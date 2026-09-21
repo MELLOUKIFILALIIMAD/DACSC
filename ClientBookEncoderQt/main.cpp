@@ -1,5 +1,5 @@
 #include "mainwindowclientbookencoder.h"
-#include <system.h>
+
 #include <QApplication>
 
 int main(int argc, char *argv[])
