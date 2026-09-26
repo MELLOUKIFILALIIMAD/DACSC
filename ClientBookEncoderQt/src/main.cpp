@@ -1,4 +1,4 @@
-#include "mainwindowclientbookencoder.h"
+#include "include/mainwindowclientbookencoder.h"
 #include <system.h>
 #include <QApplication>
 

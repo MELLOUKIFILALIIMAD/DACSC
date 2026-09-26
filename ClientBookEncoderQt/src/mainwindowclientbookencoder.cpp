@@ -1,5 +1,5 @@
-#include "mainwindowclientbookencoder.h"
-#include "ui_mainwindowclientbookencoder.h"
+#include "include/mainwindowclientbookencoder.h"
+#include "include/ui_mainwindowclientbookencoder.h"
 #include "unistd.h"
 #include <QInputDialog>
 #include <QMessageBox>
