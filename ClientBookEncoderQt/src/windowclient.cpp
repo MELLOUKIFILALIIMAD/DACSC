@@ -1,4 +1,4 @@
-#include "/include/windowclient.h"
+#include "../include/windowclient.h"
 
 WindowClient::WindowClient() : connected(false) {}
 
