@@ -119,8 +119,7 @@ void *GestionClient(void *arg)
         }
 
 
-        printf("(SERVEUR) Requete recue : %d\n",
-               m.requete);
+        printf("(SERVEUR) Requete recue : %d\n",m.requete);
 
 
         switch (m.requete)
