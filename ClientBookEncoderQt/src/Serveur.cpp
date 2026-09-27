@@ -57,7 +57,7 @@ int main()
 
 
         // Allocation pour transmettre la socket au thread
-        int *socketClient = malloc(sizeof(int));
+        int *socketClient = (int *) malloc(sizeof(int));
 
         if (socketClient == NULL)
         {

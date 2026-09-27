@@ -1,6 +1,6 @@
-#include "../include/mainwindowclientbookencoder.h"
-#include "../include/ui_mainwindowclientbookencoder.h"
-#include "../include/windowclient.h"
+#include "mainwindowclientbookencoder.h"
+#include "ui_mainwindowclientbookencoder.h"
+#include "Client.h"
 #include "unistd.h"
 #include <QInputDialog>
 #include <QMessageBox>
@@ -266,22 +266,18 @@ void MainWindowClientBookEncoder::on_pushButtonClear_clicked() {
 }
 
 void MainWindowClientBookEncoder::on_actionLogin_triggered() {
-    WindowClient windowClient;
-
-
     string login = this->dialogInputText("Entrée en session","Login ?");
     string password = this->dialogInputText("Entrée en session","Password ?");
 
-    windowClient.setLogin(login);
-    windowClient.setPassword(password);
+    client.setLogin(login);
+    client.setPassword(password);
 
-    windowClient.setConnected(true); // Simulation pour l'instant
+    client.setConnected(true); // Simulation pour l'instant
     this->loginOk();
 }
 
 void MainWindowClientBookEncoder::on_actionLogout_triggered() {
-    WindowClient windowClient;
-    windowClient.setConnected(false);
+    client.setConnected(false);
     this->logoutOk();
 }
 

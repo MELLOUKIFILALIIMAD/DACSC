@@ -1,3 +1,6 @@
+#ifndef PROTOCOLE_H
+#define PROTOCOLE_H
+
 #define CLE 1234
 // C : Client, S : Serveur
 //      requete         sens            data1           data2           texte
@@ -19,3 +22,5 @@ typedef struct {
     char* data2;    // utilisation de strlen pour calculer la taille du message
     char* texte;    // à l'envoi retirer les 4 premiers caractères de data1, data2 et texte pour mettre la taille du message dans une variable
 } MESSAGE;
+
+#endif // PROTOCOLE_H

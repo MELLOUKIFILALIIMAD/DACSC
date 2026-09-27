@@ -1,13 +1,13 @@
-#ifndef WINDOWCLIENT_H
-#define WINDOWCLIENT_H
+#ifndef CLIENT_H
+#define CLIENT_H
 
 #include <string>
 
-class WindowClient
+class Client
 {
 public:
-    WindowClient();
-    ~WindowClient();
+    Client();
+    ~Client();
 
     void setLogin(const std::string& login);
     std::string getLogin() const;
@@ -27,6 +27,6 @@ private:
     std::string login;
     std::string password;
     bool connected;
-}
+};
 
-#endif // WINDOWCLIENT_H
+#endif // CLIENT_H
