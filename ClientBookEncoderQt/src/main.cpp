@@ -1,8 +1,4 @@
-<<<<<<< HEAD:ClientBookEncoderQt/src/main.cpp
-#include "include/mainwindowclientbookencoder.h"
-=======
-#include "mainwindowclientbookencoder.h"
->>>>>>> origin/main:ClientBookEncoderQt/main.cpp
+#include "../include/mainwindowclientbookencoder.h"
 
 #include <QApplication>
 
