@@ -1,0 +1,5 @@
+# Hashes of file build rules.
+c166b822f05d91a3e4378523c9e162ed CMakeFiles/ClientBookEncoder_autogen
+c166b822f05d91a3e4378523c9e162ed CMakeFiles/Serveur_autogen
+05835bf848bda8ab7f0db0aa564b0b9b ClientBookEncoder_autogen/timestamp
+fda3f70f34f4c1a4a34bc5c0782c1395 Serveur_autogen/timestamp

@@ -1,6 +1,7 @@
 #ifndef MAINWINDOWCLIENTBOOKENCODER_H
 #define MAINWINDOWCLIENTBOOKENCODER_H
 
+#include "Client.h"
 #include <QMainWindow>
 #include <string>
 using namespace std;
@@ -53,5 +54,6 @@ private slots:
 
 private:
     Ui::MainWindowClientBookEncoder *ui;
+    Client client;
 };
 #endif // MAINWINDOWCLIENTBOOKENCODER_H

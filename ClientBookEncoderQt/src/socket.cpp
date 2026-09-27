@@ -241,7 +241,7 @@ int Receive(int socket, MESSAGE *message)
 
     tailleData1 = atoi(taille);
 
-    message->data1 = malloc(tailleData1 + 1);
+    message->data1 = (char *) malloc(tailleData1 + 1);
 
     if (message->data1 == NULL)
     {
@@ -273,7 +273,7 @@ int Receive(int socket, MESSAGE *message)
 
     tailleData2 = atoi(taille);
 
-    message->data2 = malloc(tailleData2 + 1);
+    message->data2 = (char *) malloc(tailleData2 + 1);
 
     if (message->data2 == NULL)
     {
@@ -286,7 +286,8 @@ int Receive(int socket, MESSAGE *message)
     {
         if (ReceiveAll(socket,message->data2,tailleData2) <= 0)
         {
-            free(message->data1);>data2);
+            free(message->data1);
+            free(message->data2);
             return -1;
         }
     }
@@ -307,7 +308,7 @@ int Receive(int socket, MESSAGE *message)
 
     tailleTexte = atoi(taille);
 
-    message->texte = malloc(tailleTexte + 1);
+    message->texte = (char *) malloc(tailleTexte + 1);
 
     if (message->texte == NULL)
     {

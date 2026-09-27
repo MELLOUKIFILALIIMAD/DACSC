@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/Serveur.dir/Serveur_autogen/mocs_compilation.cpp.o CMakeFiles/Serveur.dir/src/Serveur.cpp.o CMakeFiles/Serveur.dir/src/socket.cpp.o -o Serveur
