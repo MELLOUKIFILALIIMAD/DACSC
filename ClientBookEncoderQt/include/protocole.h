@@ -7,7 +7,7 @@
 
 
 #define LOGIN 1         // C -> S          1 ou 0          login           password
-//                         S -> C       "OK" ou "KO"
+//                         S -> C       "OK" ou "KO"                       erreur
 #define LOGOUT 2        // C -> S
 #define GET_AUTHORS 3   // C -> S
 #define GET_SUBJECTS 4  // C -> S

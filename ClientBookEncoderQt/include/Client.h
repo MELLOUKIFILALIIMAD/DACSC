@@ -22,11 +22,16 @@ public:
 
     void setConnected(bool connected);
     bool isConnected() const;
+    
+    void setSocketServeur(int socket);
+    int getSocketServeur();
 
 private:
     std::string login;
     std::string password;
     bool connected;
+
+    int socketServeur;
 };
 
 #endif // CLIENT_H

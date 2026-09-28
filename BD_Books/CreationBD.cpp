@@ -87,6 +87,9 @@ int main(int argc,char *argv[])
   if (mysql_query(connexion, "DROP TABLE IF EXISTS subjects;")) {
     finish_with_error(connexion);
   }
+  if (mysql_query(connexion, "DROP TABLE IF EXISTS employees;")) {
+    finish_with_error(connexion);
+  }
 
   // Creation de la table authors
   printf("Creation de la table authors...\n");
@@ -120,6 +123,13 @@ int main(int argc,char *argv[])
                        "publish_year INT, "
                        "FOREIGN KEY (author_id) REFERENCES authors(id), "
                        "FOREIGN KEY (subject_id) REFERENCES subjects(id));")) {
+    finish_with_error(connexion);
+  }
+  printf("Creation de la table employees...\n");
+  if (mysql_query(connexion,"CREATE TABLE employees ("
+                      "id INT(4) AUTO_INCREMENT PRIMARY KEY, "
+                      "login VARCHAR(20), "
+                      "password VARCHAR(20));")) {
     finish_with_error(connexion);
   }
 

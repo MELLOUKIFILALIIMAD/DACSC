@@ -15,7 +15,7 @@ MainWindowClientBookEncoder::MainWindowClientBookEncoder(int idClient, QWidget *
 {
     ui->setupUi(this);
     ::close(2);
-
+    client.setSocketServeur(idClient);
     //this->setFixedSize(1068, 301);
 
     // Configuration de la table des employes (Personnel Garage)
@@ -299,23 +299,24 @@ void MainWindowClientBookEncoder::on_actionLogin_triggered() {
     cout << "Password : " << texte << endl;
 
     MESSAGE message;
-    message.type = 0;
+    message.type = client.getSocketServeur();
     message.expediteur = idClient;
     message.requete = LOGIN;
     message.data1 = NULL;
-    message.data2 = (char*)data2.c_str();
-    message.texte = (char*)texte.c_str();
+    message.data2 = (char*)login.c_str();
+    message.texte = (char*)password.c_str();
 
 
     // Traitement du message LOGIN côté client (à implémenter côté serveur)
-    int result = Send(idClient, &message);
+    printf("(CLIENT) Requete envoyee : %d\n", message.requete);
+    int result = Send(message.type, &message);
     if (result < 0) {
         this->dialogError("Erreur","Erreur lors de l'envoi du message LOGIN au serveur !");
         return;
     }
 
     // Attente de la réponse du serveur (à implémenter côté serveur)
-    int receiveResult = Receive(idClient, &message);
+    int receiveResult = Receive(client.getSocketServeur(), &message);
     if (receiveResult < 0) {
         this->dialogError("Erreur","Erreur: " + std::string(message.texte));
         return;
