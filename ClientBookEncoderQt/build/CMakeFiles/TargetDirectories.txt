@@ -1,8 +1,17 @@
+<<<<<<< HEAD
+/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/CMakeFiles/Client.dir
+/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/CMakeFiles/Serveur.dir
+/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/CMakeFiles/edit_cache.dir
+/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/CMakeFiles/rebuild_cache.dir
+/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/CMakeFiles/Client_autogen_timestamp_deps.dir
+/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/CMakeFiles/Client_autogen.dir
+=======
 /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/CMakeFiles/ClientBookEncoder.dir
 /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/CMakeFiles/Serveur.dir
 /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/CMakeFiles/edit_cache.dir
 /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/CMakeFiles/rebuild_cache.dir
 /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/CMakeFiles/ClientBookEncoder_autogen_timestamp_deps.dir
 /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/CMakeFiles/ClientBookEncoder_autogen.dir
+>>>>>>> origin/main
 /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/CMakeFiles/Serveur_autogen_timestamp_deps.dir
 /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/CMakeFiles/Serveur_autogen.dir

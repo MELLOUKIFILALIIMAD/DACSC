@@ -21,7 +21,7 @@ find_package(Qt5 REQUIRED COMPONENTS Widgets)
 # CLIENT
 # =========================
 
-add_executable(ClientBookEncoder
+add_executable(Client
     src/main.cpp
     src/mainwindowclientbookencoder.cpp
     src/Client.cpp
@@ -33,11 +33,11 @@ add_executable(ClientBookEncoder
     include/socket.h
 )
 
-target_include_directories(ClientBookEncoder PRIVATE
+target_include_directories(Client PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-target_link_libraries(ClientBookEncoder PRIVATE
+target_link_libraries(Client PRIVATE
     Qt5::Widgets
 )
 

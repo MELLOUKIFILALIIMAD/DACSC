@@ -52,6 +52,11 @@ Serveur_autogen/timestamp: /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt
   /usr/lib64/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake \
   /usr/lib64/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake \
   /usr/lib64/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake \
+<<<<<<< HEAD
+  /usr/share/cmake/Modules/CMakeCInformation.cmake \
+  /usr/share/cmake/Modules/CMakeCXXInformation.cmake \
+  /usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake \
+=======
   /usr/share/cmake/Modules/CMakeCCompiler.cmake.in \
   /usr/share/cmake/Modules/CMakeCCompilerABI.c \
   /usr/share/cmake/Modules/CMakeCInformation.cmake \
@@ -68,10 +73,22 @@ Serveur_autogen/timestamp: /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt
   /usr/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake \
   /usr/share/cmake/Modules/CMakeDetermineSystem.cmake \
   /usr/share/cmake/Modules/CMakeFindBinUtils.cmake \
+>>>>>>> origin/main
   /usr/share/cmake/Modules/CMakeGenericSystem.cmake \
   /usr/share/cmake/Modules/CMakeInitializeConfigs.cmake \
   /usr/share/cmake/Modules/CMakeLanguageInformation.cmake \
   /usr/share/cmake/Modules/CMakeParseArguments.cmake \
+<<<<<<< HEAD
+  /usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake \
+  /usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake \
+  /usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake \
+  /usr/share/cmake/Modules/Compiler/GNU-C.cmake \
+  /usr/share/cmake/Modules/Compiler/GNU-CXX.cmake \
+  /usr/share/cmake/Modules/Compiler/GNU.cmake \
+  /usr/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake \
+  /usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake \
+  /usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake \
+=======
   /usr/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake \
   /usr/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake \
   /usr/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake \
@@ -147,6 +164,7 @@ Serveur_autogen/timestamp: /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt
   /usr/share/cmake/Modules/Internal/CMakeInspectCLinker.cmake \
   /usr/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake \
   /usr/share/cmake/Modules/Internal/FeatureTesting.cmake \
+>>>>>>> origin/main
   /usr/share/cmake/Modules/Linker/GNU-C.cmake \
   /usr/share/cmake/Modules/Linker/GNU-CXX.cmake \
   /usr/share/cmake/Modules/Linker/GNU.cmake \
@@ -154,6 +172,8 @@ Serveur_autogen/timestamp: /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt
   /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-C.cmake \
   /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake \
   /usr/share/cmake/Modules/Platform/Linker/Linux-GNU.cmake \
+<<<<<<< HEAD
+=======
   /usr/share/cmake/Modules/Platform/Linux-Determine-CXX.cmake \
   /usr/share/cmake/Modules/Platform/Linux-GNU-C.cmake \
   /usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake \
@@ -475,6 +495,7 @@ Serveur_autogen/timestamp: /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt
   /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake \
   /usr/share/cmake/Modules/Platform/Linker/Linux-GNU.cmake \
   /usr/share/cmake/Modules/Platform/Linux-Determine-CXX.cmake \
+>>>>>>> origin/main
   /usr/share/cmake/Modules/Platform/Linux-GNU-C.cmake \
   /usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake \
   /usr/share/cmake/Modules/Platform/Linux-GNU.cmake \
@@ -607,6 +628,150 @@ CMakeFiles/Serveur.dir/src/Serveur.cpp.o: /home/student/Bureau/Projet/DACSC/Clie
   /usr/lib/gcc/x86_64-redhat-linux/11/include/stdarg.h \
   /usr/lib/gcc/x86_64-redhat-linux/11/include/stddef.h
 
+<<<<<<< HEAD
+CMakeFiles/Serveur.dir/src/socket.cpp.o: /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/socket.cpp \
+  /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include/protocole.h \
+  /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include/socket.h \
+  /usr/include/alloca.h \
+  /usr/include/arpa/inet.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/asm-generic/socket.h \
+  /usr/include/asm-generic/sockios.h \
+  /usr/include/asm/bitsperlong.h \
+  /usr/include/asm/posix_types.h \
+  /usr/include/asm/posix_types_64.h \
+  /usr/include/asm/socket.h \
+  /usr/include/asm/sockios.h \
+  /usr/include/bits/atomic_wide_counter.h \
+  /usr/include/bits/byteswap.h \
+  /usr/include/bits/confname.h \
+  /usr/include/bits/endian.h \
+  /usr/include/bits/endianness.h \
+  /usr/include/bits/environments.h \
+  /usr/include/bits/floatn-common.h \
+  /usr/include/bits/floatn.h \
+  /usr/include/bits/getopt_core.h \
+  /usr/include/bits/getopt_posix.h \
+  /usr/include/bits/in.h \
+  /usr/include/bits/libc-header-start.h \
+  /usr/include/bits/long-double.h \
+  /usr/include/bits/posix_opt.h \
+  /usr/include/bits/pthreadtypes-arch.h \
+  /usr/include/bits/pthreadtypes.h \
+  /usr/include/bits/select.h \
+  /usr/include/bits/sockaddr.h \
+  /usr/include/bits/socket.h \
+  /usr/include/bits/socket_type.h \
+  /usr/include/bits/stdint-intn.h \
+  /usr/include/bits/stdint-uintn.h \
+  /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/stdlib-float.h \
+  /usr/include/bits/struct_mutex.h \
+  /usr/include/bits/struct_rwlock.h \
+  /usr/include/bits/thread-shared-types.h \
+  /usr/include/bits/time64.h \
+  /usr/include/bits/timesize.h \
+  /usr/include/bits/types.h \
+  /usr/include/bits/types/FILE.h \
+  /usr/include/bits/types/__FILE.h \
+  /usr/include/bits/types/__fpos64_t.h \
+  /usr/include/bits/types/__fpos_t.h \
+  /usr/include/bits/types/__locale_t.h \
+  /usr/include/bits/types/__mbstate_t.h \
+  /usr/include/bits/types/__sigset_t.h \
+  /usr/include/bits/types/clock_t.h \
+  /usr/include/bits/types/clockid_t.h \
+  /usr/include/bits/types/cookie_io_functions_t.h \
+  /usr/include/bits/types/locale_t.h \
+  /usr/include/bits/types/sigset_t.h \
+  /usr/include/bits/types/struct_FILE.h \
+  /usr/include/bits/types/struct_iovec.h \
+  /usr/include/bits/types/struct_osockaddr.h \
+  /usr/include/bits/types/struct_timespec.h \
+  /usr/include/bits/types/struct_timeval.h \
+  /usr/include/bits/types/time_t.h \
+  /usr/include/bits/types/timer_t.h \
+  /usr/include/bits/typesizes.h \
+  /usr/include/bits/uintn-identity.h \
+  /usr/include/bits/unistd_ext.h \
+  /usr/include/bits/waitflags.h \
+  /usr/include/bits/waitstatus.h \
+  /usr/include/bits/wordsize.h \
+  /usr/include/c++/11/bits/std_abs.h \
+  /usr/include/c++/11/cstdlib \
+  /usr/include/c++/11/pstl/pstl_config.h \
+  /usr/include/c++/11/stdlib.h \
+  /usr/include/c++/11/x86_64-redhat-linux/bits/c++config.h \
+  /usr/include/c++/11/x86_64-redhat-linux/bits/cpu_defines.h \
+  /usr/include/c++/11/x86_64-redhat-linux/bits/os_defines.h \
+  /usr/include/endian.h \
+  /usr/include/features-time64.h \
+  /usr/include/features.h \
+  /usr/include/gnu/stubs-64.h \
+  /usr/include/gnu/stubs.h \
+  /usr/include/linux/close_range.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/netinet/in.h \
+  /usr/include/stdc-predef.h \
+  /usr/include/stdio.h \
+  /usr/include/stdlib.h \
+  /usr/include/string.h \
+  /usr/include/strings.h \
+  /usr/include/sys/cdefs.h \
+  /usr/include/sys/select.h \
+  /usr/include/sys/socket.h \
+  /usr/include/sys/types.h \
+  /usr/include/unistd.h \
+  /usr/lib/gcc/x86_64-redhat-linux/11/include/stdarg.h \
+  /usr/lib/gcc/x86_64-redhat-linux/11/include/stddef.h
+
+
+/usr/include/strings.h:
+
+/usr/include/string.h:
+
+/usr/include/netinet/in.h:
+
+/usr/include/bits/types/struct_osockaddr.h:
+
+/usr/include/bits/types/struct_iovec.h:
+
+/usr/include/bits/socket_type.h:
+
+/usr/include/bits/sockaddr.h:
+
+/usr/include/bits/in.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/11/include/stddef.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/11/include/stdarg.h:
+
+/usr/include/bits/socket.h:
+
+/usr/include/time.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/stdlib.h:
+
+/usr/include/stdio.h:
+
+/usr/include/signal.h:
+
+/usr/include/sched.h:
+
+/usr/include/pthread.h:
+
+/usr/include/linux/types.h:
+
+/usr/include/linux/sched/types.h:
+
+/usr/include/linux/posix_types.h:
+
+/usr/include/gnu/stubs-64.h:
+=======
 
 /usr/lib/gcc/x86_64-redhat-linux/11/include/stddef.h:
 
@@ -627,11 +792,324 @@ CMakeFiles/Serveur.dir/src/Serveur.cpp.o: /home/student/Bureau/Projet/DACSC/Clie
 /usr/include/linux/sched/types.h:
 
 /usr/include/gnu/stubs.h:
+>>>>>>> origin/main
 
 /usr/include/features-time64.h:
 
 /usr/include/endian.h:
 
+<<<<<<< HEAD
+/usr/include/linux/stddef.h:
+
+/usr/include/c++/11/x86_64-redhat-linux/bits/c++config.h:
+
+/usr/include/c++/11/pstl/pstl_config.h:
+
+/usr/include/c++/11/cstdlib:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/bits/waitflags.h:
+
+/usr/include/bits/unistd_ext.h:
+
+/usr/include/bits/uintn-identity.h:
+
+/usr/include/bits/types/timer_t.h:
+
+/usr/include/bits/types/time_t.h:
+
+/usr/include/bits/types/struct_tm.h:
+
+/usr/include/bits/types/struct_timespec.h:
+
+/usr/include/bits/types/struct_sched_param.h:
+
+/usr/include/asm-generic/socket.h:
+
+/usr/include/bits/types/sigval_t.h:
+
+/usr/include/asm-generic/sockios.h:
+
+/usr/include/bits/types/sigset_t.h:
+
+/usr/include/bits/types/sigevent_t.h:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/bits/types/sig_atomic_t.h:
+
+/usr/include/bits/types/cookie_io_functions_t.h:
+
+/usr/include/bits/types/clockid_t.h:
+
+/usr/include/bits/types/__sigval_t.h:
+
+/usr/include/bits/types/__sigset_t.h:
+
+/usr/include/bits/types/__locale_t.h:
+
+/usr/include/bits/types/clock_t.h:
+
+/usr/include/bits/types/__fpos_t.h:
+
+/usr/include/bits/types/__FILE.h:
+
+/usr/include/bits/types/FILE.h:
+
+/usr/include/bits/timex.h:
+
+/usr/include/bits/waitstatus.h:
+
+/usr/include/bits/timesize.h:
+
+/usr/include/bits/types/struct_itimerspec.h:
+
+/usr/include/bits/struct_rwlock.h:
+
+/usr/include/bits/struct_mutex.h:
+
+/usr/include/bits/time64.h:
+
+/usr/include/bits/stdlib-float.h:
+
+/usr/share/cmake/Modules/CMakeCInformation.cmake:
+
+/usr/lib64/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake:
+
+/usr/include/bits/thread-shared-types.h:
+
+/usr/lib64/cmake/Qt5Widgets/Qt5WidgetsConfig.cmake:
+
+/usr/share/cmake/Modules/CMakeGenericSystem.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QXcbIntegrationPlugin.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QJpegPlugin.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QIbusPlatformInputContextPlugin.cmake:
+
+/usr/share/cmake/Modules/Linker/GNU-C.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QXcbEglIntegrationPlugin.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QTuioTouchPlugin.cmake:
+
+/usr/include/bits/types/__mbstate_t.h:
+
+/usr/include/bits/time.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/lib64/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake:
+
+/usr/include/bits/types.h:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QICOPlugin.cmake:
+
+/usr/include/asm/sockios.h:
+
+/usr/share/cmake/Modules/Platform/Linux-GNU.cmake:
+
+/usr/include/bits/stdint-uintn.h:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QGifPlugin.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QSvgIconPlugin.cmake:
+
+/usr/lib64/cmake/Qt5Core/Qt5CoreConfigExtras.cmake:
+
+/usr/include/bits/getopt_posix.h:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QLinuxFbIntegrationPlugin.cmake:
+
+/usr/lib64/cmake/Qt5/Qt5ModuleLocation.cmake:
+
+/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/Serveur.cpp:
+
+/usr/include/bits/environments.h:
+
+/usr/share/cmake/Modules/CMakeLanguageInformation.cmake:
+
+/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include/socket.h:
+
+/usr/share/cmake/Modules/Linker/GNU.cmake:
+
+/usr/lib64/cmake/Qt5/Qt5ConfigVersion.cmake:
+
+/usr/include/unistd.h:
+
+/usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake:
+
+/usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake:
+
+/usr/include/bits/types/__fpos64_t.h:
+
+/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/CMakeLists.txt:
+
+/usr/include/bits/long-double.h:
+
+/usr/lib64/cmake/Qt5Core/Qt5CoreConfig.cmake:
+
+/usr/include/bits/types/locale_t.h:
+
+/usr/bin/cmake:
+
+/usr/include/arpa/inet.h:
+
+/usr/lib64/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake:
+
+CMakeFiles/3.31.8/CMakeCXXCompiler.cmake:
+
+/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/socket.cpp:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QVncIntegrationPlugin.cmake:
+
+/usr/include/bits/byteswap.h:
+
+/usr/include/sys/socket.h:
+
+/usr/include/sys/cdefs.h:
+
+CMakeFiles/3.31.8/CMakeCCompiler.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEvdevMousePlugin.cmake:
+
+/usr/include/bits/sigaction.h:
+
+/usr/share/cmake/Modules/CMakeInitializeConfigs.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5GuiConfig.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSIntegrationPlugin.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSEmulatorIntegrationPlugin.cmake:
+
+/usr/include/asm/bitsperlong.h:
+
+/usr/include/bits/sigcontext.h:
+
+/usr/lib64/cmake/Qt5Core/Qt5CoreConfigVersion.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSKmsEglDeviceIntegrationPlugin.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEvdevTabletPlugin.cmake:
+
+/usr/include/bits/pthreadtypes.h:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QMinimalIntegrationPlugin.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QMinimalEglIntegrationPlugin.cmake:
+
+/usr/include/c++/11/stdlib.h:
+
+/usr/include/bits/types/struct___jmp_buf_tag.h:
+
+CMakeFiles/3.31.8/CMakeSystem.cmake:
+
+/usr/include/bits/types/struct_timeval.h:
+
+/usr/share/cmake/Modules/CMakeCXXInformation.cmake:
+
+/usr/lib64/cmake/Qt5/Qt5Config.cmake:
+
+/usr/include/bits/sigstack.h:
+
+/usr/include/bits/siginfo-consts-arch.h:
+
+/usr/include/bits/getopt_core.h:
+
+/usr/share/cmake/Modules/Platform/Linux-Initialize.cmake:
+
+Serveur_autogen/mocs_compilation.cpp:
+
+/usr/include/bits/siginfo-arch.h:
+
+/usr/lib64/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake:
+
+/usr/lib64/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake:
+
+/usr/share/cmake/Modules/Compiler/GNU.cmake:
+
+/usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake:
+
+/usr/include/sys/select.h:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSX11IntegrationPlugin.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QSvgPlugin.cmake:
+
+/usr/include/bits/types/struct_sigstack.h:
+
+/usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake:
+
+/usr/share/cmake/Modules/CMakeParseArguments.cmake:
+
+/usr/include/bits/setjmp.h:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEvdevKeyboardPlugin.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QComposePlatformInputContextPlugin.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEvdevTouchScreenPlugin.cmake:
+
+/usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QOffscreenIntegrationPlugin.cmake:
+
+/usr/include/alloca.h:
+
+/usr/include/c++/11/bits/std_abs.h:
+
+/usr/include/bits/sigthread.h:
+
+/usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake:
+
+/usr/lib64/cmake/Qt5Core/Qt5CoreMacros.cmake:
+
+/usr/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake:
+
+/usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake:
+
+/usr/share/cmake/Modules/Platform/Linker/GNU.cmake:
+
+/usr/share/cmake/Modules/Platform/Linker/Linux-GNU-C.cmake:
+
+/usr/share/cmake/Modules/Linker/GNU-CXX.cmake:
+
+/usr/include/bits/pthread_stack_min-dynamic.h:
+
+/usr/share/cmake/Modules/Platform/Linker/Linux-GNU.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QXcbGlxIntegrationPlugin.cmake:
+
+/usr/share/cmake/Modules/Platform/Linux-GNU-C.cmake:
+
+/usr/include/bits/floatn.h:
+
+/usr/share/cmake/Modules/Platform/Linux.cmake:
+
+/usr/share/cmake/Modules/Platform/UnixPaths.cmake:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/c++/11/x86_64-redhat-linux/bits/os_defines.h:
+
+/usr/include/bits/pthreadtypes-arch.h:
+
+/usr/include/asm-generic/bitsperlong.h:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QXdgDesktopPortalThemePlugin.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QLibInputPlugin.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QGtk3ThemePlugin.cmake:
+
+/usr/include/asm-generic/int-ll64.h:
+
+/usr/share/cmake/Modules/Compiler/GNU-CXX.cmake:
+
+=======
 /usr/include/sched.h:
 
 /usr/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake:
@@ -764,10 +1242,56 @@ CMakeFiles/Serveur.dir/src/Serveur.cpp.o: /home/student/Bureau/Projet/DACSC/Clie
 
 /usr/include/sys/ucontext.h:
 
+>>>>>>> origin/main
 /usr/include/stdc-predef.h:
 
 /usr/include/asm-generic/posix_types.h:
 
+<<<<<<< HEAD
+/usr/include/asm-generic/types.h:
+
+/usr/include/asm/posix_types.h:
+
+/usr/include/asm/posix_types_64.h:
+
+/usr/include/c++/11/x86_64-redhat-linux/bits/cpu_defines.h:
+
+/usr/include/bits/types/struct_FILE.h:
+
+/usr/include/bits/ss_flags.h:
+
+/usr/include/asm/types.h:
+
+/usr/include/bits/confname.h:
+
+/usr/include/bits/cpu-set.h:
+
+/usr/include/bits/endian.h:
+
+/usr/include/features.h:
+
+/usr/include/bits/endianness.h:
+
+/usr/include/bits/floatn-common.h:
+
+/usr/include/bits/libc-header-start.h:
+
+/usr/include/bits/siginfo-consts.h:
+
+/usr/include/bits/atomic_wide_counter.h:
+
+/usr/include/bits/posix_opt.h:
+
+/usr/include/bits/types/siginfo_t.h:
+
+/usr/lib64/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake:
+
+/usr/include/bits/sched.h:
+
+/usr/include/bits/select.h:
+
+/usr/include/bits/types/stack_t.h:
+=======
 /usr/lib64/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake:
 
 /usr/include/bits/siginfo-arch.h:
@@ -827,11 +1351,20 @@ CMakeFiles/3.31.8/CMakeCXXCompiler.cmake:
 /usr/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake:
 
 /usr/include/bits/types/locale_t.h:
+>>>>>>> origin/main
 
 /usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSKmsGbmIntegrationPlugin.cmake:
 
 /usr/include/bits/sigevent-consts.h:
 
+<<<<<<< HEAD
+/usr/include/sys/ucontext.h:
+
+/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include/protocole.h:
+
+/usr/include/bits/signal_ext.h:
+
+=======
 /usr/include/bits/types/stack_t.h:
 
 /usr/lib64/cmake/Qt5Core/Qt5CoreConfig.cmake:
@@ -1094,10 +1627,24 @@ Serveur_autogen/mocs_compilation.cpp:
 
 /usr/include/bits/siginfo-consts.h:
 
+>>>>>>> origin/main
 /usr/include/bits/signum-arch.h:
 
 /usr/include/bits/signum-generic.h:
 
+<<<<<<< HEAD
+/usr/include/asm/socket.h:
+
+/usr/share/cmake/Modules/Compiler/GNU-C.cmake:
+
+/usr/include/bits/sigstksz.h:
+
+/usr/include/linux/close_range.h:
+
+/usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake:
+
+/usr/include/bits/stdint-intn.h:
+=======
 /usr/share/cmake/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake:
 
 /usr/include/bits/sigthread.h:
@@ -1167,3 +1714,4 @@ Serveur_autogen/mocs_compilation.cpp:
 /usr/include/c++/11/pstl/pstl_config.h:
 
 /usr/include/c++/11/x86_64-redhat-linux/bits/c++config.h:
+>>>>>>> origin/main

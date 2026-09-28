@@ -54,6 +54,11 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/lib64/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake"
   "/usr/lib64/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake"
   "/usr/lib64/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake"
+<<<<<<< HEAD
+  "/usr/share/cmake/Modules/CMakeCInformation.cmake"
+  "/usr/share/cmake/Modules/CMakeCXXInformation.cmake"
+  "/usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake"
+=======
   "/usr/share/cmake/Modules/CMakeCCompiler.cmake.in"
   "/usr/share/cmake/Modules/CMakeCCompilerABI.c"
   "/usr/share/cmake/Modules/CMakeCInformation.cmake"
@@ -70,10 +75,22 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake"
   "/usr/share/cmake/Modules/CMakeDetermineSystem.cmake"
   "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake"
+>>>>>>> origin/main
   "/usr/share/cmake/Modules/CMakeGenericSystem.cmake"
   "/usr/share/cmake/Modules/CMakeInitializeConfigs.cmake"
   "/usr/share/cmake/Modules/CMakeLanguageInformation.cmake"
   "/usr/share/cmake/Modules/CMakeParseArguments.cmake"
+<<<<<<< HEAD
+  "/usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake"
+  "/usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake"
+  "/usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+  "/usr/share/cmake/Modules/Compiler/GNU-C.cmake"
+  "/usr/share/cmake/Modules/Compiler/GNU-CXX.cmake"
+  "/usr/share/cmake/Modules/Compiler/GNU.cmake"
+  "/usr/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake"
+  "/usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake"
+  "/usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake"
+=======
   "/usr/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake"
   "/usr/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake"
   "/usr/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake"
@@ -149,6 +166,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake/Modules/Internal/CMakeInspectCLinker.cmake"
   "/usr/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake"
   "/usr/share/cmake/Modules/Internal/FeatureTesting.cmake"
+>>>>>>> origin/main
   "/usr/share/cmake/Modules/Linker/GNU-C.cmake"
   "/usr/share/cmake/Modules/Linker/GNU-CXX.cmake"
   "/usr/share/cmake/Modules/Linker/GNU.cmake"
@@ -156,7 +174,10 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake/Modules/Platform/Linker/Linux-GNU-C.cmake"
   "/usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake"
   "/usr/share/cmake/Modules/Platform/Linker/Linux-GNU.cmake"
+<<<<<<< HEAD
+=======
   "/usr/share/cmake/Modules/Platform/Linux-Determine-CXX.cmake"
+>>>>>>> origin/main
   "/usr/share/cmake/Modules/Platform/Linux-GNU-C.cmake"
   "/usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake"
   "/usr/share/cmake/Modules/Platform/Linux-GNU.cmake"
@@ -173,6 +194,9 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
+<<<<<<< HEAD
+  "CMakeFiles/Client_autogen.dir/AutogenInfo.json"
+=======
   "CMakeFiles/3.31.8/CMakeSystem.cmake"
   "CMakeFiles/3.31.8/CMakeCCompiler.cmake"
   "CMakeFiles/3.31.8/CMakeCXXCompiler.cmake"
@@ -181,16 +205,24 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/3.31.8/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.31.8/CMakeCXXCompiler.cmake"
   "CMakeFiles/ClientBookEncoder_autogen.dir/AutogenInfo.json"
+>>>>>>> origin/main
   "CMakeFiles/Serveur_autogen.dir/AutogenInfo.json"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
+<<<<<<< HEAD
+  "CMakeFiles/Client.dir/DependInfo.cmake"
+  "CMakeFiles/Serveur.dir/DependInfo.cmake"
+  "CMakeFiles/Client_autogen_timestamp_deps.dir/DependInfo.cmake"
+  "CMakeFiles/Client_autogen.dir/DependInfo.cmake"
+=======
   "CMakeFiles/ClientBookEncoder.dir/DependInfo.cmake"
   "CMakeFiles/Serveur.dir/DependInfo.cmake"
   "CMakeFiles/ClientBookEncoder_autogen_timestamp_deps.dir/DependInfo.cmake"
   "CMakeFiles/ClientBookEncoder_autogen.dir/DependInfo.cmake"
+>>>>>>> origin/main
   "CMakeFiles/Serveur_autogen_timestamp_deps.dir/DependInfo.cmake"
   "CMakeFiles/Serveur_autogen.dir/DependInfo.cmake"
   )
