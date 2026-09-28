@@ -480,6 +480,7 @@ Serveur_autogen/timestamp: /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt
   /usr/share/cmake/Modules/Platform/Linux-GNU.cmake \
   /usr/share/cmake/Modules/Platform/Linux-Initialize.cmake \
   /usr/share/cmake/Modules/Platform/Linux.cmake \
+<<<<<<< HEAD
   /usr/share/cmake/Modules/Platform/UnixPaths.cmake \
   /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/CMakeLists.txt \
   CMakeFiles/3.31.8/CMakeCCompiler.cmake \
@@ -560,6 +561,8 @@ Serveur_autogen/timestamp: /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt
   /usr/share/cmake/Modules/Platform/Linux-GNU.cmake \
   /usr/share/cmake/Modules/Platform/Linux-Initialize.cmake \
   /usr/share/cmake/Modules/Platform/Linux.cmake \
+=======
+>>>>>>> origin/main
   /usr/share/cmake/Modules/Platform/UnixPaths.cmake
 
 

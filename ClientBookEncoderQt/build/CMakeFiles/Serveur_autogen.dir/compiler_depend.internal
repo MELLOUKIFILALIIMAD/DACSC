@@ -482,6 +482,7 @@
  /usr/share/cmake/Modules/Platform/Linux-Initialize.cmake
  /usr/share/cmake/Modules/Platform/Linux.cmake
  /usr/share/cmake/Modules/Platform/UnixPaths.cmake
+<<<<<<< HEAD
  /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/CMakeLists.txt
  /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/CMakeFiles/3.31.8/CMakeCCompiler.cmake
  /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/CMakeFiles/3.31.8/CMakeCXXCompiler.cmake
@@ -562,4 +563,6 @@
  /usr/share/cmake/Modules/Platform/Linux-Initialize.cmake
  /usr/share/cmake/Modules/Platform/Linux.cmake
  /usr/share/cmake/Modules/Platform/UnixPaths.cmake
+=======
+>>>>>>> origin/main
 
