@@ -271,10 +271,64 @@ void MainWindowClientBookEncoder::on_actionLogin_triggered() {
     string login = this->dialogInputText("Entrée en session","Login ?");
     string password = this->dialogInputText("Entrée en session","Password ?");
 
+    string tailleLogin = std::to_string(login.length());
+    string taillePassword = std::to_string(password.length());
+
+    if (tailleLogin == "0") {
+        this->dialogError("Erreur","Login invalide !");
+        return;
+    }
+
+    if (taillePassword == "0") {
+        this->dialogError("Erreur","Password invalide !");
+        return;
+    }
+
+    // Trouver un autre moyen ?
+    while (tailleLogin.length() < 4) {
+        tailleLogin = "0" + tailleLogin;
+    }
+    while (taillePassword.length() < 4) {
+        taillePassword = "0" + taillePassword;
+    }
+
+    string data2 = tailleLogin + login;
+    string texte = taillePassword + password;
+
+    cout << "Login : " << data2 << endl;
+    cout << "Password : " << texte << endl;
+
+    MESSAGE message;
+    message.type = 0;
+    message.expediteur = idClient;
+    message.requete = LOGIN;
+    message.data1 = NULL;
+    message.data2 = (char*)data2.c_str();
+    message.texte = (char*)texte.c_str();
+
+
+    // Traitement du message LOGIN côté client (à implémenter côté serveur)
+    int result = Send(idClient, &message);
+    if (result < 0) {
+        this->dialogError("Erreur","Erreur lors de l'envoi du message LOGIN au serveur !");
+        return;
+    }
+
+    // Attente de la réponse du serveur (à implémenter côté serveur)
+    int receiveResult = Receive(idClient, &message);
+    if (receiveResult < 0) {
+        this->dialogError("Erreur","Erreur: " + std::string(message.texte));
+        return;
+    }
+
+
+
+    // Faciliter l'accès aux informations pour le client
     client.setLogin(login);
     client.setPassword(password);
+    client.setConnected(true);
 
-    client.setConnected(true); // Simulation pour l'instant
+    // Affichage de la fenêtre principale après une connexion réussie
     this->loginOk();
 }
 
