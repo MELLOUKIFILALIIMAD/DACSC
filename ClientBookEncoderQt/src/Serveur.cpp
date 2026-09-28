@@ -6,8 +6,6 @@
 #include "socket.h"
 #include "protocole.h"
 
-#define PORT 5000
-
 int idServeur;
 
 void HandlerSIGINT(int sig);
@@ -39,13 +37,13 @@ int main()
     idServeur = Socket();
 
     // Association de la socket au port
-    Bind(idServeur, PORT);
+    Bind(idServeur, PORT_ENCODING);
 
     // Mise en écoute
     Listen(idServeur);
 
     printf("(SERVEUR) Serveur en attente de connexions sur le port %d\n",
-           PORT);
+           PORT_ENCODING);
 
 
     // Attente des clients
@@ -124,26 +122,6 @@ void *GestionClient(void *arg)
 
         switch (m.requete)
         {
-            case CONNECT:
-
-                printf("(SERVEUR) CONNECT\n");
-
-                break;
-
-
-            case DISCONNECT:
-
-                printf("(SERVEUR) DISCONNECT\n");
-
-                free(m.data1);
-                free(m.data2);
-                free(m.texte);
-
-                Close(client);
-
-                return NULL;
-
-
             case LOGIN:
 
                 printf("(SERVEUR) LOGIN\n");
@@ -158,6 +136,37 @@ void *GestionClient(void *arg)
             case LOGOUT:
 
                 printf("(SERVEUR) LOGOUT\n");
+
+                break;
+
+
+            case GET_AUTHORS:
+
+                printf("(SERVEUR) GET_AUTHORS\n");
+
+                break;
+            
+            case GET_SUBJECTS:
+
+                printf("(SERVEUR) GET_SUBJECTS\n");
+
+                break;
+
+            case ADD_AUTHOR:
+
+                printf("(SERVEUR) ADD_AUTHOR\n");
+
+                break;
+            
+            case ADD_SUBJECT:
+
+                printf("(SERVEUR) ADD_SUBJECT\n");
+
+                break;
+            
+            case ADD_BOOK:
+
+                printf("(SERVEUR) ADD_BOOK\n");
 
                 break;
 

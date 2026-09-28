@@ -1,33 +1,33 @@
 [
 {
   "directory": "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build",
-  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/ClientBookEncoder_autogen/include -I/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -std=gnu++17 -fPIC -o CMakeFiles/ClientBookEncoder.dir/ClientBookEncoder_autogen/mocs_compilation.cpp.o -c /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/ClientBookEncoder_autogen/mocs_compilation.cpp",
-  "file": "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/ClientBookEncoder_autogen/mocs_compilation.cpp",
-  "output": "CMakeFiles/ClientBookEncoder.dir/ClientBookEncoder_autogen/mocs_compilation.cpp.o"
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/Client_autogen/include -I/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -std=gnu++17 -fPIC -o CMakeFiles/Client.dir/Client_autogen/mocs_compilation.cpp.o -c /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/Client_autogen/mocs_compilation.cpp",
+  "file": "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/Client_autogen/mocs_compilation.cpp",
+  "output": "CMakeFiles/Client.dir/Client_autogen/mocs_compilation.cpp.o"
 },
 {
   "directory": "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build",
-  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/ClientBookEncoder_autogen/include -I/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -std=gnu++17 -fPIC -o CMakeFiles/ClientBookEncoder.dir/src/main.cpp.o -c /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/main.cpp",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/Client_autogen/include -I/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -std=gnu++17 -fPIC -o CMakeFiles/Client.dir/src/main.cpp.o -c /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/main.cpp",
   "file": "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/main.cpp",
-  "output": "CMakeFiles/ClientBookEncoder.dir/src/main.cpp.o"
+  "output": "CMakeFiles/Client.dir/src/main.cpp.o"
 },
 {
   "directory": "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build",
-  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/ClientBookEncoder_autogen/include -I/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -std=gnu++17 -fPIC -o CMakeFiles/ClientBookEncoder.dir/src/mainwindowclientbookencoder.cpp.o -c /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/mainwindowclientbookencoder.cpp",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/Client_autogen/include -I/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -std=gnu++17 -fPIC -o CMakeFiles/Client.dir/src/mainwindowclientbookencoder.cpp.o -c /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/mainwindowclientbookencoder.cpp",
   "file": "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/mainwindowclientbookencoder.cpp",
-  "output": "CMakeFiles/ClientBookEncoder.dir/src/mainwindowclientbookencoder.cpp.o"
+  "output": "CMakeFiles/Client.dir/src/mainwindowclientbookencoder.cpp.o"
 },
 {
   "directory": "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build",
-  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/ClientBookEncoder_autogen/include -I/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -std=gnu++17 -fPIC -o CMakeFiles/ClientBookEncoder.dir/src/Client.cpp.o -c /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/Client.cpp",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/Client_autogen/include -I/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -std=gnu++17 -fPIC -o CMakeFiles/Client.dir/src/Client.cpp.o -c /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/Client.cpp",
   "file": "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/Client.cpp",
-  "output": "CMakeFiles/ClientBookEncoder.dir/src/Client.cpp.o"
+  "output": "CMakeFiles/Client.dir/src/Client.cpp.o"
 },
 {
   "directory": "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build",
-  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/ClientBookEncoder_autogen/include -I/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -std=gnu++17 -fPIC -o CMakeFiles/ClientBookEncoder.dir/src/socket.cpp.o -c /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/socket.cpp",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/Client_autogen/include -I/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -std=gnu++17 -fPIC -o CMakeFiles/Client.dir/src/socket.cpp.o -c /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/socket.cpp",
   "file": "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/socket.cpp",
-  "output": "CMakeFiles/ClientBookEncoder.dir/src/socket.cpp.o"
+  "output": "CMakeFiles/Client.dir/src/socket.cpp.o"
 },
 {
   "directory": "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build",

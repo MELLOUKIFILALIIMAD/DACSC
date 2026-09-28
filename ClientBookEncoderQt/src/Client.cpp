@@ -25,11 +25,11 @@ std::string Client::getPassword() const {
 }
 
 void Client::HashPassword() {
-    // Implémentation de la fonction de hachage du mot de passe
+    // Pas pour l'étape 1
 }
 
 void Client::ComparePassword(const std::string& hashedPassword) const {
-    // Implémentation de la comparaison du mot de passe haché
+    // Pas pour l'étape 1
 }
 
 void Client::setConnected(bool connected) {

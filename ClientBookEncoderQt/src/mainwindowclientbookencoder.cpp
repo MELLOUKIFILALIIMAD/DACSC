@@ -5,11 +5,13 @@
 #include <QInputDialog>
 #include <QMessageBox>
 #include <iostream>
+#include <socket.h>
 using namespace std;
 
-MainWindowClientBookEncoder::MainWindowClientBookEncoder(QWidget *parent)
+MainWindowClientBookEncoder::MainWindowClientBookEncoder(int idClient, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindowClientBookEncoder)
+    , idClient(idClient)
 {
     ui->setupUi(this);
     ::close(2);

@@ -15,7 +15,7 @@ class MainWindowClientBookEncoder : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindowClientBookEncoder(QWidget *parent = nullptr);
+    MainWindowClientBookEncoder(int idClient, QWidget *parent = nullptr);
     ~MainWindowClientBookEncoder();
 
     void addTupleTableBooks(int id,string title,string author,string subject,string isbn,int pageCount,int publishYear,float price,int stockQuantity);
@@ -55,5 +55,6 @@ private slots:
 private:
     Ui::MainWindowClientBookEncoder *ui;
     Client client;
+    int idClient;
 };
 #endif // MAINWINDOWCLIENTBOOKENCODER_H

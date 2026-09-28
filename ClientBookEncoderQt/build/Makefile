@@ -117,17 +117,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named ClientBookEncoder
+# Target rules for targets named Client
 
 # Build rule for target.
-ClientBookEncoder: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ClientBookEncoder
-.PHONY : ClientBookEncoder
+Client: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Client
+.PHONY : Client
 
 # fast build rule for target.
-ClientBookEncoder/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClientBookEncoder.dir/build.make CMakeFiles/ClientBookEncoder.dir/build
-.PHONY : ClientBookEncoder/fast
+Client/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/build
+.PHONY : Client/fast
 
 #=============================================================================
 # Target rules for targets named Serveur
@@ -143,30 +143,30 @@ Serveur/fast:
 .PHONY : Serveur/fast
 
 #=============================================================================
-# Target rules for targets named ClientBookEncoder_autogen_timestamp_deps
+# Target rules for targets named Client_autogen_timestamp_deps
 
 # Build rule for target.
-ClientBookEncoder_autogen_timestamp_deps: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ClientBookEncoder_autogen_timestamp_deps
-.PHONY : ClientBookEncoder_autogen_timestamp_deps
+Client_autogen_timestamp_deps: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Client_autogen_timestamp_deps
+.PHONY : Client_autogen_timestamp_deps
 
 # fast build rule for target.
-ClientBookEncoder_autogen_timestamp_deps/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClientBookEncoder_autogen_timestamp_deps.dir/build.make CMakeFiles/ClientBookEncoder_autogen_timestamp_deps.dir/build
-.PHONY : ClientBookEncoder_autogen_timestamp_deps/fast
+Client_autogen_timestamp_deps/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client_autogen_timestamp_deps.dir/build.make CMakeFiles/Client_autogen_timestamp_deps.dir/build
+.PHONY : Client_autogen_timestamp_deps/fast
 
 #=============================================================================
-# Target rules for targets named ClientBookEncoder_autogen
+# Target rules for targets named Client_autogen
 
 # Build rule for target.
-ClientBookEncoder_autogen: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ClientBookEncoder_autogen
-.PHONY : ClientBookEncoder_autogen
+Client_autogen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Client_autogen
+.PHONY : Client_autogen
 
 # fast build rule for target.
-ClientBookEncoder_autogen/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClientBookEncoder_autogen.dir/build.make CMakeFiles/ClientBookEncoder_autogen.dir/build
-.PHONY : ClientBookEncoder_autogen/fast
+Client_autogen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client_autogen.dir/build.make CMakeFiles/Client_autogen.dir/build
+.PHONY : Client_autogen/fast
 
 #=============================================================================
 # Target rules for targets named Serveur_autogen_timestamp_deps
@@ -194,29 +194,29 @@ Serveur_autogen/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Serveur_autogen.dir/build.make CMakeFiles/Serveur_autogen.dir/build
 .PHONY : Serveur_autogen/fast
 
-ClientBookEncoder_autogen/mocs_compilation.o: ClientBookEncoder_autogen/mocs_compilation.cpp.o
-.PHONY : ClientBookEncoder_autogen/mocs_compilation.o
+Client_autogen/mocs_compilation.o: Client_autogen/mocs_compilation.cpp.o
+.PHONY : Client_autogen/mocs_compilation.o
 
 # target to build an object file
-ClientBookEncoder_autogen/mocs_compilation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClientBookEncoder.dir/build.make CMakeFiles/ClientBookEncoder.dir/ClientBookEncoder_autogen/mocs_compilation.cpp.o
-.PHONY : ClientBookEncoder_autogen/mocs_compilation.cpp.o
+Client_autogen/mocs_compilation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Client_autogen/mocs_compilation.cpp.o
+.PHONY : Client_autogen/mocs_compilation.cpp.o
 
-ClientBookEncoder_autogen/mocs_compilation.i: ClientBookEncoder_autogen/mocs_compilation.cpp.i
-.PHONY : ClientBookEncoder_autogen/mocs_compilation.i
+Client_autogen/mocs_compilation.i: Client_autogen/mocs_compilation.cpp.i
+.PHONY : Client_autogen/mocs_compilation.i
 
 # target to preprocess a source file
-ClientBookEncoder_autogen/mocs_compilation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClientBookEncoder.dir/build.make CMakeFiles/ClientBookEncoder.dir/ClientBookEncoder_autogen/mocs_compilation.cpp.i
-.PHONY : ClientBookEncoder_autogen/mocs_compilation.cpp.i
+Client_autogen/mocs_compilation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Client_autogen/mocs_compilation.cpp.i
+.PHONY : Client_autogen/mocs_compilation.cpp.i
 
-ClientBookEncoder_autogen/mocs_compilation.s: ClientBookEncoder_autogen/mocs_compilation.cpp.s
-.PHONY : ClientBookEncoder_autogen/mocs_compilation.s
+Client_autogen/mocs_compilation.s: Client_autogen/mocs_compilation.cpp.s
+.PHONY : Client_autogen/mocs_compilation.s
 
 # target to generate assembly for a file
-ClientBookEncoder_autogen/mocs_compilation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClientBookEncoder.dir/build.make CMakeFiles/ClientBookEncoder.dir/ClientBookEncoder_autogen/mocs_compilation.cpp.s
-.PHONY : ClientBookEncoder_autogen/mocs_compilation.cpp.s
+Client_autogen/mocs_compilation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Client_autogen/mocs_compilation.cpp.s
+.PHONY : Client_autogen/mocs_compilation.cpp.s
 
 Serveur_autogen/mocs_compilation.o: Serveur_autogen/mocs_compilation.cpp.o
 .PHONY : Serveur_autogen/mocs_compilation.o
@@ -247,7 +247,7 @@ src/Client.o: src/Client.cpp.o
 
 # target to build an object file
 src/Client.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClientBookEncoder.dir/build.make CMakeFiles/ClientBookEncoder.dir/src/Client.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/Client.cpp.o
 .PHONY : src/Client.cpp.o
 
 src/Client.i: src/Client.cpp.i
@@ -255,7 +255,7 @@ src/Client.i: src/Client.cpp.i
 
 # target to preprocess a source file
 src/Client.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClientBookEncoder.dir/build.make CMakeFiles/ClientBookEncoder.dir/src/Client.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/Client.cpp.i
 .PHONY : src/Client.cpp.i
 
 src/Client.s: src/Client.cpp.s
@@ -263,7 +263,7 @@ src/Client.s: src/Client.cpp.s
 
 # target to generate assembly for a file
 src/Client.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClientBookEncoder.dir/build.make CMakeFiles/ClientBookEncoder.dir/src/Client.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/Client.cpp.s
 .PHONY : src/Client.cpp.s
 
 src/Serveur.o: src/Serveur.cpp.o
@@ -295,7 +295,7 @@ src/main.o: src/main.cpp.o
 
 # target to build an object file
 src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClientBookEncoder.dir/build.make CMakeFiles/ClientBookEncoder.dir/src/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -303,7 +303,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClientBookEncoder.dir/build.make CMakeFiles/ClientBookEncoder.dir/src/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -311,7 +311,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClientBookEncoder.dir/build.make CMakeFiles/ClientBookEncoder.dir/src/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 src/mainwindowclientbookencoder.o: src/mainwindowclientbookencoder.cpp.o
@@ -319,7 +319,7 @@ src/mainwindowclientbookencoder.o: src/mainwindowclientbookencoder.cpp.o
 
 # target to build an object file
 src/mainwindowclientbookencoder.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClientBookEncoder.dir/build.make CMakeFiles/ClientBookEncoder.dir/src/mainwindowclientbookencoder.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/mainwindowclientbookencoder.cpp.o
 .PHONY : src/mainwindowclientbookencoder.cpp.o
 
 src/mainwindowclientbookencoder.i: src/mainwindowclientbookencoder.cpp.i
@@ -327,7 +327,7 @@ src/mainwindowclientbookencoder.i: src/mainwindowclientbookencoder.cpp.i
 
 # target to preprocess a source file
 src/mainwindowclientbookencoder.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClientBookEncoder.dir/build.make CMakeFiles/ClientBookEncoder.dir/src/mainwindowclientbookencoder.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/mainwindowclientbookencoder.cpp.i
 .PHONY : src/mainwindowclientbookencoder.cpp.i
 
 src/mainwindowclientbookencoder.s: src/mainwindowclientbookencoder.cpp.s
@@ -335,7 +335,7 @@ src/mainwindowclientbookencoder.s: src/mainwindowclientbookencoder.cpp.s
 
 # target to generate assembly for a file
 src/mainwindowclientbookencoder.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClientBookEncoder.dir/build.make CMakeFiles/ClientBookEncoder.dir/src/mainwindowclientbookencoder.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/mainwindowclientbookencoder.cpp.s
 .PHONY : src/mainwindowclientbookencoder.cpp.s
 
 src/socket.o: src/socket.cpp.o
@@ -343,7 +343,7 @@ src/socket.o: src/socket.cpp.o
 
 # target to build an object file
 src/socket.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClientBookEncoder.dir/build.make CMakeFiles/ClientBookEncoder.dir/src/socket.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/socket.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Serveur.dir/build.make CMakeFiles/Serveur.dir/src/socket.cpp.o
 .PHONY : src/socket.cpp.o
 
@@ -352,7 +352,7 @@ src/socket.i: src/socket.cpp.i
 
 # target to preprocess a source file
 src/socket.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClientBookEncoder.dir/build.make CMakeFiles/ClientBookEncoder.dir/src/socket.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/socket.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Serveur.dir/build.make CMakeFiles/Serveur.dir/src/socket.cpp.i
 .PHONY : src/socket.cpp.i
 
@@ -361,7 +361,7 @@ src/socket.s: src/socket.cpp.s
 
 # target to generate assembly for a file
 src/socket.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClientBookEncoder.dir/build.make CMakeFiles/ClientBookEncoder.dir/src/socket.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/socket.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Serveur.dir/build.make CMakeFiles/Serveur.dir/src/socket.cpp.s
 .PHONY : src/socket.cpp.s
 
@@ -373,15 +373,15 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... ClientBookEncoder_autogen"
-	@echo "... ClientBookEncoder_autogen_timestamp_deps"
+	@echo "... Client_autogen"
+	@echo "... Client_autogen_timestamp_deps"
 	@echo "... Serveur_autogen"
 	@echo "... Serveur_autogen_timestamp_deps"
-	@echo "... ClientBookEncoder"
+	@echo "... Client"
 	@echo "... Serveur"
-	@echo "... ClientBookEncoder_autogen/mocs_compilation.o"
-	@echo "... ClientBookEncoder_autogen/mocs_compilation.i"
-	@echo "... ClientBookEncoder_autogen/mocs_compilation.s"
+	@echo "... Client_autogen/mocs_compilation.o"
+	@echo "... Client_autogen/mocs_compilation.i"
+	@echo "... Client_autogen/mocs_compilation.s"
 	@echo "... Serveur_autogen/mocs_compilation.o"
 	@echo "... Serveur_autogen/mocs_compilation.i"
 	@echo "... Serveur_autogen/mocs_compilation.s"

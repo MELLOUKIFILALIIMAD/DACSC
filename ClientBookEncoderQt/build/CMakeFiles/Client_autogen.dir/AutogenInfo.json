@@ -1,5 +1,5 @@
 {
-	"BUILD_DIR" : "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/Serveur_autogen",
+	"BUILD_DIR" : "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/Client_autogen",
 	"CMAKE_BINARY_DIR" : "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build",
 	"CMAKE_CURRENT_BINARY_DIR" : "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build",
 	"CMAKE_CURRENT_SOURCE_DIR" : "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt",
@@ -93,21 +93,39 @@
 	],
 	"CMAKE_SOURCE_DIR" : "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt",
 	"CROSS_CONFIG" : false,
-	"DEP_FILE" : "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/Serveur_autogen/deps",
-	"DEP_FILE_RULE_NAME" : "Serveur_autogen/timestamp",
+	"DEP_FILE" : "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/Client_autogen/deps",
+	"DEP_FILE_RULE_NAME" : "Client_autogen/timestamp",
 	"HEADERS" : 
 	[
+		[
+			"/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include/Client.h",
+			"Mu",
+			"6YEA5652QU/moc_Client.cpp",
+			null
+		],
+		[
+			"/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include/mainwindowclientbookencoder.h",
+			"Mu",
+			"6YEA5652QU/moc_mainwindowclientbookencoder.cpp",
+			null
+		],
 		[
 			"/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include/socket.h",
 			"Mu",
 			"6YEA5652QU/moc_socket.cpp",
 			null
+		],
+		[
+			"/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include/ui_mainwindowclientbookencoder.h",
+			"Mu",
+			"6YEA5652QU/moc_ui_mainwindowclientbookencoder.cpp",
+			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
-	"INCLUDE_DIR" : "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/Serveur_autogen/include",
-	"MOC_COMPILATION_FILE" : "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/Serveur_autogen/mocs_compilation.cpp",
-	"MOC_DEFINITIONS" : [],
+	"INCLUDE_DIR" : "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/Client_autogen/include",
+	"MOC_COMPILATION_FILE" : "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/Client_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : [ "QT_CORE_LIB", "QT_GUI_LIB", "QT_NO_DEBUG", "QT_WIDGETS_LIB" ],
 	"MOC_DEPEND_FILTERS" : 
 	[
 		[
@@ -118,6 +136,11 @@
 	"MOC_INCLUDES" : 
 	[
 		"/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include",
+		"/usr/include/qt5",
+		"/usr/include/qt5/QtWidgets",
+		"/usr/include/qt5/QtGui",
+		"/usr/include/qt5/QtCore",
+		"/usr/lib64/qt5/mkspecs/linux-g++",
 		"/usr/include/c++/11",
 		"/usr/include/c++/11/x86_64-redhat-linux",
 		"/usr/include/c++/11/backward",
@@ -137,24 +160,31 @@
 		"-E",
 		"/usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp"
 	],
-	"MOC_PREDEFS_FILE" : "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/Serveur_autogen/moc_predefs.h",
+	"MOC_PREDEFS_FILE" : "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/Client_autogen/moc_predefs.h",
 	"MOC_RELAXED_MODE" : false,
-	"MOC_SKIP" : 
-	[
-		"/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/Client_autogen/mocs_compilation.cpp"
-	],
+	"MOC_SKIP" : [],
 	"MULTI_CONFIG" : false,
 	"PARALLEL" : 4,
-	"PARSE_CACHE_FILE" : "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/CMakeFiles/Serveur_autogen.dir/ParseCache.txt",
+	"PARSE_CACHE_FILE" : "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/CMakeFiles/Client_autogen.dir/ParseCache.txt",
 	"QT_MOC_EXECUTABLE" : "/usr/lib64/qt5/bin/moc",
 	"QT_UIC_EXECUTABLE" : "",
 	"QT_VERSION_MAJOR" : 5,
 	"QT_VERSION_MINOR" : 15,
-	"SETTINGS_FILE" : "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/CMakeFiles/Serveur_autogen.dir/AutogenUsed.txt",
+	"SETTINGS_FILE" : "/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/build/CMakeFiles/Client_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
 		[
-			"/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/Serveur.cpp",
+			"/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/Client.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/main.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/mainwindowclientbookencoder.cpp",
 			"Mu",
 			null
 		],

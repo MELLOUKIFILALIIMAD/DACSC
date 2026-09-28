@@ -52,101 +52,22 @@ Serveur_autogen/timestamp: /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt
   /usr/lib64/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake \
   /usr/lib64/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake \
   /usr/lib64/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake \
-  /usr/share/cmake/Modules/CMakeCCompiler.cmake.in \
-  /usr/share/cmake/Modules/CMakeCCompilerABI.c \
   /usr/share/cmake/Modules/CMakeCInformation.cmake \
-  /usr/share/cmake/Modules/CMakeCXXCompiler.cmake.in \
-  /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp \
   /usr/share/cmake/Modules/CMakeCXXInformation.cmake \
   /usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake \
-  /usr/share/cmake/Modules/CMakeCompilerIdDetection.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineCompiler.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineSystem.cmake \
-  /usr/share/cmake/Modules/CMakeFindBinUtils.cmake \
   /usr/share/cmake/Modules/CMakeGenericSystem.cmake \
   /usr/share/cmake/Modules/CMakeInitializeConfigs.cmake \
   /usr/share/cmake/Modules/CMakeLanguageInformation.cmake \
   /usr/share/cmake/Modules/CMakeParseArguments.cmake \
-  /usr/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake \
-  /usr/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake \
-  /usr/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake \
-  /usr/share/cmake/Modules/CMakeSystem.cmake.in \
   /usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake \
   /usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake \
-  /usr/share/cmake/Modules/CMakeTestCCompiler.cmake \
-  /usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake \
-  /usr/share/cmake/Modules/CMakeTestCompilerCommon.cmake \
-  /usr/share/cmake/Modules/CMakeUnixFindMake.cmake \
-  /usr/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Bruce-C-DetermineCompiler.cmake \
   /usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake \
-  /usr/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake \
-  /usr/share/cmake/Modules/Compiler/Compaq-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/GNU-C-DetermineCompiler.cmake \
   /usr/share/cmake/Modules/Compiler/GNU-C.cmake \
-  /usr/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake \
   /usr/share/cmake/Modules/Compiler/GNU-CXX.cmake \
-  /usr/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake \
   /usr/share/cmake/Modules/Compiler/GNU.cmake \
-  /usr/share/cmake/Modules/Compiler/HP-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake \
-  /usr/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake \
-  /usr/share/cmake/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/LCC-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/SDCC-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/SunPro-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/XL-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/XLClang-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/zOS-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake \
   /usr/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake \
   /usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake \
   /usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake \
-  /usr/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake \
-  /usr/share/cmake/Modules/Internal/CMakeInspectCLinker.cmake \
-  /usr/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake \
-  /usr/share/cmake/Modules/Internal/FeatureTesting.cmake \
   /usr/share/cmake/Modules/Linker/GNU-C.cmake \
   /usr/share/cmake/Modules/Linker/GNU-CXX.cmake \
   /usr/share/cmake/Modules/Linker/GNU.cmake \
@@ -154,327 +75,6 @@ Serveur_autogen/timestamp: /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt
   /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-C.cmake \
   /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake \
   /usr/share/cmake/Modules/Platform/Linker/Linux-GNU.cmake \
-  /usr/share/cmake/Modules/Platform/Linux-Determine-CXX.cmake \
-  /usr/share/cmake/Modules/Platform/Linux-GNU-C.cmake \
-  /usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake \
-  /usr/share/cmake/Modules/Platform/Linux-GNU.cmake \
-  /usr/share/cmake/Modules/Platform/Linux-Initialize.cmake \
-  /usr/share/cmake/Modules/Platform/Linux.cmake \
-  /usr/share/cmake/Modules/Platform/UnixPaths.cmake \
-  /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/CMakeLists.txt \
-  CMakeFiles/3.31.8/CMakeCCompiler.cmake \
-  CMakeFiles/3.31.8/CMakeCXXCompiler.cmake \
-  CMakeFiles/3.31.8/CMakeSystem.cmake \
-  /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include/socket.h \
-  /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/Serveur.cpp \
-  /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/socket.cpp \
-  /usr/bin/cmake \
-  /usr/lib64/cmake/Qt5/Qt5Config.cmake \
-  /usr/lib64/cmake/Qt5/Qt5ConfigVersion.cmake \
-  /usr/lib64/cmake/Qt5/Qt5ModuleLocation.cmake \
-  /usr/lib64/cmake/Qt5Core/Qt5CoreConfig.cmake \
-  /usr/lib64/cmake/Qt5Core/Qt5CoreConfigExtras.cmake \
-  /usr/lib64/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake \
-  /usr/lib64/cmake/Qt5Core/Qt5CoreConfigVersion.cmake \
-  /usr/lib64/cmake/Qt5Core/Qt5CoreMacros.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5GuiConfig.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QComposePlatformInputContextPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSEmulatorIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSKmsEglDeviceIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSKmsGbmIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSX11IntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QEvdevKeyboardPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QEvdevMousePlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QEvdevTabletPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QEvdevTouchScreenPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QGifPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QGtk3ThemePlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QICOPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QIbusPlatformInputContextPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QJpegPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QLibInputPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QLinuxFbIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QMinimalEglIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QMinimalIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QOffscreenIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QSvgIconPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QSvgPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QTuioTouchPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QVncIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QXcbEglIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QXcbGlxIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QXcbIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QXdgDesktopPortalThemePlugin.cmake \
-  /usr/lib64/cmake/Qt5Widgets/Qt5WidgetsConfig.cmake \
-  /usr/lib64/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake \
-  /usr/lib64/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake \
-  /usr/lib64/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake \
-  /usr/share/cmake/Modules/CMakeCCompiler.cmake.in \
-  /usr/share/cmake/Modules/CMakeCCompilerABI.c \
-  /usr/share/cmake/Modules/CMakeCInformation.cmake \
-  /usr/share/cmake/Modules/CMakeCXXCompiler.cmake.in \
-  /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp \
-  /usr/share/cmake/Modules/CMakeCXXInformation.cmake \
-  /usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake \
-  /usr/share/cmake/Modules/CMakeCompilerIdDetection.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineCompiler.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineSystem.cmake \
-  /usr/share/cmake/Modules/CMakeFindBinUtils.cmake \
-  /usr/share/cmake/Modules/CMakeGenericSystem.cmake \
-  /usr/share/cmake/Modules/CMakeInitializeConfigs.cmake \
-  /usr/share/cmake/Modules/CMakeLanguageInformation.cmake \
-  /usr/share/cmake/Modules/CMakeParseArguments.cmake \
-  /usr/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake \
-  /usr/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake \
-  /usr/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake \
-  /usr/share/cmake/Modules/CMakeSystem.cmake.in \
-  /usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake \
-  /usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake \
-  /usr/share/cmake/Modules/CMakeTestCCompiler.cmake \
-  /usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake \
-  /usr/share/cmake/Modules/CMakeTestCompilerCommon.cmake \
-  /usr/share/cmake/Modules/CMakeUnixFindMake.cmake \
-  /usr/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Bruce-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake \
-  /usr/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake \
-  /usr/share/cmake/Modules/Compiler/Compaq-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/GNU-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/GNU-C.cmake \
-  /usr/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/GNU-CXX.cmake \
-  /usr/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake \
-  /usr/share/cmake/Modules/Compiler/GNU.cmake \
-  /usr/share/cmake/Modules/Compiler/HP-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake \
-  /usr/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake \
-  /usr/share/cmake/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/LCC-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/SDCC-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/SunPro-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/XL-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/XLClang-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/zOS-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake \
-  /usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake \
-  /usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake \
-  /usr/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake \
-  /usr/share/cmake/Modules/Internal/CMakeInspectCLinker.cmake \
-  /usr/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake \
-  /usr/share/cmake/Modules/Internal/FeatureTesting.cmake \
-  /usr/share/cmake/Modules/Linker/GNU-C.cmake \
-  /usr/share/cmake/Modules/Linker/GNU-CXX.cmake \
-  /usr/share/cmake/Modules/Linker/GNU.cmake \
-  /usr/share/cmake/Modules/Platform/Linker/GNU.cmake \
-  /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-C.cmake \
-  /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake \
-  /usr/share/cmake/Modules/Platform/Linker/Linux-GNU.cmake \
-  /usr/share/cmake/Modules/Platform/Linux-Determine-CXX.cmake \
-  /usr/share/cmake/Modules/Platform/Linux-GNU-C.cmake \
-  /usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake \
-  /usr/share/cmake/Modules/Platform/Linux-GNU.cmake \
-  /usr/share/cmake/Modules/Platform/Linux-Initialize.cmake \
-  /usr/share/cmake/Modules/Platform/Linux.cmake \
-  /usr/share/cmake/Modules/Platform/UnixPaths.cmake \
-  /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/CMakeLists.txt \
-  CMakeFiles/3.31.8/CMakeCCompiler.cmake \
-  CMakeFiles/3.31.8/CMakeCXXCompiler.cmake \
-  CMakeFiles/3.31.8/CMakeSystem.cmake \
-  /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include/socket.h \
-  /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/Serveur.cpp \
-  /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/socket.cpp \
-  /usr/bin/cmake \
-  /usr/lib64/cmake/Qt5/Qt5Config.cmake \
-  /usr/lib64/cmake/Qt5/Qt5ConfigVersion.cmake \
-  /usr/lib64/cmake/Qt5/Qt5ModuleLocation.cmake \
-  /usr/lib64/cmake/Qt5Core/Qt5CoreConfig.cmake \
-  /usr/lib64/cmake/Qt5Core/Qt5CoreConfigExtras.cmake \
-  /usr/lib64/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake \
-  /usr/lib64/cmake/Qt5Core/Qt5CoreConfigVersion.cmake \
-  /usr/lib64/cmake/Qt5Core/Qt5CoreMacros.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5GuiConfig.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QComposePlatformInputContextPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSEmulatorIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSKmsEglDeviceIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSKmsGbmIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSX11IntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QEvdevKeyboardPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QEvdevMousePlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QEvdevTabletPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QEvdevTouchScreenPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QGifPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QGtk3ThemePlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QICOPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QIbusPlatformInputContextPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QJpegPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QLibInputPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QLinuxFbIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QMinimalEglIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QMinimalIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QOffscreenIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QSvgIconPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QSvgPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QTuioTouchPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QVncIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QXcbEglIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QXcbGlxIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QXcbIntegrationPlugin.cmake \
-  /usr/lib64/cmake/Qt5Gui/Qt5Gui_QXdgDesktopPortalThemePlugin.cmake \
-  /usr/lib64/cmake/Qt5Widgets/Qt5WidgetsConfig.cmake \
-  /usr/lib64/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake \
-  /usr/lib64/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake \
-  /usr/lib64/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake \
-  /usr/share/cmake/Modules/CMakeCCompiler.cmake.in \
-  /usr/share/cmake/Modules/CMakeCCompilerABI.c \
-  /usr/share/cmake/Modules/CMakeCInformation.cmake \
-  /usr/share/cmake/Modules/CMakeCXXCompiler.cmake.in \
-  /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp \
-  /usr/share/cmake/Modules/CMakeCXXInformation.cmake \
-  /usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake \
-  /usr/share/cmake/Modules/CMakeCompilerIdDetection.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineCompiler.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake \
-  /usr/share/cmake/Modules/CMakeDetermineSystem.cmake \
-  /usr/share/cmake/Modules/CMakeFindBinUtils.cmake \
-  /usr/share/cmake/Modules/CMakeGenericSystem.cmake \
-  /usr/share/cmake/Modules/CMakeInitializeConfigs.cmake \
-  /usr/share/cmake/Modules/CMakeLanguageInformation.cmake \
-  /usr/share/cmake/Modules/CMakeParseArguments.cmake \
-  /usr/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake \
-  /usr/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake \
-  /usr/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake \
-  /usr/share/cmake/Modules/CMakeSystem.cmake.in \
-  /usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake \
-  /usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake \
-  /usr/share/cmake/Modules/CMakeTestCCompiler.cmake \
-  /usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake \
-  /usr/share/cmake/Modules/CMakeTestCompilerCommon.cmake \
-  /usr/share/cmake/Modules/CMakeUnixFindMake.cmake \
-  /usr/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Bruce-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake \
-  /usr/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake \
-  /usr/share/cmake/Modules/Compiler/Compaq-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/GNU-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/GNU-C.cmake \
-  /usr/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/GNU-CXX.cmake \
-  /usr/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake \
-  /usr/share/cmake/Modules/Compiler/GNU.cmake \
-  /usr/share/cmake/Modules/Compiler/HP-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake \
-  /usr/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake \
-  /usr/share/cmake/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/LCC-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/SDCC-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/SunPro-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/XL-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/XLClang-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/zOS-C-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake \
-  /usr/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake \
-  /usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake \
-  /usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake \
-  /usr/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake \
-  /usr/share/cmake/Modules/Internal/CMakeInspectCLinker.cmake \
-  /usr/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake \
-  /usr/share/cmake/Modules/Internal/FeatureTesting.cmake \
-  /usr/share/cmake/Modules/Linker/GNU-C.cmake \
-  /usr/share/cmake/Modules/Linker/GNU-CXX.cmake \
-  /usr/share/cmake/Modules/Linker/GNU.cmake \
-  /usr/share/cmake/Modules/Platform/Linker/GNU.cmake \
-  /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-C.cmake \
-  /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake \
-  /usr/share/cmake/Modules/Platform/Linker/Linux-GNU.cmake \
-  /usr/share/cmake/Modules/Platform/Linux-Determine-CXX.cmake \
   /usr/share/cmake/Modules/Platform/Linux-GNU-C.cmake \
   /usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake \
   /usr/share/cmake/Modules/Platform/Linux-GNU.cmake \
@@ -607,563 +207,533 @@ CMakeFiles/Serveur.dir/src/Serveur.cpp.o: /home/student/Bureau/Projet/DACSC/Clie
   /usr/lib/gcc/x86_64-redhat-linux/11/include/stdarg.h \
   /usr/lib/gcc/x86_64-redhat-linux/11/include/stddef.h
 
+CMakeFiles/Serveur.dir/src/socket.cpp.o: /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/socket.cpp \
+  /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include/protocole.h \
+  /home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include/socket.h \
+  /usr/include/alloca.h \
+  /usr/include/arpa/inet.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/asm-generic/socket.h \
+  /usr/include/asm-generic/sockios.h \
+  /usr/include/asm/bitsperlong.h \
+  /usr/include/asm/posix_types.h \
+  /usr/include/asm/posix_types_64.h \
+  /usr/include/asm/socket.h \
+  /usr/include/asm/sockios.h \
+  /usr/include/bits/atomic_wide_counter.h \
+  /usr/include/bits/byteswap.h \
+  /usr/include/bits/confname.h \
+  /usr/include/bits/endian.h \
+  /usr/include/bits/endianness.h \
+  /usr/include/bits/environments.h \
+  /usr/include/bits/floatn-common.h \
+  /usr/include/bits/floatn.h \
+  /usr/include/bits/getopt_core.h \
+  /usr/include/bits/getopt_posix.h \
+  /usr/include/bits/in.h \
+  /usr/include/bits/libc-header-start.h \
+  /usr/include/bits/long-double.h \
+  /usr/include/bits/posix_opt.h \
+  /usr/include/bits/pthreadtypes-arch.h \
+  /usr/include/bits/pthreadtypes.h \
+  /usr/include/bits/select.h \
+  /usr/include/bits/sockaddr.h \
+  /usr/include/bits/socket.h \
+  /usr/include/bits/socket_type.h \
+  /usr/include/bits/stdint-intn.h \
+  /usr/include/bits/stdint-uintn.h \
+  /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/stdlib-float.h \
+  /usr/include/bits/struct_mutex.h \
+  /usr/include/bits/struct_rwlock.h \
+  /usr/include/bits/thread-shared-types.h \
+  /usr/include/bits/time64.h \
+  /usr/include/bits/timesize.h \
+  /usr/include/bits/types.h \
+  /usr/include/bits/types/FILE.h \
+  /usr/include/bits/types/__FILE.h \
+  /usr/include/bits/types/__fpos64_t.h \
+  /usr/include/bits/types/__fpos_t.h \
+  /usr/include/bits/types/__locale_t.h \
+  /usr/include/bits/types/__mbstate_t.h \
+  /usr/include/bits/types/__sigset_t.h \
+  /usr/include/bits/types/clock_t.h \
+  /usr/include/bits/types/clockid_t.h \
+  /usr/include/bits/types/cookie_io_functions_t.h \
+  /usr/include/bits/types/locale_t.h \
+  /usr/include/bits/types/sigset_t.h \
+  /usr/include/bits/types/struct_FILE.h \
+  /usr/include/bits/types/struct_iovec.h \
+  /usr/include/bits/types/struct_osockaddr.h \
+  /usr/include/bits/types/struct_timespec.h \
+  /usr/include/bits/types/struct_timeval.h \
+  /usr/include/bits/types/time_t.h \
+  /usr/include/bits/types/timer_t.h \
+  /usr/include/bits/typesizes.h \
+  /usr/include/bits/uintn-identity.h \
+  /usr/include/bits/unistd_ext.h \
+  /usr/include/bits/waitflags.h \
+  /usr/include/bits/waitstatus.h \
+  /usr/include/bits/wordsize.h \
+  /usr/include/c++/11/bits/std_abs.h \
+  /usr/include/c++/11/cstdlib \
+  /usr/include/c++/11/pstl/pstl_config.h \
+  /usr/include/c++/11/stdlib.h \
+  /usr/include/c++/11/x86_64-redhat-linux/bits/c++config.h \
+  /usr/include/c++/11/x86_64-redhat-linux/bits/cpu_defines.h \
+  /usr/include/c++/11/x86_64-redhat-linux/bits/os_defines.h \
+  /usr/include/endian.h \
+  /usr/include/features-time64.h \
+  /usr/include/features.h \
+  /usr/include/gnu/stubs-64.h \
+  /usr/include/gnu/stubs.h \
+  /usr/include/linux/close_range.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/netinet/in.h \
+  /usr/include/stdc-predef.h \
+  /usr/include/stdio.h \
+  /usr/include/stdlib.h \
+  /usr/include/string.h \
+  /usr/include/strings.h \
+  /usr/include/sys/cdefs.h \
+  /usr/include/sys/select.h \
+  /usr/include/sys/socket.h \
+  /usr/include/sys/types.h \
+  /usr/include/unistd.h \
+  /usr/lib/gcc/x86_64-redhat-linux/11/include/stdarg.h \
+  /usr/lib/gcc/x86_64-redhat-linux/11/include/stddef.h
+
+
+/usr/include/strings.h:
+
+/usr/include/string.h:
+
+/usr/include/netinet/in.h:
+
+/usr/include/bits/types/struct_osockaddr.h:
+
+/usr/include/bits/types/struct_iovec.h:
+
+/usr/include/bits/socket_type.h:
+
+/usr/include/bits/sockaddr.h:
+
+/usr/include/bits/in.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/11/include/stddef.h:
 
-/usr/include/unistd.h:
+/usr/lib/gcc/x86_64-redhat-linux/11/include/stdarg.h:
+
+/usr/include/bits/socket.h:
 
 /usr/include/time.h:
 
-/usr/include/sys/select.h:
-
-/usr/include/sys/cdefs.h:
+/usr/include/sys/types.h:
 
 /usr/include/stdlib.h:
 
+/usr/include/stdio.h:
+
+/usr/include/signal.h:
+
+/usr/include/sched.h:
+
 /usr/include/pthread.h:
 
-/usr/include/linux/stddef.h:
+/usr/include/linux/types.h:
 
 /usr/include/linux/sched/types.h:
 
-/usr/include/gnu/stubs.h:
+/usr/include/linux/posix_types.h:
+
+/usr/include/gnu/stubs-64.h:
 
 /usr/include/features-time64.h:
 
 /usr/include/endian.h:
 
-/usr/include/sched.h:
+/usr/include/linux/stddef.h:
 
-/usr/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake:
+/usr/include/c++/11/x86_64-redhat-linux/bits/c++config.h:
 
-/usr/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake:
+/usr/include/c++/11/pstl/pstl_config.h:
 
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEvdevTabletPlugin.cmake:
-
-/usr/include/bits/typesizes.h:
-
-/usr/lib64/cmake/Qt5/Qt5Config.cmake:
-
-/usr/share/cmake/Modules/Platform/Linux-GNU.cmake:
-
-/usr/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake:
-
-/usr/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake:
-
-/usr/include/linux/types.h:
-
-/usr/share/cmake/Modules/CMakeParseArguments.cmake:
-
-/usr/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/Compiler/GNU-C.cmake:
-
-/usr/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake:
-
-/usr/include/bits/endian.h:
-
-/usr/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/Platform/Linux-Determine-CXX.cmake:
-
-/usr/include/bits/endianness.h:
-
-/usr/include/bits/waitflags.h:
-
-/usr/share/cmake/Modules/CMakeDetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/Compiler/Bruce-C-DetermineCompiler.cmake:
-
-/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/CMakeLists.txt:
-
-/usr/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/Compiler/Compaq-C-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/CMakeUnixFindMake.cmake:
-
-/usr/include/stdio.h:
+/usr/include/c++/11/cstdlib:
 
 /usr/include/bits/wordsize.h:
 
-/usr/share/cmake/Modules/CMakeTestCompilerCommon.cmake:
+/usr/include/bits/waitflags.h:
 
-/usr/share/cmake/Modules/CMakeTestCCompiler.cmake:
-
-/usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake:
-
-/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:
-
-/usr/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake:
-
-/usr/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake:
-
-/usr/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/Compiler/LCC-C-DetermineCompiler.cmake:
-
-/usr/include/bits/types/__fpos64_t.h:
-
-/usr/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake:
-
-/usr/share/cmake/Modules/CMakeInitializeConfigs.cmake:
-
-/usr/share/cmake/Modules/Compiler/GNU-C-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/CMakeGenericSystem.cmake:
-
-/usr/share/cmake/Modules/CMakeDetermineSystem.cmake:
-
-/usr/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/CMakeCInformation.cmake:
-
-/usr/share/cmake/Modules/Compiler/HP-C-DetermineCompiler.cmake:
-
-/usr/include/gnu/stubs-64.h:
-
-/usr/include/bits/types/__sigval_t.h:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEvdevTouchScreenPlugin.cmake:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEvdevKeyboardPlugin.cmake:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QSvgPlugin.cmake:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSX11IntegrationPlugin.cmake:
-
-/usr/include/bits/select.h:
-
-/usr/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake:
-
-/usr/lib64/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake:
-
-/usr/share/cmake/Modules/Compiler/GNU-CXX.cmake:
-
-/usr/include/sys/ucontext.h:
-
-/usr/include/stdc-predef.h:
-
-/usr/include/asm-generic/posix_types.h:
-
-/usr/lib64/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake:
-
-/usr/include/bits/siginfo-arch.h:
-
-/usr/share/cmake/Modules/CMakeCXXInformation.cmake:
-
-/usr/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake:
+/usr/include/bits/unistd_ext.h:
 
 /usr/include/bits/uintn-identity.h:
 
-/usr/include/c++/11/stdlib.h:
+/usr/include/bits/types/timer_t.h:
 
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QMinimalIntegrationPlugin.cmake:
-
-/usr/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QMinimalEglIntegrationPlugin.cmake:
-
-/usr/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake:
-
-/usr/lib64/cmake/Qt5Core/Qt5CoreConfigVersion.cmake:
-
-/usr/share/cmake/Modules/Compiler/SunPro-C-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSEmulatorIntegrationPlugin.cmake:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSIntegrationPlugin.cmake:
-
-/usr/share/cmake/Modules/Compiler/SDCC-C-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/Compiler/GNU.cmake:
-
-/usr/include/bits/sigstksz.h:
-
-/usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake:
-
-/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/socket.cpp:
-
-CMakeFiles/3.31.8/CMakeCXXCompiler.cmake:
-
-/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:
-
-/usr/share/cmake/Modules/Platform/UnixPaths.cmake:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QGtk3ThemePlugin.cmake:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QLibInputPlugin.cmake:
-
-/usr/include/asm-generic/int-ll64.h:
-
-/usr/lib64/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake:
-
-/usr/bin/cmake:
-
-/usr/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake:
-
-/usr/include/bits/types/locale_t.h:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSKmsGbmIntegrationPlugin.cmake:
-
-/usr/include/bits/sigevent-consts.h:
-
-/usr/include/bits/types/stack_t.h:
-
-/usr/lib64/cmake/Qt5Core/Qt5CoreConfig.cmake:
-
-/usr/lib/gcc/x86_64-redhat-linux/11/include/stdarg.h:
-
-/usr/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QTuioTouchPlugin.cmake:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QOffscreenIntegrationPlugin.cmake:
-
-/usr/include/alloca.h:
-
-/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/Serveur.cpp:
-
-/usr/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake:
-
-/usr/lib64/cmake/Qt5/Qt5ModuleLocation.cmake:
-
-/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QLinuxFbIntegrationPlugin.cmake:
-
-/usr/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake:
-
-/usr/lib64/cmake/Qt5Core/Qt5CoreConfigExtras.cmake:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QSvgIconPlugin.cmake:
-
-/usr/share/cmake/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake:
-
-/usr/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake:
-
-/usr/include/bits/types/struct_timeval.h:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QGifPlugin.cmake:
-
-/usr/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake:
-
-/usr/include/bits/types/sigset_t.h:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QICOPlugin.cmake:
-
-/usr/include/bits/types.h:
-
-/usr/lib64/cmake/Qt5Gui/Qt5GuiConfig.cmake:
-
-/usr/share/cmake/Modules/CMakeCompilerIdDetection.cmake:
-
-/usr/include/bits/floatn-common.h:
-
-/usr/include/sys/types.h:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QXcbEglIntegrationPlugin.cmake:
-
-/usr/share/cmake/Modules/CMakeCXXCompiler.cmake.in:
-
-/usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake:
-
-/usr/include/bits/sigaction.h:
-
-/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include/socket.h:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QXcbGlxIntegrationPlugin.cmake:
-
-/usr/share/cmake/Modules/Platform/Linux-GNU-C.cmake:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QIbusPlatformInputContextPlugin.cmake:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QJpegPlugin.cmake:
-
-/usr/share/cmake/Modules/CMakeSystem.cmake.in:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QXcbIntegrationPlugin.cmake:
-
-/usr/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake:
+/usr/include/bits/types/time_t.h:
 
 /usr/include/bits/types/struct_tm.h:
 
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QComposePlatformInputContextPlugin.cmake:
+/usr/include/bits/types/struct_timespec.h:
 
-/usr/lib64/cmake/Qt5Widgets/Qt5WidgetsConfig.cmake:
+/usr/include/bits/types/struct_sched_param.h:
+
+/usr/include/asm-generic/socket.h:
+
+/usr/include/bits/types/sigval_t.h:
+
+/usr/include/asm-generic/sockios.h:
+
+/usr/include/bits/types/sigset_t.h:
+
+/usr/include/bits/types/sigevent_t.h:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/bits/types/sig_atomic_t.h:
+
+/usr/include/bits/types/cookie_io_functions_t.h:
+
+/usr/include/bits/types/clockid_t.h:
+
+/usr/include/bits/types/__sigval_t.h:
+
+/usr/include/bits/types/__sigset_t.h:
+
+/usr/include/bits/types/__locale_t.h:
+
+/usr/include/bits/types/clock_t.h:
+
+/usr/include/bits/types/__fpos_t.h:
+
+/usr/include/bits/types/__FILE.h:
+
+/usr/include/bits/types/FILE.h:
+
+/usr/include/bits/timex.h:
+
+/usr/include/bits/waitstatus.h:
+
+/usr/include/bits/timesize.h:
+
+/usr/include/bits/types/struct_itimerspec.h:
+
+/usr/include/bits/struct_rwlock.h:
+
+/usr/include/bits/struct_mutex.h:
+
+/usr/include/bits/time64.h:
+
+/usr/include/bits/stdlib-float.h:
+
+/usr/share/cmake/Modules/CMakeCInformation.cmake:
+
+/usr/lib64/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake:
 
 /usr/include/bits/thread-shared-types.h:
 
-/usr/lib64/cmake/Qt5/Qt5ConfigVersion.cmake:
+/usr/lib64/cmake/Qt5Widgets/Qt5WidgetsConfig.cmake:
 
-/usr/lib64/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake:
+/usr/share/cmake/Modules/CMakeGenericSystem.cmake:
 
-CMakeFiles/3.31.8/CMakeCCompiler.cmake:
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QXcbIntegrationPlugin.cmake:
 
-/usr/include/bits/types/siginfo_t.h:
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QJpegPlugin.cmake:
 
-/usr/include/bits/setjmp.h:
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QIbusPlatformInputContextPlugin.cmake:
+
+/usr/share/cmake/Modules/Linker/GNU-C.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QXcbEglIntegrationPlugin.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QTuioTouchPlugin.cmake:
+
+/usr/include/bits/types/__mbstate_t.h:
+
+/usr/include/bits/time.h:
+
+/usr/include/bits/stdio_lim.h:
 
 /usr/lib64/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake:
 
-/usr/share/cmake/Modules/CMakeCCompiler.cmake.in:
+/usr/include/bits/types.h:
 
-/usr/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake:
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QICOPlugin.cmake:
 
-/usr/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake:
+/usr/include/asm/sockios.h:
 
-/usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake:
+/usr/share/cmake/Modules/Platform/Linux-GNU.cmake:
+
+/usr/include/bits/stdint-uintn.h:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QGifPlugin.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QSvgIconPlugin.cmake:
+
+/usr/lib64/cmake/Qt5Core/Qt5CoreConfigExtras.cmake:
+
+/usr/include/bits/getopt_posix.h:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QLinuxFbIntegrationPlugin.cmake:
+
+/usr/lib64/cmake/Qt5/Qt5ModuleLocation.cmake:
+
+/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/Serveur.cpp:
+
+/usr/include/bits/environments.h:
+
+/usr/share/cmake/Modules/CMakeLanguageInformation.cmake:
+
+/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include/socket.h:
+
+/usr/share/cmake/Modules/Linker/GNU.cmake:
+
+/usr/lib64/cmake/Qt5/Qt5ConfigVersion.cmake:
+
+/usr/include/unistd.h:
+
+/usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake:
+
+/usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake:
+
+/usr/include/bits/types/__fpos64_t.h:
+
+/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/CMakeLists.txt:
+
+/usr/include/bits/long-double.h:
+
+/usr/lib64/cmake/Qt5Core/Qt5CoreConfig.cmake:
+
+/usr/include/bits/types/locale_t.h:
+
+/usr/bin/cmake:
+
+/usr/include/arpa/inet.h:
+
+/usr/lib64/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake:
+
+CMakeFiles/3.31.8/CMakeCXXCompiler.cmake:
+
+/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/src/socket.cpp:
 
 /usr/lib64/cmake/Qt5Gui/Qt5Gui_QVncIntegrationPlugin.cmake:
 
 /usr/include/bits/byteswap.h:
 
-/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:
+/usr/include/sys/socket.h:
 
-/usr/share/cmake/Modules/CMakeCCompilerABI.c:
+/usr/include/sys/cdefs.h:
 
-/usr/share/cmake/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake:
+CMakeFiles/3.31.8/CMakeCCompiler.cmake:
 
-/usr/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake:
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEvdevMousePlugin.cmake:
+
+/usr/include/bits/sigaction.h:
+
+/usr/share/cmake/Modules/CMakeInitializeConfigs.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5GuiConfig.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSIntegrationPlugin.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSEmulatorIntegrationPlugin.cmake:
 
 /usr/include/asm/bitsperlong.h:
 
-/usr/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake:
+/usr/include/bits/sigcontext.h:
 
-/usr/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake:
+/usr/lib64/cmake/Qt5Core/Qt5CoreConfigVersion.cmake:
 
-/usr/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake:
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSKmsEglDeviceIntegrationPlugin.cmake:
 
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QXdgDesktopPortalThemePlugin.cmake:
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEvdevTabletPlugin.cmake:
 
-/usr/include/bits/stdlib-float.h:
+/usr/include/bits/pthreadtypes.h:
 
-/usr/include/bits/time64.h:
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QMinimalIntegrationPlugin.cmake:
 
-/usr/share/cmake/Modules/Compiler/XL-C-DetermineCompiler.cmake:
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QMinimalEglIntegrationPlugin.cmake:
 
-/usr/share/cmake/Modules/Compiler/XLClang-C-DetermineCompiler.cmake:
-
-/usr/include/features.h:
-
-/usr/include/bits/types/__FILE.h:
-
-/usr/include/bits/sched.h:
-
-/usr/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake:
-
-/usr/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake:
-
-/usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake:
-
-/usr/include/bits/types/clockid_t.h:
-
-/usr/include/bits/stdint-intn.h:
-
-/usr/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake:
-
-/usr/include/bits/timesize.h:
-
-/usr/include/c++/11/cstdlib:
+/usr/include/c++/11/stdlib.h:
 
 /usr/include/bits/types/struct___jmp_buf_tag.h:
 
-/usr/include/bits/waitstatus.h:
-
-/usr/share/cmake/Modules/Internal/CMakeInspectCLinker.cmake:
-
-/usr/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake:
-
 CMakeFiles/3.31.8/CMakeSystem.cmake:
 
-/usr/include/bits/struct_rwlock.h:
+/usr/include/bits/types/struct_timeval.h:
 
-/usr/include/bits/types/struct_itimerspec.h:
+/usr/share/cmake/Modules/CMakeCXXInformation.cmake:
 
-/usr/share/cmake/Modules/Internal/FeatureTesting.cmake:
+/usr/lib64/cmake/Qt5/Qt5Config.cmake:
 
-/usr/share/cmake/Modules/Linker/GNU-C.cmake:
+/usr/include/bits/sigstack.h:
 
-/usr/include/bits/types/timer_t.h:
+/usr/include/bits/siginfo-consts-arch.h:
 
-/usr/share/cmake/Modules/Linker/GNU-CXX.cmake:
+/usr/include/bits/getopt_core.h:
 
-/usr/include/bits/pthread_stack_min-dynamic.h:
+/usr/share/cmake/Modules/Platform/Linux-Initialize.cmake:
 
-/usr/include/linux/close_range.h:
+Serveur_autogen/mocs_compilation.cpp:
+
+/usr/include/bits/siginfo-arch.h:
+
+/usr/lib64/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake:
+
+/usr/lib64/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake:
+
+/usr/share/cmake/Modules/Compiler/GNU.cmake:
+
+/usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake:
+
+/usr/include/sys/select.h:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSX11IntegrationPlugin.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QSvgPlugin.cmake:
+
+/usr/include/bits/types/struct_sigstack.h:
+
+/usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake:
+
+/usr/share/cmake/Modules/CMakeParseArguments.cmake:
+
+/usr/include/bits/setjmp.h:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEvdevKeyboardPlugin.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QComposePlatformInputContextPlugin.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEvdevTouchScreenPlugin.cmake:
+
+/usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QOffscreenIntegrationPlugin.cmake:
+
+/usr/include/alloca.h:
+
+/usr/include/c++/11/bits/std_abs.h:
+
+/usr/include/bits/sigthread.h:
+
+/usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake:
+
+/usr/lib64/cmake/Qt5Core/Qt5CoreMacros.cmake:
+
+/usr/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake:
+
+/usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake:
 
 /usr/share/cmake/Modules/Platform/Linker/GNU.cmake:
 
 /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-C.cmake:
 
-/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:
+/usr/share/cmake/Modules/Linker/GNU-CXX.cmake:
 
-/usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake:
-
-/usr/include/bits/types/struct_sigstack.h:
+/usr/include/bits/pthread_stack_min-dynamic.h:
 
 /usr/share/cmake/Modules/Platform/Linker/Linux-GNU.cmake:
 
-/usr/share/cmake/Modules/Platform/Linux-Initialize.cmake:
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QXcbGlxIntegrationPlugin.cmake:
 
-/usr/include/bits/getopt_core.h:
+/usr/share/cmake/Modules/Platform/Linux-GNU-C.cmake:
 
-/usr/include/bits/siginfo-consts-arch.h:
-
-/usr/include/bits/sigstack.h:
+/usr/include/bits/floatn.h:
 
 /usr/share/cmake/Modules/Platform/Linux.cmake:
 
-/usr/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake:
+/usr/share/cmake/Modules/Platform/UnixPaths.cmake:
 
-/usr/share/cmake/Modules/Linker/GNU.cmake:
+/usr/include/gnu/stubs.h:
 
-Serveur_autogen/mocs_compilation.cpp:
+/usr/include/c++/11/x86_64-redhat-linux/bits/os_defines.h:
 
-/usr/include/signal.h:
-
-/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include/protocole.h:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEvdevMousePlugin.cmake:
-
-/usr/include/bits/signal_ext.h:
+/usr/include/bits/pthreadtypes-arch.h:
 
 /usr/include/asm-generic/bitsperlong.h:
 
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QXdgDesktopPortalThemePlugin.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QLibInputPlugin.cmake:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QGtk3ThemePlugin.cmake:
+
+/usr/include/asm-generic/int-ll64.h:
+
+/usr/share/cmake/Modules/Compiler/GNU-CXX.cmake:
+
+/usr/include/stdc-predef.h:
+
+/usr/include/asm-generic/posix_types.h:
+
 /usr/include/asm-generic/types.h:
+
+/usr/include/asm/posix_types.h:
 
 /usr/include/asm/posix_types_64.h:
 
+/usr/include/c++/11/x86_64-redhat-linux/bits/cpu_defines.h:
+
+/usr/include/bits/types/struct_FILE.h:
+
+/usr/include/bits/ss_flags.h:
+
 /usr/include/asm/types.h:
-
-/usr/include/bits/atomic_wide_counter.h:
-
-/usr/include/bits/posix_opt.h:
 
 /usr/include/bits/confname.h:
 
 /usr/include/bits/cpu-set.h:
 
-/usr/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake:
+/usr/include/bits/endian.h:
 
-/usr/include/bits/floatn.h:
+/usr/include/features.h:
 
-/usr/include/bits/getopt_posix.h:
+/usr/include/bits/endianness.h:
 
-/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:
-
-/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSKmsEglDeviceIntegrationPlugin.cmake:
+/usr/include/bits/floatn-common.h:
 
 /usr/include/bits/libc-header-start.h:
 
-/usr/include/bits/long-double.h:
-
-/usr/include/bits/pthreadtypes-arch.h:
-
-/usr/lib64/cmake/Qt5Core/Qt5CoreMacros.cmake:
-
-/usr/include/c++/11/x86_64-redhat-linux/bits/os_defines.h:
-
-/usr/include/bits/pthreadtypes.h:
-
-/usr/include/bits/sigcontext.h:
-
 /usr/include/bits/siginfo-consts.h:
+
+/usr/include/bits/atomic_wide_counter.h:
+
+/usr/include/bits/posix_opt.h:
+
+/usr/include/bits/types/siginfo_t.h:
+
+/usr/lib64/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake:
+
+/usr/include/bits/sched.h:
+
+/usr/include/bits/select.h:
+
+/usr/include/bits/types/stack_t.h:
+
+/usr/lib64/cmake/Qt5Gui/Qt5Gui_QEglFSKmsGbmIntegrationPlugin.cmake:
+
+/usr/include/bits/sigevent-consts.h:
+
+/usr/include/sys/ucontext.h:
+
+/home/student/Bureau/Projet/DACSC/ClientBookEncoderQt/include/protocole.h:
+
+/usr/include/bits/signal_ext.h:
 
 /usr/include/bits/signum-arch.h:
 
 /usr/include/bits/signum-generic.h:
 
-/usr/share/cmake/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake:
+/usr/include/asm/socket.h:
 
-/usr/include/bits/sigthread.h:
+/usr/share/cmake/Modules/Compiler/GNU-C.cmake:
 
-/usr/include/c++/11/bits/std_abs.h:
+/usr/include/bits/sigstksz.h:
 
-/usr/share/cmake/Modules/CMakeLanguageInformation.cmake:
+/usr/include/linux/close_range.h:
 
-/usr/include/bits/ss_flags.h:
+/usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake:
 
-/usr/include/bits/environments.h:
-
-/usr/include/bits/types/struct_FILE.h:
-
-/usr/include/c++/11/x86_64-redhat-linux/bits/cpu_defines.h:
-
-/usr/include/bits/stdio_lim.h:
-
-/usr/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake:
-
-/usr/include/asm/posix_types.h:
-
-/usr/include/bits/time.h:
-
-/usr/lib64/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake:
-
-/usr/include/bits/types/__mbstate_t.h:
-
-/usr/include/bits/struct_mutex.h:
-
-/usr/include/bits/timex.h:
-
-/usr/include/linux/posix_types.h:
-
-/usr/share/cmake/Modules/Compiler/zOS-C-DetermineCompiler.cmake:
-
-/usr/include/bits/types/FILE.h:
-
-/usr/include/bits/types/sig_atomic_t.h:
-
-/usr/include/bits/types/__fpos_t.h:
-
-/usr/include/bits/types/clock_t.h:
-
-/usr/include/bits/types/__locale_t.h:
-
-/usr/include/bits/types/__sigset_t.h:
-
-/usr/include/bits/types/cookie_io_functions_t.h:
-
-/usr/include/bits/types/sigevent_t.h:
-
-/usr/include/bits/types/sigval_t.h:
-
-/usr/include/bits/types/struct_sched_param.h:
-
-/usr/include/bits/types/struct_timespec.h:
-
-/usr/include/bits/types/time_t.h:
-
-/usr/share/cmake/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake:
-
-/usr/include/bits/unistd_ext.h:
-
-/usr/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake:
-
-/usr/include/c++/11/pstl/pstl_config.h:
-
-/usr/include/c++/11/x86_64-redhat-linux/bits/c++config.h:
+/usr/include/bits/stdint-intn.h:
