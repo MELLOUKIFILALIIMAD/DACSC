@@ -44,14 +44,34 @@ target_link_libraries(Client PRIVATE
 # =========================
 # SERVEUR
 # =========================
+find_path(MYSQL_INCLUDE_DIR mysql.h
+    PATHS
+        /usr/include/mysql
+        /usr/include/mariadb
+)
 
+find_library(MYSQL_LIBRARY
+    NAMES mysqlclient
+    PATHS
+        /usr/lib64/mysql
+        /usr/lib64
+        /usr/lib/mysql
+        /usr/lib
+)
 add_executable(Serveur
     src/Serveur.cpp
     src/socket.cpp
+    src/database.cpp
 
     include/socket.h
+    include/database.h
 )
 
 target_include_directories(Serveur PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${MYSQL_INCLUDE_DIR}
+)
+
+target_link_libraries(Serveur PRIVATE
+    ${MYSQL_LIBRARY}
 )
