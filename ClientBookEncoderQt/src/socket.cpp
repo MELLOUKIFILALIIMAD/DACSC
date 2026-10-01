@@ -135,6 +135,21 @@ int ReceiveAll(int socket, char *buffer, int taille)
 
 int Send(int socket, MESSAGE *message)
 {
+    if (SendAll(socket, (char *)&message->type, sizeof(long)) <= 0)
+    {
+        return -1;
+    }
+
+    if (SendAll(socket, (char *)&message->expediteur, sizeof(int)) <= 0)
+    {
+        return -1;
+    }
+
+    if (SendAll(socket, (char *)&message->requete, sizeof(int)) <= 0)
+    {
+        return -1;
+    }
+
     char taille[5];
 
     int tailleData1 = 0;
@@ -156,14 +171,9 @@ int Send(int socket, MESSAGE *message)
         tailleTexte = strlen(message->texte);
     }
 
-
-    // Envoi de data1
-
     sprintf(taille, "%04d", tailleData1);
-
     if (SendAll(socket, taille, 4) <= 0)
     {
-        perror("(SOCKET) Erreur d'envoi de la taille de data1");
         return -1;
     }
 
@@ -171,19 +181,13 @@ int Send(int socket, MESSAGE *message)
     {
         if (SendAll(socket, message->data1, tailleData1) <= 0)
         {
-            perror("(SOCKET) Erreur d'envoi de data1");
             return -1;
         }
     }
 
-
-    // Envoi de data2
-
     sprintf(taille, "%04d", tailleData2);
-
     if (SendAll(socket, taille, 4) <= 0)
     {
-        perror("(SOCKET) Erreur d'envoi de la taille de data2");
         return -1;
     }
 
@@ -191,19 +195,13 @@ int Send(int socket, MESSAGE *message)
     {
         if (SendAll(socket, message->data2, tailleData2) <= 0)
         {
-            perror("(SOCKET) Erreur d'envoi de data2");
             return -1;
         }
     }
 
-
-    // Envoi de texte
-
     sprintf(taille, "%04d", tailleTexte);
-
     if (SendAll(socket, taille, 4) <= 0)
     {
-        perror("(SOCKET) Erreur d'envoi de la taille de texte");
         return -1;
     }
 
@@ -211,18 +209,29 @@ int Send(int socket, MESSAGE *message)
     {
         if (SendAll(socket, message->texte, tailleTexte) <= 0)
         {
-            perror("(SOCKET) Erreur d'envoi de texte");
             return -1;
         }
     }
 
-
     return 0;
 }
 
-
 int Receive(int socket, MESSAGE *message)
 {
+    if (ReceiveAll(socket, (char *)&message->type, sizeof(long)) <= 0)
+    {
+        return -1;
+    }
+
+    if (ReceiveAll(socket, (char *)&message->expediteur, sizeof(int)) <= 0)
+    {
+        return -1;
+    }
+
+    if (ReceiveAll(socket, (char *)&message->requete, sizeof(int)) <= 0)
+    {
+        return -1;
+    }
     char taille[5];
 
     int tailleData1;

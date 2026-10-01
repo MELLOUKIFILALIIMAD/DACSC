@@ -1,6 +1,10 @@
 #include "Client.h"
 
-Client::Client() : connected(false) {}
+Client::Client()
+{
+    connected = false;
+    socketServeur = -1;
+}
 
 Client::~Client() {}
 
@@ -38,4 +42,12 @@ void Client::setConnected(bool connected) {
 
 bool Client::isConnected() const {
     return connected;
+}
+void Client::setSocketServeur(int socket)
+{
+    socketServeur = socket;
+}
+int Client::getSocketServeur()
+{
+    return socketServeur;
 }

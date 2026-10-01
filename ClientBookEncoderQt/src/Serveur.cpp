@@ -2,9 +2,18 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <pthread.h>
+#include <string>
 
 #include "socket.h"
 #include "protocole.h"
+#include "database.h"
+
+using namespace std;
+
+
+
+pthread_mutex_t mutexDB = PTHREAD_MUTEX_INITIALIZER;
+
 
 int idServeur;
 
@@ -15,6 +24,10 @@ void Liberer(void* arg);
 
 int main()
 {
+    // Connexion SQL:
+    printf("(SERVEUR) Version actuelle: 0.1.0");
+    printf("(SERVEUR) Connexion à la base de donnée");
+    ConnexionBD();
     // Armement du signal SIGINT
     struct sigaction A;
 
@@ -42,8 +55,7 @@ int main()
     // Mise en écoute
     Listen(idServeur);
 
-    printf("(SERVEUR) Serveur en attente de connexions sur le port %d\n",
-           PORT_ENCODING);
+    printf("(SERVEUR) Serveur en attente de connexions sur le port %d\n", PORT_ENCODING);
 
 
     // Attente des clients
@@ -96,7 +108,7 @@ int main()
 void *GestionClient(void *arg)
 {
     int client = *((int *)arg);
-
+    int result;
     Liberer(arg);
 
     MESSAGE m;
@@ -123,15 +135,53 @@ void *GestionClient(void *arg)
         switch (m.requete)
         {
             case LOGIN:
+                MESSAGE msg;
+                int existe;
+                fprintf(stderr,"(SERVEUR %ld) Requete LOGIN reçue de %d : --%s--\n",m.type, m.expediteur, m.data2);
+                m.type = m.expediteur;
+                msg.expediteur = getpid();
+                msg.requete = LOGIN;
+                pthread_mutex_lock(&mutexDB);
+                existe = LoginExiste(m.data2);
+                if (existe == 0)
+                {
+                    AjouterEmploye(m.data2, m.texte);
+                }
+                result = VerifierLogin(m.data2, m.texte);
+                pthread_mutex_unlock(&mutexDB);
+                if (result == 1)
+                {
+                    printf("(SERVEUR) Login correct\n");
+                    string data1 = "OK";
+                    msg.data1 = (char*)data1.c_str();
 
-                printf("(SERVEUR) LOGIN\n");
+                    msg.data2 = NULL;
+                    msg.texte = NULL;
+                }
+                else
+                {
+                    if (existe == 1)
+                    {
+                        fprintf(stderr,"(SERVEUR) Utilisateur déja existant\n");
+                    }
+                    printf("(SERVEUR) Login incorrect\n");
 
-                printf("(SERVEUR) Login : %s\n",m.data1);
+                    string data1 = "KO";
+                    msg.data1 = (char*)data1.c_str();
+                    msg.data2 = NULL;
+                    msg.texte = NULL;
 
-                printf("(SERVEUR) Password : %s\n",m.data2);
+                }
+
+                if (Send(client, &msg) == -1)
+                {
+                    printf("(SERVEUR %d) Erreur d'envoi (REQUETE LOGIN: %d)\n", getpid(), m.expediteur);
+                    Close(client);
+                    return NULL;
+
+                }
 
                 break;
-
 
             case LOGOUT:
 
@@ -170,37 +220,26 @@ void *GestionClient(void *arg)
 
                 break;
 
-
-            default:
-
-                printf("(SERVEUR) Requete inconnue\n");
-
-                break;
         }
 
 
-        // Exemple de réponse
-        if (Send(client, &m) == -1)
+
+        if (m.data1 != NULL)
         {
-            printf("(SERVEUR) Erreur d'envoi\n");
-
             free(m.data1);
-            free(m.data2);
-            free(m.texte);
-
-            break;
         }
-
-
-        // Libération des données reçues
-        free(m.data1);
-        free(m.data2);
-        free(m.texte);
+        if (m.data2 != NULL)
+        {
+            free(m.data2);
+        }
+        if (m.texte != NULL)
+        {
+            free(m.texte);
+        }
     }
 
 
     Close(client);
-
     return NULL;
 }
 
@@ -210,6 +249,7 @@ void HandlerSIGINT(int sig)
     printf("\n(SERVEUR) Arret du serveur\n");
 
     Close(idServeur);
+    DeconnexionBD();
 
     exit(0);
 }
