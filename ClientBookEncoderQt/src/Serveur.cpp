@@ -10,22 +10,30 @@
 
 using namespace std;
 
+#define TAILLE_FILE 20
 
 
 pthread_mutex_t mutexDB = PTHREAD_MUTEX_INITIALIZER;
 
+pthread_mutex_t mutexFile = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t condFile = PTHREAD_COND_INITIALIZER;
+
+int fileClients[TAILLE_FILE];
+int debut = 0;
+int fin = 0;
+int nbClients = 0;
 
 int idServeur;
 
 void HandlerSIGINT(int sig);
 void *GestionClient(void *arg);
 void Liberer(void* arg);
-
+void *Worker(void *arg);
 
 int main()
 {
     // Connexion SQL:
-    printf("(SERVEUR) Version actuelle: 0.1.0");
+    printf("(SERVEUR) Version actuelle: 0.2.1");
     printf("(SERVEUR) Connexion à la base de donnée");
     ConnexionBD();
     // Armement du signal SIGINT
@@ -57,6 +65,19 @@ int main()
 
     printf("(SERVEUR) Serveur en attente de connexions sur le port %d\n", PORT_ENCODING);
 
+    // Création du thread pool
+    pthread_t threads[NB_THREADS];
+
+    for (int i = 0; i < NB_THREADS; i++)
+    {
+        if (pthread_create(&threads[i], NULL, Worker, NULL) != 0)
+        {
+            perror("Erreur pthread_create");
+            exit(1);
+        }
+
+        pthread_detach(threads[i]);
+    }
 
     // Attente des clients
     while (1)
@@ -79,25 +100,6 @@ int main()
         }
 
         *socketClient = client;
-
-
-        // Création du thread
-        pthread_t thread;
-
-        if (pthread_create(&thread,NULL,GestionClient,socketClient) != 0)
-        {
-            perror("(SERVEUR) Erreur de pthread_create");
-
-            Close(client);
-
-            free(socketClient);
-
-            continue;
-        }
-
-
-        // Le thread est indépendant
-        pthread_detach(thread);
     }
 
 
@@ -109,7 +111,11 @@ void *GestionClient(void *arg)
 {
     int client = *((int *)arg);
     int result;
+<<<<<<< HEAD
+    int loggedIn = 0;
+=======
     int loggedIn;
+>>>>>>> origin/main
     Liberer(arg);
 
     MESSAGE m;
@@ -302,4 +308,41 @@ void HandlerSIGINT(int sig)
 void Liberer(void* arg)
 {
 	free(arg);
+}
+
+void *Worker(void *arg)
+{
+    while (1)
+    {
+        pthread_mutex_lock(&mutexFile);
+
+        // Tant qu'il n'y a aucun client, le thread attend
+        while (nbClients == 0)
+        {
+            pthread_cond_wait(&condFile, &mutexFile);
+        }
+
+        // Récupération du prochain client
+        int client = fileClients[debut];
+
+        debut = (debut + 1) % TAILLE_FILE;
+        nbClients--;
+
+        pthread_mutex_unlock(&mutexFile);
+
+        // Gestion du client
+        int *socketClient = (int *)malloc(sizeof(int));
+
+        if (socketClient == NULL)
+        {
+            Close(client);
+            continue;
+        }
+
+        *socketClient = client;
+
+        GestionClient(socketClient);
+    }
+
+    return NULL;
 }

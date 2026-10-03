@@ -5,6 +5,10 @@
 
 #define PORT_ENCODING 5000
 
+// Pool de threads pour gérer les clients
+// Gère combien de client simultanément
+#define NB_THREADS 10
+
 int Socket();
 void Bind(int socket, int port);
 void Listen(int socket);
