@@ -109,6 +109,7 @@ void *GestionClient(void *arg)
 {
     int client = *((int *)arg);
     int result;
+    int loggedIn;
     Liberer(arg);
 
     MESSAGE m;
@@ -145,9 +146,25 @@ void *GestionClient(void *arg)
                 existe = LoginExiste(m.data2);
                 if (existe == 0)
                 {
-                    AjouterEmploye(m.data2, m.texte);
+                    string texte = "Utilisateur inexistant";
+                    string data1 = "KO";
+                    msg.data1 = (char*)data1.c_str();
+                    msg.texte = (char*)texte.c_str();
+                    msg.data2 = NULL;
+
+                    if (Send(client, &msg) == -1)
+                    {
+                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE LOGIN: %d)\n", getpid(), m.expediteur);
+                        Close(client);
+                        return NULL;
+
+                    }
+
+                    pthread_mutex_unlock(&mutexDB);
+                    break;
                 }
                 result = VerifierLogin(m.data2, m.texte);
+                loggedIn = isLoggedin(m.data2);
                 pthread_mutex_unlock(&mutexDB);
                 if (result == 1)
                 {
@@ -157,20 +174,38 @@ void *GestionClient(void *arg)
 
                     msg.data2 = NULL;
                     msg.texte = NULL;
+
+                    result = LoggedIn(m.data2);
+                    if (result == 0)
+                    {
+                        fprintf(stderr,"(SERVEUR) Erreur lors de la mise à jour de l'état de connexion de l'utilisateur\n");
+                    }
                 }
                 else
                 {
                     if (existe == 1)
                     {
                         fprintf(stderr,"(SERVEUR) Utilisateur déja existant\n");
+                        string message = "Utilisateur déjà connecté";
+                        msg.texte = (char*)message.c_str();
                     }
                     printf("(SERVEUR) Login incorrect\n");
 
                     string data1 = "KO";
                     msg.data1 = (char*)data1.c_str();
                     msg.data2 = NULL;
-                    msg.texte = NULL;
 
+                    if (existe == 0 || loggedIn == 1)
+                        msg.texte = NULL;
+
+                }
+
+                if (loggedIn == 1)
+                {
+                    fprintf(stderr,"(SERVEUR) Utilisateur déjà connecté\n");
+                    msg.texte = (char*) "Utilisateur déjà connecté";
+                    msg.data1 = (char*) "KO";
+                    msg.data2 = NULL;
                 }
 
                 if (Send(client, &msg) == -1)
@@ -184,6 +219,17 @@ void *GestionClient(void *arg)
                 break;
 
             case LOGOUT:
+                pthread_mutex_lock(&mutexDB);
+                result = LoggedOut(m.data2);
+                pthread_mutex_unlock(&mutexDB);
+                if (result == 0)
+                {
+                    fprintf(stderr,"(SERVEUR) Erreur lors de la mise à jour de l'état de connexion de l'utilisateur\n");
+                }
+                else
+                {
+                    printf("(SERVEUR) Utilisateur déconnecté\n");
+                }
 
                 printf("(SERVEUR) LOGOUT\n");
 

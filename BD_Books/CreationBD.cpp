@@ -129,7 +129,8 @@ int main(int argc,char *argv[])
   if (mysql_query(connexion,"CREATE TABLE employees ("
                       "id INT(4) AUTO_INCREMENT PRIMARY KEY, "
                       "login VARCHAR(20), "
-                      "password VARCHAR(20));")) {
+                      "password VARCHAR(20), "
+                      "Active BOOLEAN DEFAULT FALSE);")) {
     finish_with_error(connexion);
   }
 
@@ -164,6 +165,19 @@ int main(int argc,char *argv[])
       finish_with_error(connexion);   
     }
   }
+
+  // Ajout de tuples dans la table employees
+  printf("Ajout des employes...\n");
+
+  mysql_query(connexion,
+    "INSERT INTO employees (login, password) VALUES ('Imad', 'imad');");
+
+  mysql_query(connexion,
+      "INSERT INTO employees (login, password) VALUES ('Issam', '123');");
+
+  mysql_query(connexion,
+      "INSERT INTO employees (login, password) VALUES ('E1', '1234');");
+
 
   // Deconnection de la BD
   mysql_close(connexion);

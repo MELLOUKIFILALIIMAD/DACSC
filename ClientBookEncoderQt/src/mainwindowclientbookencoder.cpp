@@ -307,7 +307,7 @@ void MainWindowClientBookEncoder::on_actionLogin_triggered() {
     message.texte = (char*)password.c_str();
 
 
-    // Traitement du message LOGIN côté client (à implémenter côté serveur)
+    // Traitement du message LOGIN côté client
     printf("(CLIENT) Requete envoyee : %d\n", message.requete);
     int result = Send(message.type, &message);
     if (result < 0) {
@@ -315,13 +315,17 @@ void MainWindowClientBookEncoder::on_actionLogin_triggered() {
         return;
     }
 
-    // Attente de la réponse du serveur (à implémenter côté serveur)
+    // Attente de la réponse du serveur
     int receiveResult = Receive(client.getSocketServeur(), &message);
     if (receiveResult < 0) {
-        this->dialogError("Erreur","Erreur: " + std::string(message.texte));
+        this->dialogError("Erreur","Erreur lors de la réception de la réponse du serveur pour le message LOGIN !");
         return;
     }
 
+    if (string(message.data1) != "OK") {
+        this->dialogError("Erreur","Erreur de connexion : " + string(message.texte));
+        return;
+    }
 
 
     // Faciliter l'accès aux informations pour le client
@@ -334,7 +338,23 @@ void MainWindowClientBookEncoder::on_actionLogin_triggered() {
 }
 
 void MainWindowClientBookEncoder::on_actionLogout_triggered() {
-    client.setConnected(false);
+    MESSAGE message;
+    message.type = client.getSocketServeur();
+    message.expediteur = idClient;
+    message.requete = LOGOUT;
+    message.data1 = NULL;
+    message.data2 = (char*)client.getLogin().c_str();
+
+    printf("(CLIENT) Requete envoyee : %d\n", message.requete);
+    int result = Send(message.type, &message);
+    if (result < 0) {
+        this->dialogError("Erreur","Erreur lors de l'envoi du message LOGIN au serveur !");
+        return;
+    }
+
+    client.setLogin("");
+    client.setPassword("");
+    client.setConnected(false);    
     this->logoutOk();
 }
 
