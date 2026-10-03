@@ -111,7 +111,11 @@ void *GestionClient(void *arg)
 {
     int client = *((int *)arg);
     int result;
+<<<<<<< HEAD
     int loggedIn = 0;
+=======
+    int loggedIn;
+>>>>>>> origin/main
     Liberer(arg);
 
     MESSAGE m;
