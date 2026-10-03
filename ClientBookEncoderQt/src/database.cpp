@@ -44,6 +44,33 @@ int VerifierLogin(const char *login, const char *password)
 
     return 0;
 }
+
+int isLoggedin(const char *login)
+{
+    char requete[256];
+
+    sprintf(requete,"SELECT Active FROM employees WHERE login='%s';",login);
+
+    if (mysql_query(connexion, requete))
+    {
+        return 0;
+    }
+
+    MYSQL_RES *resultat = mysql_store_result(connexion);
+
+    if (mysql_num_rows(resultat) > 0)
+    {
+        MYSQL_ROW row = mysql_fetch_row(resultat);
+        int active = atoi(row[0]);
+        mysql_free_result(resultat);
+        return active;
+    }
+
+    mysql_free_result(resultat);
+
+    return 0;
+}
+
 int LoginExiste(const char *login)
 {
     char requete[256];
@@ -68,6 +95,39 @@ int LoginExiste(const char *login)
     return 0;
 }
 
+int LoggedIn(const char *login)
+{
+    char requete[256];
+
+    // Updating Active to 1 if the user is logged in
+    sprintf(requete,"UPDATE employees SET Active = 1 WHERE login='%s';",login);
+
+    if (mysql_query(connexion, requete))
+    {
+        return 0;
+    }
+
+    return 1;
+}
+
+int LoggedOut(const char *login)
+{
+    char requete[256];
+
+    // Updating Active to 0 if the user is logged out
+    sprintf(requete,"UPDATE employees SET Active = 0 WHERE login='%s';",login);
+
+    if (mysql_query(connexion, requete))
+    {
+        return 0;
+    }
+
+    printf("(SERVEUR) Utilisateur déconnecté : %s\n", login);
+
+    return 1;
+}
+
+// Not used anywhere
 int AjouterEmploye(const char *login, const char *password)
 {
     char requete[256];
@@ -79,6 +139,8 @@ int AjouterEmploye(const char *login, const char *password)
         fprintf(stderr, "%s\n", mysql_error(connexion));
         return 0;
     }
+
+    printf("(SERVEUR) Employe ajoute : %s\n", login);
 
     return 1;
 }
