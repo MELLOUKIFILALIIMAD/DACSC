@@ -3,12 +3,15 @@
 
 #include "protocole.h"
 
-#define PORT_ENCODING 5000
 
 // Pool de threads pour gérer les clients
 // Gère combien de client simultanément
-#define NB_THREADS 10
+extern int nbThreads, port;
 
+#define NB_THREADS nbThreads
+#define PORT_ENCODING port
+
+void LireConfiguration();
 int Socket();
 void Bind(int socket, int port);
 void Listen(int socket);

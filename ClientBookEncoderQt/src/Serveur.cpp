@@ -3,13 +3,11 @@
 #include <signal.h>
 #include <pthread.h>
 #include <string>
-
 #include "socket.h"
 #include "protocole.h"
 #include "database.h"
 
 using namespace std;
-
 #define TAILLE_FILE 20
 
 
@@ -30,11 +28,13 @@ void *GestionClient(void *arg);
 void Liberer(void* arg);
 void *Worker(void *arg);
 
+
 int main()
 {
     // Connexion SQL:
-    printf("(SERVEUR) Version actuelle: 0.2.1");
+    printf("(SERVEUR) Version actuelle: 0.2.2");
     printf("(SERVEUR) Connexion à la base de donnée");
+    LireConfiguration();
     ConnexionBD();
     // Armement du signal SIGINT
     struct sigaction A;
@@ -86,6 +86,22 @@ int main()
 
         printf("(SERVEUR) Nouveau client connecte\n");
 
+        pthread_mutex_lock(&mutexFile);
+
+        if (nbClients < TAILLE_FILE)
+        {
+            fileClients[fin] = client;
+            fin = (fin + 1) % TAILLE_FILE;
+            nbClients++;
+
+            pthread_cond_signal(&condFile);
+        }
+        else
+        {
+            Close(client);
+        }
+
+        pthread_mutex_unlock(&mutexFile);
 
         // Allocation pour transmettre la socket au thread
         int *socketClient = (int *) malloc(sizeof(int));
@@ -111,11 +127,7 @@ void *GestionClient(void *arg)
 {
     int client = *((int *)arg);
     int result;
-<<<<<<< HEAD
     int loggedIn = 0;
-=======
-    int loggedIn;
->>>>>>> origin/main
     Liberer(arg);
 
     MESSAGE m;
