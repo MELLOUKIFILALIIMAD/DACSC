@@ -1,9 +1,15 @@
 #include "Client.h"
 
+#include <cstring>
+#include <string>
+using namespace std;
+
 Client::Client()
 {
-    connected = false;
-    socketServeur = -1;
+    this->login = "";
+    this->password = "";
+    this->connected = false;
+    this->socketServeur = -1;
 }
 
 Client::~Client() {}
@@ -50,4 +56,42 @@ void Client::setSocketServeur(int socket)
 int Client::getSocketServeur()
 {
     return socketServeur;
+}
+
+string Client::PrepareMessageQuery(const string &query) {
+    string tailleMessage = std::to_string(query.length());
+
+    if (tailleMessage == "0") {
+        return "Erreur: Message vide !";
+    }
+
+    while (tailleMessage.length() < 4) {
+        tailleMessage = "0" + tailleMessage;
+    }
+
+    return tailleMessage + query;
+}
+
+MESSAGE Client::DecryptMessageQuery(const string &encryptedQuery) {
+    MESSAGE msg;
+
+    if (encryptedQuery.length() < 4) {
+        return msg;
+    }
+
+    string tailleMessageStr = encryptedQuery.substr(0, 4);
+    int tailleMessage = std::stoi(tailleMessageStr);
+
+    if (tailleMessage <= 0 || tailleMessage > static_cast<int>(encryptedQuery.length() - 4)) {
+        return msg;
+    }
+
+    msg.type = socketServeur;
+    msg.expediteur = -1;
+    msg.requete = -1;
+    msg.data1 = (char*)tailleMessageStr.c_str();
+    msg.data2 = NULL;
+    msg.texte = (char*)encryptedQuery.substr(4, tailleMessage).c_str();
+
+    return msg;
 }

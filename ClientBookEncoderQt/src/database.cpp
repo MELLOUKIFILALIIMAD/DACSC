@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <signal.h>
+#include <pthread.h>
+#include <string>
+#include <cstring>
 #include <mysql.h>
 #include "database.h"
 
@@ -125,6 +129,103 @@ int LoggedOut(const char *login)
     printf("(SERVEUR) Utilisateur déconnecté : %s\n", login);
 
     return 1;
+}
+
+MESSAGE GetAuthors(int client)
+{
+    char requete[256];
+    MESSAGE msg;
+
+    sprintf(requete,"SELECT id, last_Name, first_Name FROM authors;");
+
+    if (mysql_query(connexion, requete))
+    {
+        printf("(SERVEUR) Erreur lors de la récupération des auteurs : %s\n", mysql_error(connexion));
+        msg.type = client;
+        msg.expediteur = getpid();
+        msg.requete = GET_AUTHORS;
+        msg.data1 = NULL;
+        msg.data2 = NULL;
+        msg.texte = NULL;
+        return msg;
+    }
+
+    MYSQL_RES *resultat = mysql_store_result(connexion);
+
+    if (mysql_num_rows(resultat) > 0)
+    {
+
+        std::string data1 = ""; // id
+        std::string data2 = ""; // lastName
+        std::string texte = "";
+
+        msg.type = client;
+        msg.expediteur = getpid();
+        msg.requete = GET_AUTHORS;
+
+        MYSQL_ROW row;
+        while ((row = mysql_fetch_row(resultat)))
+        {
+            data1 += std::string(row[0] ? row[0] : "") + ";";
+            data2 += std::string(row[1] ? row[1] : "") + ";";
+            texte += std::string(row[2] ? row[2] : "") + ";";
+        }
+
+        msg.data1 = strdup(data1.c_str());
+        msg.data2 = strdup(data2.c_str());
+        msg.texte = strdup(texte.c_str());
+    }
+
+    mysql_free_result(resultat);
+
+    return msg;
+}
+
+MESSAGE GetSubjects(int client)
+{
+    char requete[256];
+    MESSAGE msg;
+
+    sprintf(requete,"SELECT id, name FROM subjects;");
+
+    if (mysql_query(connexion, requete))
+    {
+        printf("(SERVEUR) Erreur lors de la récupération des sujets : %s\n", mysql_error(connexion));
+        msg.type = client;
+        msg.expediteur = getpid();
+        msg.requete = GET_SUBJECTS;
+        msg.data1 = NULL;
+        msg.data2 = NULL;
+        msg.texte = NULL;
+        return msg;
+    }
+
+    MYSQL_RES *resultat = mysql_store_result(connexion);
+
+    if (mysql_num_rows(resultat) > 0)
+    {
+        std::string data1 = ""; // id, exemple : 1;2;3..
+        std::string texte = ""; // name, exemple : Roman;Science-fiction;Thriller.. 
+
+        msg.type = client;
+        msg.expediteur = getpid();
+        msg.requete = GET_SUBJECTS;
+
+        MYSQL_ROW row;
+        while ((row = mysql_fetch_row(resultat)))
+        {
+            data1 += std::string(row[0] ? row[0] : "") + ";";
+            texte += std::string(row[1] ? row[1] : "") + ";";
+        }
+
+        msg.data1 = strdup(data1.c_str());
+        msg.data2 = NULL;
+        msg.texte = strdup(texte.c_str());
+    }
+
+    mysql_free_result(resultat);
+
+    return msg;
 }
 
 // Not used anywhere
