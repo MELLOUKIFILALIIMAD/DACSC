@@ -2,6 +2,7 @@
 #define CLIENT_H
 
 #include <string>
+#include "protocole.h"
 
 class Client
 {
@@ -22,6 +23,9 @@ public:
 
     void setConnected(bool connected);
     bool isConnected() const;
+
+    std::string PrepareMessageQuery(const std::string &query);
+    MESSAGE DecryptMessageQuery(const std::string &encryptedQuery);
     
     void setSocketServeur(int socket);
     int getSocketServeur();

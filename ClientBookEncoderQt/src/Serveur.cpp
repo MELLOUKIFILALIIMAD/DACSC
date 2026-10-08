@@ -6,6 +6,7 @@
 #include "socket.h"
 #include "protocole.h"
 #include "database.h"
+#include "Client.h"
 
 using namespace std;
 #define TAILLE_FILE 20
@@ -32,7 +33,7 @@ void *Worker(void *arg);
 int main()
 {
     // Connexion SQL:
-    printf("(SERVEUR) Version actuelle: 0.2.2");
+    printf("(SERVEUR) Version actuelle: 0.4.0");
     printf("(SERVEUR) Connexion à la base de donnée");
     LireConfiguration();
     ConnexionBD();
@@ -154,6 +155,7 @@ void *GestionClient(void *arg)
         switch (m.requete)
         {
             case LOGIN:
+            {
                 MESSAGE msg;
                 int existe;
                 fprintf(stderr,"(SERVEUR %ld) Requete LOGIN reçue de %d : --%s--\n",m.type, m.expediteur, m.data2);
@@ -235,8 +237,10 @@ void *GestionClient(void *arg)
                 }
 
                 break;
+            }
 
             case LOGOUT:
+            {
                 pthread_mutex_lock(&mutexDB);
                 result = LoggedOut(m.data2);
                 pthread_mutex_unlock(&mutexDB);
@@ -252,38 +256,119 @@ void *GestionClient(void *arg)
                 printf("(SERVEUR) LOGOUT\n");
 
                 break;
-
+            }
 
             case GET_AUTHORS:
+            {
+                pthread_mutex_lock(&mutexDB);
+                MESSAGE Amsg = GetAuthors(client);
+                pthread_mutex_unlock(&mutexDB);
+                if (Amsg.texte == NULL)
+                {
+                    printf("(Serveur) Erreur lors de la récupération des auteurs\n");
+                    MESSAGE errorMsg;
+                    errorMsg.type = client;
+                    errorMsg.expediteur = getpid();
+                    errorMsg.requete = GET_AUTHORS;
+                    string data1 = "KO";
+                    errorMsg.data1 = (char*)data1.c_str();
+                    errorMsg.data2 = NULL;
+                    errorMsg.texte = (char*) "Erreur lors de la récupération des auteurs";
+                    if (Send(client, &errorMsg) == -1)
+                    {
+                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE GET_AUTHORS: %d)\n", getpid(), m.expediteur);
+                        Close(client);
+                        return NULL;
 
-                printf("(SERVEUR) GET_AUTHORS\n");
+                    }
+                    free(Amsg.data1);
+                    free(Amsg.data2);
+                    free(Amsg.texte);
+                    break;
+                }
+                else
+                {
+                    if (Send(client, &Amsg) == -1)
+                    {
+                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE GET_AUTHORS: %d)\n", getpid(), m.expediteur);
+                        Close(client);
+                        return NULL;
 
-                break;
-            
+                    }
+                    free(Amsg.data1);
+                    free(Amsg.data2);
+                    free(Amsg.texte);
+
+                    printf("(SERVEUR) Récupération des auteurs réussie\n");
+
+                    break;
+                }
+            }
+
             case GET_SUBJECTS:
+            {
+                pthread_mutex_lock(&mutexDB);
+                MESSAGE Smsg = GetSubjects(client);
+                pthread_mutex_unlock(&mutexDB);
+                if (Smsg.texte == NULL)
+                {
+                    printf("(Serveur) Erreur lors de la récupération des sujets\n");
+                    MESSAGE errorMsg;
+                    errorMsg.type = client;
+                    errorMsg.expediteur = getpid();
+                    errorMsg.requete = GET_SUBJECTS;
+                    string data1 = "KO";
+                    errorMsg.data1 = (char*)data1.c_str();
+                    errorMsg.data2 = NULL;
+                    errorMsg.texte = (char*) "Erreur lors de la récupération des sujets";
+                    if (Send(client, &errorMsg) == -1)
+                    {
+                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE GET_SUBJECTS: %d)\n", getpid(), m.expediteur);
+                        Close(client);
+                        return NULL;
 
-                printf("(SERVEUR) GET_SUBJECTS\n");
+                    }
+                    free(Smsg.data1);
+                    free(Smsg.texte);
+                    break;
+                }
+                else
+                {
+                    printf("(SERVEUR) Récupération des sujets réussie\n");
+                    if (Send(client, &Smsg) == -1)
+                    {
+                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE GET_SUBJECTS: %d)\n", getpid(), m.expediteur);
+                        Close(client);
+                        return NULL;
+                    }
+                }
+                free(Smsg.data1);
+                free(Smsg.texte);
+                    
 
                 break;
+            }
 
             case ADD_AUTHOR:
-
+            {
                 printf("(SERVEUR) ADD_AUTHOR\n");
 
                 break;
-            
-            case ADD_SUBJECT:
+            }
 
+            case ADD_SUBJECT:
+            {
                 printf("(SERVEUR) ADD_SUBJECT\n");
 
                 break;
-            
-            case ADD_BOOK:
+            }
 
+            case ADD_BOOK:
+            {
                 printf("(SERVEUR) ADD_BOOK\n");
 
                 break;
-
+            }
         }
 
 

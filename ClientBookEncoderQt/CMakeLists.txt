@@ -60,6 +60,7 @@ find_library(MYSQL_LIBRARY
 )
 add_executable(Serveur
     src/Serveur.cpp
+    src/Client.cpp
     src/socket.cpp
     src/database.cpp
 

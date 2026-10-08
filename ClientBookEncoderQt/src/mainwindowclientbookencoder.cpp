@@ -6,6 +6,8 @@
 #include <QMessageBox>
 #include <iostream>
 #include <socket.h>
+#include <string>
+#include <sstream>
 using namespace std;
 
 MainWindowClientBookEncoder::MainWindowClientBookEncoder(int idClient, QWidget *parent)
@@ -34,16 +36,106 @@ MainWindowClientBookEncoder::MainWindowClientBookEncoder(int idClient, QWidget *
 
     this->logoutOk();
 
+    MESSAGE msg;
+    msg.type = client.getSocketServeur();
+    msg.expediteur = idClient;
+    msg.requete = GET_AUTHORS;
+    msg.data1 = NULL;
+    msg.data2 = NULL;
+    msg.texte = NULL;
+
+    if (Send(idClient, &msg) == -1)
+    {
+        dialogError("Erreur", "Erreur lors de l'envoi de la requête GET_AUTHORS");
+        return;
+    }
+
+    printf("(CLIENT) Requête GET_AUTHORS envoyée\n");
+
+    if (Receive(client.getSocketServeur(), &msg) == -1)
+    {
+        dialogError("Erreur", "Erreur lors de la réception de la réponse GET_AUTHORS");
+        return;
+    }
+
+    printf("(CLIENT) Réponse GET_AUTHORS reçue\n");
+
+    if (msg.data1 != NULL && msg.data2 != NULL && msg.texte != NULL)
+    {
+        std::stringstream ids(msg.data1);
+        std::stringstream lastnames(msg.data2);
+        std::stringstream firstnames(msg.texte);
+
+        std::string id, lastname, firstname;
+
+        while (std::getline(ids, id, ';') &&
+            std::getline(lastnames, lastname, ';') &&
+            std::getline(firstnames, firstname, ';'))
+        {
+            std::string author = lastname + " " + firstname;
+
+            this->addComboBoxAuthors(author);
+        }
+    }
+
+    free(msg.data1);
+    free(msg.data2);
+    free(msg.texte);
+
+    msg.type = client.getSocketServeur();;
+    msg.expediteur = idClient;
+    msg.requete = GET_SUBJECTS;
+    msg.data1 = NULL;
+    msg.data2 = NULL;
+    msg.texte = NULL;
+
+    if (Send(idClient, &msg) == -1)
+    {
+        dialogError("Erreur", "Erreur lors de l'envoi de la requête GET_SUBJECTS");
+        return;
+    }
+
+    printf("(CLIENT) Requête GET_SUBJECTS envoyée\n");
+
+    if (Receive(client.getSocketServeur(), &msg) == -1)
+    {
+        dialogError("Erreur", "Erreur lors de la réception de la réponse GET_SUBJECTS");
+        return;
+    }
+
+    printf("(CLIENT) Réponse GET_SUBJECTS reçue\n");
+
+    if (msg.data1 != NULL && msg.texte != NULL)
+    {
+        std::stringstream ids(msg.data1);
+        std::stringstream names(msg.texte);
+
+        std::string id, name;
+
+        while (std::getline(ids, id, ';') &&
+            std::getline(names, name, ';'))
+        {
+            this->addComboBoxSubjects(name);
+        }
+    }
+
+    printf("(CLIENT) Sujets ajoutés à la combobox\n");
+
+    free(msg.data1);
+    free(msg.texte);
+
+
     // Exemples d'utilisation (à supprimer)
-    this->addTupleTableBooks(1,"Les Thanatonautes","Bernard Werber","Science-Fiction","978-2253139225",505,1999,9.7f,3);
-    this->addTupleTableBooks(6,"Dune","Frank Herbert","Science-Fiction","978-2266320481",929,2021,11.95f,13);
-    this->addTupleTableBooks(13,"Le silence des agneaux","Thomas Harris","Thriller","978-2266208949",377,2015,7.7f,17);
+    // this->addTupleTableBooks(1,"Les Thanatonautes","Bernard Werber","Science-Fiction","978-2253139225",505,1999,9.7f,3);
+    // this->addTupleTableBooks(6,"Dune","Frank Herbert","Science-Fiction","978-2266320481",929,2021,11.95f,13);
+    // this->addTupleTableBooks(13,"Le silence des agneaux","Thomas Harris","Thriller","978-2266208949",377,2015,7.7f,17);
 
-    this->addComboBoxAuthors("Bernard Werber");
-    this->addComboBoxAuthors("Dan Brown");
+    // this->addComboBoxAuthors("Bernard Werber");
+    // this->addComboBoxAuthors("Dan Brown");
 
-    this->addComboBoxSubjects("Roman");
-    this->addComboBoxSubjects("Science-fiction");
+    // this->addComboBoxSubjects("Roman");
+    // this->addComboBoxSubjects("Science-fiction");
+
 }
 
 MainWindowClientBookEncoder::~MainWindowClientBookEncoder() {
@@ -303,8 +395,8 @@ void MainWindowClientBookEncoder::on_actionLogin_triggered() {
     message.expediteur = idClient;
     message.requete = LOGIN;
     message.data1 = NULL;
-    message.data2 = (char*)login.c_str();
-    message.texte = (char*)password.c_str();
+    message.data2 = data2.empty() ? NULL : (char*)data2.c_str();
+    message.texte = texte.empty() ? NULL : (char*)texte.c_str();
 
 
     // Traitement du message LOGIN côté client
