@@ -33,7 +33,7 @@ void *Worker(void *arg);
 int main()
 {
     // Connexion SQL:
-    printf("(SERVEUR) Version actuelle: 0.4.0");
+    printf("(SERVEUR) Version actuelle: 0.5.0");
     printf("(SERVEUR) Connexion à la base de donnée");
     LireConfiguration();
     ConnexionBD();
