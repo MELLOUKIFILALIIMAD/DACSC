@@ -13,6 +13,8 @@ int LoggedIn(const char *login);
 int LoggedOut(const char *login);
 int isLoggedin(const char *login);
 
+int AddAuthors(const char *lastname, const char *firstname, const char *date);
+int AddSubjects(const char *name);
 MESSAGE GetAuthors(int client);
 MESSAGE GetSubjects(int client);
 

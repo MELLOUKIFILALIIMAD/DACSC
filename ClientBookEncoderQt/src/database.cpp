@@ -28,6 +28,8 @@ void DeconnexionBD()
 int VerifierLogin(const char *login, const char *password)
 {
     char requete[256];
+    printf("(SERVEUR) Login reçu : '%s'\n", login);
+    printf("(SERVEUR) Mot de passe reçu : '%s'\n", password);
 
     sprintf(requete,"SELECT id FROM employees WHERE login='%s' AND password='%s';",login, password);
 
@@ -130,7 +132,39 @@ int LoggedOut(const char *login)
 
     return 1;
 }
+int AddAuthors(const char* lastname, const char* firstname, const char * date)
+{
+    char requete[256];
 
+    sprintf(requete,"INSERT INTO authors (last_name, first_name, birth_date) VALUES ('%s','%s', '%s');", lastname, firstname, date);
+
+    if (mysql_query(connexion, requete))
+    {
+        fprintf(stderr, "%s\n", mysql_error(connexion));
+        return 0;
+    }
+
+    printf("(SERVEUR) Auteur ajoute : %s %s\n", lastname, firstname);
+
+    return 1;
+
+}
+int AddSubjects(const char *name)
+{
+    char requete[256];
+
+    sprintf(requete,"INSERT INTO subjects (name) VALUES ('%s');",name);
+
+    if (mysql_query(connexion, requete))
+    {
+        fprintf(stderr, "%s\n", mysql_error(connexion));
+        return 0;
+    }
+
+    printf("(SERVEUR) Sujet ajoute : %s\n", name);
+
+    return 1;
+}
 MESSAGE GetAuthors(int client)
 {
     char requete[256];

@@ -4,6 +4,7 @@
 #include "unistd.h"
 #include <QInputDialog>
 #include <QMessageBox>
+#include <QDate>
 #include <iostream>
 #include <socket.h>
 #include <string>
@@ -328,14 +329,96 @@ void MainWindowClientBookEncoder::on_pushButtonAddAuthor_clicked() {
     string lastName = this->dialogInputText("Nouvel auteur","Nom ?");
     string firstName = this->dialogInputText("Nouvel auteur","Prénom ?");
     string birthDate = this->dialogInputText("Nouvel auteur","Date de naissance (yyyy-mm-dd) ?");
+    string tailleLastName = to_string(lastName.length());
+    string tailleFirstName = to_string(firstName.length());
+    string taillebirthDate = to_string(birthDate.length());
+    if (tailleLastName == "0") {
+        this->dialogError("Erreur","Nom invalide !");
+        return;
+    }
+
+    if (tailleFirstName == "0") {
+        this->dialogError("Erreur","Prénom invalide !");
+        return;
+    }
+    if (taillebirthDate  == "0")
+    {
+        this->dialogError("Erreur","Date invalide !");
+        return;
+    }
+    QDate date = QDate::fromString(QString::fromStdString(birthDate), "yyyy-MM-dd"); 
+    if (!date.isValid() || date.toString("yyyy-MM-dd").toStdString() != birthDate) 
+    {
+        this->dialogError("Erreur","Date invalide ! Le format doit être yyyy-mm-dd.");
+        return; 
+    }
     cout << "Nom : " << lastName << endl;
     cout << "Prénom : " << firstName << endl;
     cout << "Date de naissance : " << birthDate << endl;
+    MESSAGE m;
+    m.type = client.getSocketServeur();
+    m.expediteur = idClient;
+    m.requete = ADD_AUTHOR;
+    m.data1 = (char*) lastName.c_str();
+    m.data2 = (char*) firstName.c_str();
+    m.texte = (char*) birthDate.c_str();
+    int result = Send(m.type, &m);
+    if (result < 0) {
+        this->dialogError("Erreur","Erreur lors de l'envoi du message ADD_AUTHOR au serveur !");
+        return;
+    }
+    int receiveResult = Receive(client.getSocketServeur(), &m);
+    if (receiveResult < 0) {
+        this->dialogError("Erreur","Erreur lors de la réception de la réponse du serveur pour le message ADD_AUTHOR !");
+        return;
+    }
+
+    if (string(m.data1) != "OK") {
+        this->dialogError("Erreur", string(m.texte));
+        return;
+    }
+    else
+    {
+        this->addComboBoxAuthors(lastName + " " + firstName);
+        this->dialogMessage("Ajout Auteur", string(m.texte));
+    }
 }
 
 void MainWindowClientBookEncoder::on_pushButtonAddSubject_clicked() {
     string name = this->dialogInputText("Nouveau sujet","Nom ?");
+    string tailleName = to_string(name.length());
+    if (tailleName == "0") {
+        this->dialogError("Erreur","Nom invalide !");
+        return;
+    }
     cout << "Nom : " << name << endl;
+    MESSAGE m;
+    m.type = client.getSocketServeur();
+    m.requete = ADD_SUBJECT;
+    m.expediteur = idClient;
+    m.data1 = (char*) name.c_str();
+    m.data2 = NULL;
+    m.texte = NULL;
+    int result = Send(m.type, &m);
+    if (result < 0) {
+        this->dialogError("Erreur","Erreur lors de l'envoi du message ADD_SUBJECT au serveur !");
+        return;
+    }
+    int receiveResult = Receive(client.getSocketServeur(), &m);
+    if (receiveResult < 0) {
+        this->dialogError("Erreur","Erreur lors de la réception de la réponse du serveur pour le message ADD_SUBJECT !");
+        return;
+    }
+
+    if (string(m.data1) != "OK") {
+        this->dialogError("Erreur", string(m.texte));
+        return;
+    }
+    else
+    {
+        this->addComboBoxSubjects(name);
+        this->dialogMessage("Ajout Sujet", string(m.texte));
+    }
 }
 
 void MainWindowClientBookEncoder::on_pushButtonAddBook_clicked() {
@@ -384,8 +467,8 @@ void MainWindowClientBookEncoder::on_actionLogin_triggered() {
         taillePassword = "0" + taillePassword;
     }
 
-    string data2 = tailleLogin + login;
-    string texte = taillePassword + password;
+    string data2 = login;
+    string texte = password;
 
     cout << "Login : " << data2 << endl;
     cout << "Password : " << texte << endl;
@@ -440,7 +523,7 @@ void MainWindowClientBookEncoder::on_actionLogout_triggered() {
     printf("(CLIENT) Requete envoyee : %d\n", message.requete);
     int result = Send(message.type, &message);
     if (result < 0) {
-        this->dialogError("Erreur","Erreur lors de l'envoi du message LOGIN au serveur !");
+        this->dialogError("Erreur","Erreur lors de l'envoi du message LOGOUT au serveur !");
         return;
     }
 
@@ -451,5 +534,26 @@ void MainWindowClientBookEncoder::on_actionLogout_triggered() {
 }
 
 void MainWindowClientBookEncoder::on_actionQuitter_triggered(){
+    if(client.isConnected())
+    {
+        MESSAGE message;
+        message.type = client.getSocketServeur();
+        message.expediteur = idClient;
+        message.requete = LOGOUT;
+        message.data1 = NULL;
+        message.data2 = (char*)client.getLogin().c_str();
+
+        printf("(CLIENT) Requete envoyee : %d\n", message.requete);
+        int result = Send(message.type, &message);
+        if (result < 0) {
+            this->dialogError("Erreur","Erreur lors de l'envoi du message LOGOUT au serveur !");
+            return;
+        }
+
+        client.setLogin("");
+        client.setPassword("");
+        client.setConnected(false);    
+            
+    }
     QApplication::exit(0);
 }

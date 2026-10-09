@@ -352,14 +352,92 @@ void *GestionClient(void *arg)
             case ADD_AUTHOR:
             {
                 printf("(SERVEUR) ADD_AUTHOR\n");
+                pthread_mutex_lock(&mutexDB);
+                int res = AddAuthors(m.data1, m.data2, m.texte);
+                pthread_mutex_unlock(&mutexDB);
+                if(res == 0)
+                {
+                    MESSAGE err;
+                    err.type = client;
+                    err.expediteur = getpid();
+                    err.requete = ADD_AUTHOR;
+                    string data1 = "KO";
+                    err.data1 = (char*) data1.c_str();
+                    err.data2 = NULL;
+                    err.texte = (char*) "Erreur lors de l'ajout d'un auteur.";
+                    if (Send(client, &err) == -1)
+                    {
+                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE ADD_AUTHOR: %d)\n", getpid(), m.expediteur);
+                        Close(client);
+                        return NULL;
 
+                    }
+
+                }
+                else
+                {
+                    MESSAGE msg;
+                    msg.type = client;
+                    msg.expediteur = getpid();
+                    msg.requete = ADD_AUTHOR;
+                    string data1 = "OK";
+                    msg.data1 = (char*) data1.c_str();
+                    msg.data2 = NULL;
+                    msg.texte = (char*) "Auteur ajouté avec succès.";
+                    if (Send(client, &msg) == -1)
+                    {
+                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE ADD_AUTHOR: %d)\n", getpid(), m.expediteur);
+                        Close(client);
+                        return NULL;
+
+                    }
+                }
                 break;
             }
 
             case ADD_SUBJECT:
             {
                 printf("(SERVEUR) ADD_SUBJECT\n");
+                pthread_mutex_lock(&mutexDB);
+                int res = AddSubjects(m.data1);
+                pthread_mutex_unlock(&mutexDB);
+                if(res == 0)
+                {
+                    MESSAGE err;
+                    err.type = client;
+                    err.expediteur = getpid();
+                    err.requete = ADD_SUBJECT;
+                    string data1 = "KO";
+                    err.data1 = (char*) data1.c_str();
+                    err.data2 = NULL;
+                    err.texte = (char*) "Erreur lors de l'ajout d'un sujet.";
+                    if (Send(client, &err) == -1)
+                    {
+                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE ADD_SUBJECT: %d)\n", getpid(), m.expediteur);
+                        Close(client);
+                        return NULL;
 
+                    }
+
+                }
+                else
+                {
+                    MESSAGE msg;
+                    msg.type = client;
+                    msg.expediteur = getpid();
+                    msg.requete = ADD_SUBJECT;
+                    string data1 = "OK";
+                    msg.data1 = (char*) data1.c_str();
+                    msg.data2 = NULL;
+                    msg.texte = (char*) "Sujet ajouté avec succès.";
+                    if (Send(client, &msg) == -1)
+                    {
+                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE ADD_SUBJECT: %d)\n", getpid(), m.expediteur);
+                        Close(client);
+                        return NULL;
+
+                    }
+                }
                 break;
             }
 
