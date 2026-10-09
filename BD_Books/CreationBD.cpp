@@ -91,6 +91,18 @@ int main(int argc,char *argv[])
     finish_with_error(connexion);
   }
 
+  if (mysql_query(connexion, "DROP TABLE IF EXISTS clients;")) {
+    finish_with_error(connexion);
+  }
+
+  if (mysql_query(connexion, "DROP TABLE IF EXISTS caddies;")) {
+    finish_with_error(connexion);
+  }
+
+  if (mysql_query(connexion, "DROP TABLE IF EXISTS caddies_items;")) {
+    finish_with_error(connexion);
+  }
+
   // Creation de la table authors
   printf("Creation de la table authors...\n");
   if (mysql_query(connexion,"CREATE TABLE authors ("
@@ -133,6 +145,38 @@ int main(int argc,char *argv[])
                       "Active BOOLEAN DEFAULT FALSE);")) {
     finish_with_error(connexion);
   }
+
+  printf("Creation de la table clients...\n");
+  if (mysql_query(connexion,"CREATE TABLE clients ("
+                      "id INT(4) AUTO_INCREMENT PRIMARY KEY, "
+                      "name VARCHAR(20), "
+                      "first_name VARCHAR(20), "
+                      "address VARCHAR(100));")) {
+    finish_with_error(connexion);
+  }
+
+  printf("Creation de la table caddies...\n");
+  if (mysql_query(connexion,"CREATE TABLE caddies ("
+                      "id INT(4) AUTO_INCREMENT PRIMARY KEY, "
+                      "client_id INT, "
+                      "date DATETIME, "
+                      "amount DECIMAL(10, 2), "
+                      "payed BOOLEAN DEFAULT FALSE, "
+                      "FOREIGN KEY (client_id) REFERENCES clients(id));")) {
+    finish_with_error(connexion);
+  }
+
+  printf("Creation de la table caddies_items...\n");
+  if (mysql_query(connexion,"CREATE TABLE caddies_items ("
+                      "id INT(4) AUTO_INCREMENT PRIMARY KEY, "
+                      "caddy_id INT, "
+                      "book_id INT, "
+                      "quantity INT, "
+                      "FOREIGN KEY (caddy_id) REFERENCES caddies(id), "
+                      "FOREIGN KEY (book_id) REFERENCES books(id));")) {
+    finish_with_error(connexion);
+  }
+
 
   // Ajout de tuples dans la table authors
   printf("Ajout de %d auteurs la table authors...\n",nbAuthors);
