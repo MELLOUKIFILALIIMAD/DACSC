@@ -115,7 +115,16 @@ int LoggedIn(const char *login)
 
     return 1;
 }
+void ReinitialiserConnexions()
+{
+    char requete[] = "UPDATE employees SET Active = 0";
 
+    if (mysql_query(connexion, requete))
+    {
+        fprintf(stderr, "(SERVEUR) Erreur de réinitialisation : %s\n",
+                mysql_error(connexion));
+    }
+}
 int LoggedOut(const char *login)
 {
     char requete[256];

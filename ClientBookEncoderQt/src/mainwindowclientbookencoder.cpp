@@ -37,95 +37,7 @@ MainWindowClientBookEncoder::MainWindowClientBookEncoder(int idClient, QWidget *
 
     this->logoutOk();
 
-    MESSAGE msg;
-    msg.type = client.getSocketServeur();
-    msg.expediteur = idClient;
-    msg.requete = GET_AUTHORS;
-    msg.data1 = NULL;
-    msg.data2 = NULL;
-    msg.texte = NULL;
-
-    if (Send(idClient, &msg) == -1)
-    {
-        dialogError("Erreur", "Erreur lors de l'envoi de la requête GET_AUTHORS");
-        return;
-    }
-
-    printf("(CLIENT) Requête GET_AUTHORS envoyée\n");
-
-    if (Receive(client.getSocketServeur(), &msg) == -1)
-    {
-        dialogError("Erreur", "Erreur lors de la réception de la réponse GET_AUTHORS");
-        return;
-    }
-
-    printf("(CLIENT) Réponse GET_AUTHORS reçue\n");
-
-    if (msg.data1 != NULL && msg.data2 != NULL && msg.texte != NULL)
-    {
-        std::stringstream ids(msg.data1);
-        std::stringstream lastnames(msg.data2);
-        std::stringstream firstnames(msg.texte);
-
-        std::string id, lastname, firstname;
-
-        while (std::getline(ids, id, ';') &&
-            std::getline(lastnames, lastname, ';') &&
-            std::getline(firstnames, firstname, ';'))
-        {
-            std::string author = lastname + " " + firstname;
-
-            this->addComboBoxAuthors(author);
-        }
-    }
-
-    free(msg.data1);
-    free(msg.data2);
-    free(msg.texte);
-
-    msg.type = client.getSocketServeur();;
-    msg.expediteur = idClient;
-    msg.requete = GET_SUBJECTS;
-    msg.data1 = NULL;
-    msg.data2 = NULL;
-    msg.texte = NULL;
-
-    if (Send(idClient, &msg) == -1)
-    {
-        dialogError("Erreur", "Erreur lors de l'envoi de la requête GET_SUBJECTS");
-        return;
-    }
-
-    printf("(CLIENT) Requête GET_SUBJECTS envoyée\n");
-
-    if (Receive(client.getSocketServeur(), &msg) == -1)
-    {
-        dialogError("Erreur", "Erreur lors de la réception de la réponse GET_SUBJECTS");
-        return;
-    }
-
-    printf("(CLIENT) Réponse GET_SUBJECTS reçue\n");
-
-    if (msg.data1 != NULL && msg.texte != NULL)
-    {
-        std::stringstream ids(msg.data1);
-        std::stringstream names(msg.texte);
-
-        std::string id, name;
-
-        while (std::getline(ids, id, ';') &&
-            std::getline(names, name, ';'))
-        {
-            this->addComboBoxSubjects(name);
-        }
-    }
-
-    printf("(CLIENT) Sujets ajoutés à la combobox\n");
-
-    free(msg.data1);
-    free(msg.texte);
-
-
+    
     // Exemples d'utilisation (à supprimer)
     // this->addTupleTableBooks(1,"Les Thanatonautes","Bernard Werber","Science-Fiction","978-2253139225",505,1999,9.7f,3);
     // this->addTupleTableBooks(6,"Dune","Frank Herbert","Science-Fiction","978-2266320481",929,2021,11.95f,13);
@@ -379,7 +291,6 @@ void MainWindowClientBookEncoder::on_pushButtonAddAuthor_clicked() {
     }
     else
     {
-        this->addComboBoxAuthors(lastName + " " + firstName);
         this->dialogMessage("Ajout Auteur", string(m.texte));
     }
 }
@@ -416,7 +327,6 @@ void MainWindowClientBookEncoder::on_pushButtonAddSubject_clicked() {
     }
     else
     {
-        this->addComboBoxSubjects(name);
         this->dialogMessage("Ajout Sujet", string(m.texte));
     }
 }
@@ -501,6 +411,96 @@ void MainWindowClientBookEncoder::on_actionLogin_triggered() {
         this->dialogError("Erreur","Erreur de connexion : " + string(message.texte));
         return;
     }
+    ui->comboBoxAuthors->clear();
+    ui->comboBoxSubjects->clear();
+    MESSAGE msg;
+    msg.type = client.getSocketServeur();
+    msg.expediteur = idClient;
+    msg.requete = GET_AUTHORS;
+    msg.data1 = NULL;
+    msg.data2 = NULL;
+    msg.texte = NULL;
+
+    if (Send(idClient, &msg) == -1)
+    {
+        dialogError("Erreur", "Erreur lors de l'envoi de la requête GET_AUTHORS");
+        return;
+    }
+
+    printf("(CLIENT) Requête GET_AUTHORS envoyée\n");
+
+    if (Receive(client.getSocketServeur(), &msg) == -1)
+    {
+        dialogError("Erreur", "Erreur lors de la réception de la réponse GET_AUTHORS");
+        return;
+    }
+
+    printf("(CLIENT) Réponse GET_AUTHORS reçue\n");
+
+    if (msg.data1 != NULL && msg.data2 != NULL && msg.texte != NULL)
+    {
+        std::stringstream ids(msg.data1);
+        std::stringstream lastnames(msg.data2);
+        std::stringstream firstnames(msg.texte);
+
+        std::string id, lastname, firstname;
+
+        while (std::getline(ids, id, ';') &&
+            std::getline(lastnames, lastname, ';') &&
+            std::getline(firstnames, firstname, ';'))
+        {
+            std::string author = lastname + " " + firstname;
+
+            this->addComboBoxAuthors(author);
+        }
+    }
+
+    free(msg.data1);
+    free(msg.data2);
+    free(msg.texte);
+
+    msg.type = client.getSocketServeur();;
+    msg.expediteur = idClient;
+    msg.requete = GET_SUBJECTS;
+    msg.data1 = NULL;
+    msg.data2 = NULL;
+    msg.texte = NULL;
+
+    if (Send(idClient, &msg) == -1)
+    {
+        dialogError("Erreur", "Erreur lors de l'envoi de la requête GET_SUBJECTS");
+        return;
+    }
+
+    printf("(CLIENT) Requête GET_SUBJECTS envoyée\n");
+
+    if (Receive(client.getSocketServeur(), &msg) == -1)
+    {
+        dialogError("Erreur", "Erreur lors de la réception de la réponse GET_SUBJECTS");
+        return;
+    }
+
+    printf("(CLIENT) Réponse GET_SUBJECTS reçue\n");
+
+    if (msg.data1 != NULL && msg.texte != NULL)
+    {
+        std::stringstream ids(msg.data1);
+        std::stringstream names(msg.texte);
+
+        std::string id, name;
+
+        while (std::getline(ids, id, ';') &&
+            std::getline(names, name, ';'))
+        {
+            this->addComboBoxSubjects(name);
+        }
+    }
+
+    printf("(CLIENT) Sujets ajoutés à la combobox\n");
+
+    free(msg.data1);
+    free(msg.texte);
+
 
 
     // Faciliter l'accès aux informations pour le client
@@ -526,6 +526,9 @@ void MainWindowClientBookEncoder::on_actionLogout_triggered() {
         this->dialogError("Erreur","Erreur lors de l'envoi du message LOGOUT au serveur !");
         return;
     }
+    
+    ui->comboBoxAuthors->clear();
+    ui->comboBoxSubjects->clear();
 
     client.setLogin("");
     client.setPassword("");

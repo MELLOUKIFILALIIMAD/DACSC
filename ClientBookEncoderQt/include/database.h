@@ -5,6 +5,7 @@
 
 void ConnexionBD();
 void DeconnexionBD();
+void ReinitialiserConnexions();
 
 int VerifierLogin(const char *login, const char *password);
 int LoginExiste(const char *login);

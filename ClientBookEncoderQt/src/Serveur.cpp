@@ -37,6 +37,8 @@ int main()
     printf("(SERVEUR) Connexion à la base de donnée");
     LireConfiguration();
     ConnexionBD();
+    ReinitialiserConnexions();
+
     // Armement du signal SIGINT
     struct sigaction A;
 
@@ -129,6 +131,8 @@ void *GestionClient(void *arg)
     int client = *((int *)arg);
     int result;
     int loggedIn = 0;
+    int logged = 0;
+    string loginConnecte = "";
     Liberer(arg);
 
     MESSAGE m;
@@ -144,8 +148,19 @@ void *GestionClient(void *arg)
 
         if (resultat == -1)
         {
-            printf("(SERVEUR) Erreur de reception\n");
-            break;
+            printf("(SERVEUR) Echec de reception de message du client: %d\n", client);
+
+            if (logged == 1)
+            {
+                pthread_mutex_lock(&mutexDB);
+                LoggedOut(loginConnecte.c_str());
+                pthread_mutex_unlock(&mutexDB);
+
+                logged = 0;
+            }
+
+            Close(client);
+            return NULL;
         }
 
 
@@ -188,6 +203,8 @@ void *GestionClient(void *arg)
                 pthread_mutex_unlock(&mutexDB);
                 if (result == 1)
                 {
+                    loginConnecte = m.data2;
+                    logged = 1;
                     printf("(SERVEUR) Login correct\n");
                     string data1 = "OK";
                     msg.data1 = (char*)data1.c_str();
@@ -251,6 +268,8 @@ void *GestionClient(void *arg)
                 else
                 {
                     printf("(SERVEUR) Utilisateur déconnecté\n");
+                    logged = 0;
+                    loginConnecte = "";
                 }
 
                 printf("(SERVEUR) LOGOUT\n");
