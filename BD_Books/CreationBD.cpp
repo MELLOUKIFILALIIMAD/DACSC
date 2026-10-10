@@ -73,22 +73,32 @@ int main(int argc,char *argv[])
   MYSQL* connexion = mysql_init(NULL);
   mysql_real_connect(connexion,"localhost","Student","PassStudent1_","PourStudent",0,0,0);
 
-  // Supprimer la table books si elle existe déjà
+  if (mysql_query(connexion, "DROP TABLE IF EXISTS caddies_items;")) {
+    finish_with_error(connexion);
+  }
+
+  if (mysql_query(connexion, "DROP TABLE IF EXISTS caddies;")) {
+      finish_with_error(connexion);
+  }
+
   if (mysql_query(connexion, "DROP TABLE IF EXISTS books;")) {
-    finish_with_error(connexion);
+      finish_with_error(connexion);
   }
 
-  // Supprimer la table authors si elle existe déjà
   if (mysql_query(connexion, "DROP TABLE IF EXISTS authors;")) {
-    finish_with_error(connexion);
+      finish_with_error(connexion);
   }
 
-  // Supprimer la table subjects si elle existe déjà
   if (mysql_query(connexion, "DROP TABLE IF EXISTS subjects;")) {
-    finish_with_error(connexion);
+      finish_with_error(connexion);
   }
+
   if (mysql_query(connexion, "DROP TABLE IF EXISTS employees;")) {
-    finish_with_error(connexion);
+      finish_with_error(connexion);
+  }
+
+  if (mysql_query(connexion, "DROP TABLE IF EXISTS clients;")) {
+      finish_with_error(connexion);
   }
 
   if (mysql_query(connexion, "DROP TABLE IF EXISTS clients;")) {
