@@ -152,7 +152,6 @@ int ReceiveAll(int socket, char *buffer, int taille)
     return total;
 }
 
-
 int Send(int socket, MESSAGE *message)
 {
     if (SendAll(socket, (char *)&message->type, sizeof(long)) <= 0)
@@ -238,9 +237,16 @@ int Send(int socket, MESSAGE *message)
 
 int Receive(int socket, MESSAGE *message)
 {
-    if (ReceiveAll(socket, (char *)&message->type, sizeof(long)) <= 0)
+    int result = ReceiveAll(socket, (char *)&message->type, sizeof(long));
+    
+    if (result == 0)
     {
-        return -1;
+        return 0; // Deconnexion
+    }
+
+    if (result < 0)
+    {
+        return -1; // Erreur
     }
 
     if (ReceiveAll(socket, (char *)&message->expediteur, sizeof(int)) <= 0)

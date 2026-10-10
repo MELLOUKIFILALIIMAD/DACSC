@@ -2,7 +2,10 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <pthread.h>
+#include <sstream>
 #include <string>
+#include <algorithm>
+#include <locale>
 #include "socket.h"
 #include "protocole.h"
 #include "database.h"
@@ -33,7 +36,7 @@ void *Worker(void *arg);
 int main()
 {
     // Connexion SQL:
-    printf("(SERVEUR) Version actuelle: 0.5.0");
+    printf("(SERVEUR) Version actuelle: 0.9.5");
     printf("(SERVEUR) Connexion à la base de donnée");
     LireConfiguration();
     ConnexionBD();
@@ -137,7 +140,6 @@ void *GestionClient(void *arg)
 
     MESSAGE m;
 
-
     printf("(SERVEUR) Thread cree pour le client\n");
 
 
@@ -146,9 +148,13 @@ void *GestionClient(void *arg)
         // Réception d'une requête
         int resultat = Receive(client, &m);
 
-        if (resultat == -1)
+
+        if (resultat <= 0)
         {
-            printf("(SERVEUR) Echec de reception de message du client: %d\n", client);
+            if (resultat == 0)
+                printf("(SERVEUR) Client %d déconnecté\n", client);
+            else
+                printf("(SERVEUR) Echec de reception\n");
 
             if (logged == 1)
             {
@@ -463,12 +469,91 @@ void *GestionClient(void *arg)
             case ADD_BOOK:
             {
                 printf("(SERVEUR) ADD_BOOK\n");
+                
+                char* title = m.data1;
+                char* isbn = m.data2;
+                std::string authorname;
+                std::string subjecttitle;
 
+                int pageCount, stockQuantity, publishYear;
+                float price;
+
+                std::string texte = m.texte;
+                std::replace(texte.begin(), texte.end(), ',', '.');
+
+                std::stringstream ss(texte);
+                ss.imbue(std::locale::classic());
+
+                std::getline(ss, authorname, ';');
+                std::getline(ss, subjecttitle, ';');
+
+                char separator;
+
+                if (!(ss >> pageCount))
+                    printf("ERREUR : pageCount\n");
+                else
+                    printf("pageCount = %d\n", pageCount);
+
+                if (!(ss >> separator) || separator != ';')
+                    printf("ERREUR : separateur 1 [%c]\n", separator);
+
+                if (!(ss >> publishYear))
+                    printf("ERREUR : publishYear\n");
+                else
+                    printf("publishYear = %d\n", publishYear);
+
+                if (!(ss >> separator) || separator != ';')
+                    printf("ERREUR : separateur 2 [%c]\n", separator);
+
+                if (!(ss >> price))
+                    printf("ERREUR : price\n");
+                else
+                    printf("price = %.2f\n", price);
+
+                if (!(ss >> separator) || separator != ';')
+                    printf("ERREUR : separateur 3 [%c]\n", separator);
+
+                if (!(ss >> stockQuantity))
+                    printf("ERREUR : stockQuantity\n");
+                else
+                    printf("stockQuantity = %d\n", stockQuantity);
+
+                pthread_mutex_lock(&mutexDB);
+                int res = AddBook(authorname.c_str(), subjecttitle.c_str(), title, isbn, pageCount, stockQuantity, price, publishYear);
+                pthread_mutex_unlock(&mutexDB);
+                MESSAGE msg;
+                msg.type = client;
+                msg.expediteur = getpid();
+                msg.requete = ADD_BOOK;
+                if(res == 0)
+                {
+                    string data1 = "KO";
+                    msg.data1 = (char*) data1.c_str();
+                    msg.data2 = NULL;
+                    msg.texte = (char*) "Erreur lors de l'ajout d'un livre.";
+                    if (Send(client, &msg) == -1)
+                    {
+                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE ADD_BOOK: %d)\n", getpid(), msg.expediteur);
+                        Close(client);
+                        return NULL;
+                    }
+                }
+                else
+                {
+                    string data1 = "OK";
+                    msg.data1 = (char*) data1.c_str();
+                    msg.data2 = NULL;
+                    msg.texte = (char*) "Livre ajouté avec succès.";
+                    if (Send(client, &msg) == -1)
+                    {
+                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE ADD_BOOK: %d)\n", getpid(), msg.expediteur);
+                        Close(client);
+                        return NULL;
+                    }
+                }
                 break;
             }
         }
-
-
 
         if (m.data1 != NULL)
         {

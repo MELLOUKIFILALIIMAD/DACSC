@@ -174,6 +174,65 @@ int AddSubjects(const char *name)
 
     return 1;
 }
+
+int AddBook(const char* authorname, const char* subjecttitle, const char *title, const char *isbn, int pageCount, int stockQuantity, float price, int publishYear)
+{
+    size_t taille = strlen(title) + strlen(authorname) + strlen(subjecttitle) + strlen(isbn) + 512;
+    char* requete = (char*)malloc(taille);
+
+    if (requete == NULL)
+        return 0;
+
+    sprintf(requete,"SELECT id FROM authors WHERE CONCAT(last_name, ' ', first_name)='%s';", authorname);
+    if (mysql_query(connexion, requete))
+    {
+        fprintf(stderr, "%s\n", mysql_error(connexion));
+        return 0;
+    }
+
+    MYSQL_RES *resultat = mysql_store_result(connexion);
+    if (mysql_num_rows(resultat) == 0)
+    {
+        fprintf(stderr, "(SERVEUR) Auteur non trouvé : %s\n", authorname);
+        mysql_free_result(resultat);
+        return 0;
+    }
+
+    MYSQL_ROW row = mysql_fetch_row(resultat);
+    int author_id = atoi(row[0]);
+    mysql_free_result(resultat);
+
+    sprintf(requete,"SELECT id FROM subjects WHERE name='%s';", subjecttitle);
+    if (mysql_query(connexion, requete))
+    {
+        fprintf(stderr, "%s\n", mysql_error(connexion));
+        return 0;
+    }
+    resultat = mysql_store_result(connexion);
+    if (mysql_num_rows(resultat) == 0)
+    {
+        fprintf(stderr, "(SERVEUR) Sujet non trouvé : %s\n", subjecttitle);
+        mysql_free_result(resultat);
+        return 0;
+    }
+    row = mysql_fetch_row(resultat);
+    int subject_id = atoi(row[0]);
+
+    sprintf(requete,"INSERT INTO books (author_id, subject_id, title, isbn, page_count, stock_quantity, price, publish_year) VALUES (%d, %d, '%s', '%s', %d, %d, %f, %d);", author_id, subject_id, title, isbn, pageCount, stockQuantity, price, publishYear);
+    if (mysql_query(connexion, requete))
+    {
+        fprintf(stderr, "%s\n", mysql_error(connexion));
+        mysql_free_result(resultat);
+        return 0;
+    }
+
+    free(requete);
+    printf("(SERVEUR) Livre ajoute : %s\n", title);
+
+    mysql_free_result(resultat);
+    return 1;
+}
+
 MESSAGE GetAuthors(int client)
 {
     char requete[256];

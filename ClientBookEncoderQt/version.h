@@ -2,10 +2,6 @@
 #define VERSION_H
 
 // Show this in starting (at the end) terminal of both client and server
-<<<<<<< HEAD
-#define PROJECT_VERSION "0.5.0"
-=======
 #define PROJECT_VERSION "0.7.2"
->>>>>>> origin/main
 
 #endif // VERSION_H
