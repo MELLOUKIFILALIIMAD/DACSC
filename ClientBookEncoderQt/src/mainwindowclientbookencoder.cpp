@@ -291,7 +291,8 @@ void MainWindowClientBookEncoder::on_pushButtonAddAuthor_clicked() {
     }
     else
     {
-        this->dialogMessage("Ajout Auteur", string(m.texte));
+        this->dialogMessage("Ajout Auteur", string(m.texte));  
+        this->addComboBoxAuthors(lastName + " " + firstName);      
     }
 }
 
@@ -328,7 +329,8 @@ void MainWindowClientBookEncoder::on_pushButtonAddSubject_clicked() {
     else
     {
         this->dialogMessage("Ajout Sujet", string(m.texte));
-    }
+        this->addComboBoxSubjects(name);
+    } 
 }
 
 void MainWindowClientBookEncoder::on_pushButtonAddBook_clicked() {
@@ -341,6 +343,41 @@ void MainWindowClientBookEncoder::on_pushButtonAddBook_clicked() {
 
     cout << "selection auteur = " << this->getSelectionAuthor() << endl;
     cout << "selection sujet  = " << this->getSelectionSubject() << endl;
+
+    MESSAGE msg;
+    msg.type = client.getSocketServeur();
+    msg.expediteur = idClient;
+    msg.requete = ADD_BOOK;
+    msg.data1 = (char*) this->getTitle().c_str();
+    msg.data2 = (char*) this->getIsbn().c_str();
+    
+    string data3 = this->getSelectionAuthor() + ";" + this->getSelectionSubject() + ";" +
+                   std::to_string(this->getPageCount()) + ";" +
+                   std::to_string(this->getPublishYear()) + ";" +
+                   std::to_string(this->getPrice()) + ";" +
+                   std::to_string(this->getStockQuantity());
+    msg.texte = (char*) data3.c_str();
+
+    int result = Send(msg.type, &msg);
+    if (result < 0) {
+        this->dialogError("Erreur","Erreur lors de l'envoi du message ADD_BOOK au serveur !");
+    }
+
+    int receiveResult = Receive(client.getSocketServeur(), &msg);
+    if (receiveResult < 0) {
+        this->dialogError("Erreur","Erreur lors de la réception de la réponse du serveur pour le message ADD_BOOK !");
+    }
+
+    if (string(msg.data1) != "OK") {
+        this->dialogError("Erreur", string(msg.texte));
+    }
+    else
+    {
+        this->dialogMessage("Ajout Livre", string(msg.texte));
+        this->addTupleTableBooks(0, this->getTitle(), this->getSelectionAuthor(), this->getSelectionSubject(),
+                                 this->getIsbn(), this->getPageCount(), this->getPublishYear(),
+                                 this->getPrice(), this->getStockQuantity());
+    }
 }
 
 void MainWindowClientBookEncoder::on_pushButtonClear_clicked() {

@@ -35,6 +35,7 @@ private:
     std::string password;
     bool connected;
 
+    int idClient;
     int socketServeur;
 };
 

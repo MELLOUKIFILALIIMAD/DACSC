@@ -101,6 +101,18 @@ int main(int argc,char *argv[])
       finish_with_error(connexion);
   }
 
+  if (mysql_query(connexion, "DROP TABLE IF EXISTS clients;")) {
+    finish_with_error(connexion);
+  }
+
+  if (mysql_query(connexion, "DROP TABLE IF EXISTS caddies;")) {
+    finish_with_error(connexion);
+  }
+
+  if (mysql_query(connexion, "DROP TABLE IF EXISTS caddies_items;")) {
+    finish_with_error(connexion);
+  }
+
   // Creation de la table authors
   printf("Creation de la table authors...\n");
   if (mysql_query(connexion,"CREATE TABLE authors ("

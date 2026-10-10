@@ -16,6 +16,7 @@ int isLoggedin(const char *login);
 
 int AddAuthors(const char *lastname, const char *firstname, const char *date);
 int AddSubjects(const char *name);
+int AddBook(const char* authorname, const char* subjecttitle, const char *title, const char *isbn, int pageCount, int stockQuantity, float price, int publishYear);
 MESSAGE GetAuthors(int client);
 MESSAGE GetSubjects(int client);
 

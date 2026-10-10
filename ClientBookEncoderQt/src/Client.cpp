@@ -1,7 +1,9 @@
 #include "Client.h"
-
+#include "socket.h"
 #include <cstring>
 #include <string>
+#include <sstream>
+#include <pthread.h>
 using namespace std;
 
 Client::Client()
