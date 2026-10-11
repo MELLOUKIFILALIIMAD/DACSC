@@ -248,7 +248,6 @@ int Receive(int socket, MESSAGE *message)
     {
         return -1; // Erreur
     }
-
     if (ReceiveAll(socket, (char *)&message->expediteur, sizeof(int)) <= 0)
     {
         return -1;
@@ -367,7 +366,7 @@ int Receive(int socket, MESSAGE *message)
     message->texte[tailleTexte] = '\0';
 
 
-    return 0;
+    return 1;
 }
 
 

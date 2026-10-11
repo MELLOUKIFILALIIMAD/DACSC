@@ -292,7 +292,6 @@ void MainWindowClientBookEncoder::on_pushButtonAddAuthor_clicked() {
     else
     {
         this->dialogMessage("Ajout Auteur", string(m.texte));  
-        this->addComboBoxAuthors(lastName + " " + firstName);      
     }
 }
 
@@ -329,7 +328,6 @@ void MainWindowClientBookEncoder::on_pushButtonAddSubject_clicked() {
     else
     {
         this->dialogMessage("Ajout Sujet", string(m.texte));
-        this->addComboBoxSubjects(name);
     } 
 }
 
@@ -393,26 +391,6 @@ void MainWindowClientBookEncoder::on_actionLogin_triggered() {
     string login = this->dialogInputText("Entrée en session","Login ?");
     string password = this->dialogInputText("Entrée en session","Password ?");
 
-    string tailleLogin = std::to_string(login.length());
-    string taillePassword = std::to_string(password.length());
-
-    if (tailleLogin == "0") {
-        this->dialogError("Erreur","Login invalide !");
-        return;
-    }
-
-    if (taillePassword == "0") {
-        this->dialogError("Erreur","Password invalide !");
-        return;
-    }
-
-    // Trouver un autre moyen ?
-    while (tailleLogin.length() < 4) {
-        tailleLogin = "0" + tailleLogin;
-    }
-    while (taillePassword.length() < 4) {
-        taillePassword = "0" + taillePassword;
-    }
 
     string data2 = login;
     string texte = password;
@@ -439,7 +417,7 @@ void MainWindowClientBookEncoder::on_actionLogin_triggered() {
 
     // Attente de la réponse du serveur
     int receiveResult = Receive(client.getSocketServeur(), &message);
-    if (receiveResult < 0) {
+    if (receiveResult < 0|| message.data1 == NULL) {
         this->dialogError("Erreur","Erreur lors de la réception de la réponse du serveur pour le message LOGIN !");
         return;
     }
@@ -458,7 +436,7 @@ void MainWindowClientBookEncoder::on_actionLogin_triggered() {
     msg.data2 = NULL;
     msg.texte = NULL;
 
-    if (Send(idClient, &msg) == -1)
+    if (Send(msg.type, &msg) == -1)
     {
         dialogError("Erreur", "Erreur lors de l'envoi de la requête GET_AUTHORS");
         return;
@@ -503,7 +481,7 @@ void MainWindowClientBookEncoder::on_actionLogin_triggered() {
     msg.data2 = NULL;
     msg.texte = NULL;
 
-    if (Send(idClient, &msg) == -1)
+    if (Send(msg.type, &msg) == -1)
     {
         dialogError("Erreur", "Erreur lors de l'envoi de la requête GET_SUBJECTS");
         return;
@@ -556,6 +534,7 @@ void MainWindowClientBookEncoder::on_actionLogout_triggered() {
     message.requete = LOGOUT;
     message.data1 = NULL;
     message.data2 = (char*)client.getLogin().c_str();
+    message.texte = NULL;
 
     printf("(CLIENT) Requete envoyee : %d\n", message.requete);
     int result = Send(message.type, &message);
@@ -582,6 +561,7 @@ void MainWindowClientBookEncoder::on_actionQuitter_triggered(){
         message.requete = LOGOUT;
         message.data1 = NULL;
         message.data2 = (char*)client.getLogin().c_str();
+        message.texte = NULL;
 
         printf("(CLIENT) Requete envoyee : %d\n", message.requete);
         int result = Send(message.type, &message);

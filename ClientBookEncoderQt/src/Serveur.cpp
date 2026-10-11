@@ -36,7 +36,7 @@ void *Worker(void *arg);
 int main()
 {
     // Connexion SQL:
-    printf("(SERVEUR) Version actuelle: 0.9.5");
+    printf("(SERVEUR) Version actuelle: 0.9.7");
     printf("(SERVEUR) Connexion à la base de donnée");
     LireConfiguration();
     ConnexionBD();
@@ -140,6 +140,7 @@ void *GestionClient(void *arg)
 
     MESSAGE m;
 
+
     printf("(SERVEUR) Thread cree pour le client\n");
 
 
@@ -180,17 +181,15 @@ void *GestionClient(void *arg)
                 MESSAGE msg;
                 int existe;
                 fprintf(stderr,"(SERVEUR %ld) Requete LOGIN reçue de %d : --%s--\n",m.type, m.expediteur, m.data2);
-                m.type = m.expediteur;
+                msg.type = m.expediteur;
                 msg.expediteur = getpid();
                 msg.requete = LOGIN;
                 pthread_mutex_lock(&mutexDB);
                 existe = LoginExiste(m.data2);
                 if (existe == 0)
                 {
-                    string texte = "Utilisateur inexistant";
-                    string data1 = "KO";
-                    msg.data1 = (char*)data1.c_str();
-                    msg.texte = (char*)texte.c_str();
+                    msg.data1 = (char*)"KO";
+                    msg.texte = (char*)"Utilisateur inexistant";
                     msg.data2 = NULL;
 
                     if (Send(client, &msg) == -1)
@@ -212,8 +211,7 @@ void *GestionClient(void *arg)
                     loginConnecte = m.data2;
                     logged = 1;
                     printf("(SERVEUR) Login correct\n");
-                    string data1 = "OK";
-                    msg.data1 = (char*)data1.c_str();
+                    msg.data1 = (char*)"OK";
 
                     msg.data2 = NULL;
                     msg.texte = NULL;
@@ -229,17 +227,15 @@ void *GestionClient(void *arg)
                     if (existe == 1)
                     {
                         fprintf(stderr,"(SERVEUR) Utilisateur déja existant\n");
-                        string message = "Utilisateur déjà connecté";
-                        msg.texte = (char*)message.c_str();
+                        msg.texte = (char*)"Utilisateur déjà connecté";
                     }
+                    else if (existe == 0 || loggedIn == 1)
+                        msg.texte = NULL;
                     printf("(SERVEUR) Login incorrect\n");
 
-                    string data1 = "KO";
-                    msg.data1 = (char*)data1.c_str();
+                    msg.data1 = (char*)"KO";
                     msg.data2 = NULL;
 
-                    if (existe == 0 || loggedIn == 1)
-                        msg.texte = NULL;
 
                 }
 
