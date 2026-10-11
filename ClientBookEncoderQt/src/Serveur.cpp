@@ -36,7 +36,7 @@ void *Worker(void *arg);
 int main()
 {
     // Connexion SQL:
-    printf("(SERVEUR) Version actuelle: 0.9.7");
+    printf("(SERVEUR) Version actuelle: 0.9.8");
     printf("(SERVEUR) Connexion à la base de donnée");
     LireConfiguration();
     ConnexionBD();
@@ -179,80 +179,65 @@ void *GestionClient(void *arg)
             case LOGIN:
             {
                 MESSAGE msg;
-                int existe;
-                fprintf(stderr,"(SERVEUR %ld) Requete LOGIN reçue de %d : --%s--\n",m.type, m.expediteur, m.data2);
+
                 msg.type = m.expediteur;
                 msg.expediteur = getpid();
                 msg.requete = LOGIN;
+                msg.data1 = (char*)"KO";
+                msg.data2 = NULL;
+                msg.texte = NULL;
+
+                fprintf(stderr, "(SERVEUR %d) Requete LOGIN : %s\n", getpid(), m.data2);
+
                 pthread_mutex_lock(&mutexDB);
-                existe = LoginExiste(m.data2);
+
+                int existe = LoginExiste(m.data2);
+
                 if (existe == 0)
                 {
-                    msg.data1 = (char*)"KO";
                     msg.texte = (char*)"Utilisateur inexistant";
-                    msg.data2 = NULL;
-
-                    if (Send(client, &msg) == -1)
-                    {
-                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE LOGIN: %d)\n", getpid(), m.expediteur);
-                        Close(client);
-                        return NULL;
-
-                    }
-
-                    pthread_mutex_unlock(&mutexDB);
-                    break;
                 }
-                result = VerifierLogin(m.data2, m.texte);
-                loggedIn = isLoggedin(m.data2);
-                pthread_mutex_unlock(&mutexDB);
-                if (result == 1)
+                else if (existe < 0)
                 {
-                    loginConnecte = m.data2;
-                    logged = 1;
-                    printf("(SERVEUR) Login correct\n");
-                    msg.data1 = (char*)"OK";
-
-                    msg.data2 = NULL;
-                    msg.texte = NULL;
-
-                    result = LoggedIn(m.data2);
-                    if (result == 0)
-                    {
-                        fprintf(stderr,"(SERVEUR) Erreur lors de la mise à jour de l'état de connexion de l'utilisateur\n");
-                    }
+                    msg.texte = (char*)"Erreur base de données";
+                }
+                else if (VerifierLogin(m.data2, m.texte) != 1)
+                {
+                    msg.texte = (char*)"Mot de passe incorrect";
+                }
+                else if (isLoggedin(m.data2) == 1)
+                {
+                    msg.texte = (char*)"Utilisateur déjà connecté";
                 }
                 else
                 {
-                    if (existe == 1)
+                    int result = LoggedIn(m.data2);
+
+                    if (result == 1)
                     {
-                        fprintf(stderr,"(SERVEUR) Utilisateur déja existant\n");
-                        msg.texte = (char*)"Utilisateur déjà connecté";
-                    }
-                    else if (existe == 0 || loggedIn == 1)
+                        msg.data1 = (char*)"OK";
                         msg.texte = NULL;
-                    printf("(SERVEUR) Login incorrect\n");
 
-                    msg.data1 = (char*)"KO";
-                    msg.data2 = NULL;
+                        logged = 1;
 
+                        loginConnecte = m.data2;
 
+                        printf("(SERVEUR) Login correct\n");
+                    }
+                    else
+                    {
+                        msg.texte = (char*)"Erreur de connexion";
+                    }
                 }
 
-                if (loggedIn == 1)
-                {
-                    fprintf(stderr,"(SERVEUR) Utilisateur déjà connecté\n");
-                    msg.texte = (char*) "Utilisateur déjà connecté";
-                    msg.data1 = (char*) "KO";
-                    msg.data2 = NULL;
-                }
+                pthread_mutex_unlock(&mutexDB);
 
                 if (Send(client, &msg) == -1)
                 {
-                    printf("(SERVEUR %d) Erreur d'envoi (REQUETE LOGIN: %d)\n", getpid(), m.expediteur);
+                    fprintf(stderr, "(SERVEUR) Erreur d'envoi LOGIN\n");
+
                     Close(client);
                     return NULL;
-
                 }
 
                 break;
