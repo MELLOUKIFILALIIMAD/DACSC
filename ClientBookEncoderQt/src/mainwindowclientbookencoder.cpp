@@ -545,6 +545,7 @@ void MainWindowClientBookEncoder::on_actionLogout_triggered() {
     
     ui->comboBoxAuthors->clear();
     ui->comboBoxSubjects->clear();
+    clearTableBooks();
 
     client.setLogin("");
     client.setPassword("");
