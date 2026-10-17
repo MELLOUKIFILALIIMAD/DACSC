@@ -9,7 +9,43 @@
 #include <socket.h>
 #include <string>
 #include <sstream>
+#include <cstring>
 using namespace std;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///// Outils pour le protocole texte (voir protocole.h) //////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+namespace {
+
+int Dialogue(int socketServeur, const string &requete, char *reponse, char *champs[])
+{
+    if (Echange(socketServeur, requete.c_str(), reponse, TAILLE_MAX_TRAME + 1) <= 0)
+    {
+        return -1;
+    }
+
+    return Decouper(reponse, champs, MAX_CHAMPS);
+}
+
+// La réponse correspond-elle à la requête attendue, avec le statut "ok" ?
+bool ReponseOk(int nb, char *champs[], const char *requete)
+{
+    return nb >= 2 && strcmp(champs[0], requete) == 0 && strcmp(champs[1], STATUT_OK) == 0;
+}
+
+// Champ numéro i de la réponse ("" s'il n'existe pas) : raison du ko, message du ok...
+string Champ(int nb, char *champs[], int i)
+{
+    return (i < nb) ? string(champs[i]) : string("");
+}
+
+// '#' sert de séparateur dans le protocole : interdit dans les données saisies
+bool SansSeparateur(const string &texte)
+{
+    return texte.find(SEPARATEUR_CHAMP) == string::npos;
+}
+
+}
 
 MainWindowClientBookEncoder::MainWindowClientBookEncoder(int idClient, QWidget *parent)
     : QMainWindow(parent)
@@ -241,19 +277,16 @@ void MainWindowClientBookEncoder::on_pushButtonAddAuthor_clicked() {
     string lastName = this->dialogInputText("Nouvel auteur","Nom ?");
     string firstName = this->dialogInputText("Nouvel auteur","Prénom ?");
     string birthDate = this->dialogInputText("Nouvel auteur","Date de naissance (yyyy-mm-dd) ?");
-    string tailleLastName = to_string(lastName.length());
-    string tailleFirstName = to_string(firstName.length());
-    string taillebirthDate = to_string(birthDate.length());
-    if (tailleLastName == "0") {
+    if (lastName.empty()) {
         this->dialogError("Erreur","Nom invalide !");
         return;
     }
 
-    if (tailleFirstName == "0") {
+    if (firstName.empty()) {
         this->dialogError("Erreur","Prénom invalide !");
         return;
     }
-    if (taillebirthDate  == "0")
+    if (birthDate.empty())
     {
         this->dialogError("Erreur","Date invalide !");
         return;
@@ -264,71 +297,67 @@ void MainWindowClientBookEncoder::on_pushButtonAddAuthor_clicked() {
         this->dialogError("Erreur","Date invalide ! Le format doit être yyyy-mm-dd.");
         return; 
     }
+    if (!SansSeparateur(lastName) || !SansSeparateur(firstName)) {
+        this->dialogError("Erreur", "Le caractère '#' est interdit !");
+        return;
+    }
     cout << "Nom : " << lastName << endl;
     cout << "Prénom : " << firstName << endl;
     cout << "Date de naissance : " << birthDate << endl;
-    MESSAGE m;
-    m.type = client.getSocketServeur();
-    m.expediteur = idClient;
-    m.requete = ADD_AUTHOR;
-    m.data1 = (char*) lastName.c_str();
-    m.data2 = (char*) firstName.c_str();
-    m.texte = (char*) birthDate.c_str();
-    int result = Send(m.type, &m);
-    if (result < 0) {
-        this->dialogError("Erreur","Erreur lors de l'envoi du message ADD_AUTHOR au serveur !");
-        return;
-    }
-    int receiveResult = Receive(client.getSocketServeur(), &m);
-    if (receiveResult < 0) {
-        this->dialogError("Erreur","Erreur lors de la réception de la réponse du serveur pour le message ADD_AUTHOR !");
+
+    // ***** Construction de la requete *****
+    string requete = string(ADD_AUTHOR) + SEPARATEUR_CHAMP + lastName
+                                        + SEPARATEUR_CHAMP + firstName
+                                        + SEPARATEUR_CHAMP + birthDate;
+
+    // ***** Envoi requete + réception réponse *****
+    char reponse[TAILLE_MAX_TRAME + 1];
+    char *champs[MAX_CHAMPS];
+    int nb = Dialogue(client.getSocketServeur(), requete, reponse, champs);
+
+    // ***** Parsing de la réponse *****
+    if (nb < 2 || strcmp(champs[0], ADD_AUTHOR) != 0) {
+        this->dialogError("Erreur","Erreur lors de l'échange du message ADD_AUTHOR avec le serveur !");
         return;
     }
 
-    if (string(m.data1) != "OK") {
-        this->dialogError("Erreur", string(m.texte));
+    if (!ReponseOk(nb, champs, ADD_AUTHOR)) {
+        this->dialogError("Erreur", Champ(nb, champs, 2));
         return;
     }
-    else
-    {
-        this->dialogMessage("Ajout Auteur", string(m.texte));  
-    }
+
+    this->dialogMessage("Ajout Auteur", Champ(nb, champs, 2));
 }
 
 void MainWindowClientBookEncoder::on_pushButtonAddSubject_clicked() {
     string name = this->dialogInputText("Nouveau sujet","Nom ?");
-    string tailleName = to_string(name.length());
-    if (tailleName == "0") {
+    if (name.empty()) {
         this->dialogError("Erreur","Nom invalide !");
         return;
     }
-    cout << "Nom : " << name << endl;
-    MESSAGE m;
-    m.type = client.getSocketServeur();
-    m.requete = ADD_SUBJECT;
-    m.expediteur = idClient;
-    m.data1 = (char*) name.c_str();
-    m.data2 = NULL;
-    m.texte = NULL;
-    int result = Send(m.type, &m);
-    if (result < 0) {
-        this->dialogError("Erreur","Erreur lors de l'envoi du message ADD_SUBJECT au serveur !");
+    if (!SansSeparateur(name)) {
+        this->dialogError("Erreur", "Le caractère '#' est interdit !");
         return;
     }
-    int receiveResult = Receive(client.getSocketServeur(), &m);
-    if (receiveResult < 0) {
-        this->dialogError("Erreur","Erreur lors de la réception de la réponse du serveur pour le message ADD_SUBJECT !");
+    cout << "Nom : " << name << endl;
+
+    string requete = string(ADD_SUBJECT) + SEPARATEUR_CHAMP + name;
+
+    char reponse[TAILLE_MAX_TRAME + 1];
+    char *champs[MAX_CHAMPS];
+    int nb = Dialogue(client.getSocketServeur(), requete, reponse, champs);
+
+    if (nb < 2 || strcmp(champs[0], ADD_SUBJECT) != 0) {
+        this->dialogError("Erreur","Erreur lors de l'échange du message ADD_SUBJECT avec le serveur !");
         return;
     }
 
-    if (string(m.data1) != "OK") {
-        this->dialogError("Erreur", string(m.texte));
+    if (!ReponseOk(nb, champs, ADD_SUBJECT)) {
+        this->dialogError("Erreur", Champ(nb, champs, 2));
         return;
     }
-    else
-    {
-        this->dialogMessage("Ajout Sujet", string(m.texte));
-    } 
+
+    this->dialogMessage("Ajout Sujet", Champ(nb, champs, 2));
 }
 
 void MainWindowClientBookEncoder::on_pushButtonAddBook_clicked() {
@@ -342,40 +371,39 @@ void MainWindowClientBookEncoder::on_pushButtonAddBook_clicked() {
     cout << "selection auteur = " << this->getSelectionAuthor() << endl;
     cout << "selection sujet  = " << this->getSelectionSubject() << endl;
 
-    MESSAGE msg;
-    msg.type = client.getSocketServeur();
-    msg.expediteur = idClient;
-    msg.requete = ADD_BOOK;
-    msg.data1 = (char*) this->getTitle().c_str();
-    msg.data2 = (char*) this->getIsbn().c_str();
-    
-    string data3 = this->getSelectionAuthor() + ";" + this->getSelectionSubject() + ";" +
-                   std::to_string(this->getPageCount()) + ";" +
-                   std::to_string(this->getPublishYear()) + ";" +
-                   std::to_string(this->getPrice()) + ";" +
-                   std::to_string(this->getStockQuantity());
-    msg.texte = (char*) data3.c_str();
-
-    int result = Send(msg.type, &msg);
-    if (result < 0) {
-        this->dialogError("Erreur","Erreur lors de l'envoi du message ADD_BOOK au serveur !");
+    if (!SansSeparateur(this->getTitle()) || !SansSeparateur(this->getIsbn())) {
+        this->dialogError("Erreur", "Le caractère '#' est interdit !");
+        return;
     }
 
-    int receiveResult = Receive(client.getSocketServeur(), &msg);
-    if (receiveResult < 0) {
-        this->dialogError("Erreur","Erreur lors de la réception de la réponse du serveur pour le message ADD_BOOK !");
+    // ADD_BOOK#titre#isbn#auteur#sujet#pages#annee#prix#stock
+    string requete = string(ADD_BOOK) + SEPARATEUR_CHAMP + this->getTitle()
+                                      + SEPARATEUR_CHAMP + this->getIsbn()
+                                      + SEPARATEUR_CHAMP + this->getSelectionAuthor()
+                                      + SEPARATEUR_CHAMP + this->getSelectionSubject()
+                                      + SEPARATEUR_CHAMP + std::to_string(this->getPageCount())
+                                      + SEPARATEUR_CHAMP + std::to_string(this->getPublishYear())
+                                      + SEPARATEUR_CHAMP + std::to_string(this->getPrice())
+                                      + SEPARATEUR_CHAMP + std::to_string(this->getStockQuantity());
+
+    char reponse[TAILLE_MAX_TRAME + 1];
+    char *champs[MAX_CHAMPS];
+    int nb = Dialogue(client.getSocketServeur(), requete, reponse, champs);
+
+    if (nb < 2 || strcmp(champs[0], ADD_BOOK) != 0) {
+        this->dialogError("Erreur","Erreur lors de l'échange du message ADD_BOOK avec le serveur !");
+        return;
     }
 
-    if (string(msg.data1) != "OK") {
-        this->dialogError("Erreur", string(msg.texte));
+    if (!ReponseOk(nb, champs, ADD_BOOK)) {
+        this->dialogError("Erreur", Champ(nb, champs, 2));
+        return;
     }
-    else
-    {
-        this->dialogMessage("Ajout Livre", string(msg.texte));
-        this->addTupleTableBooks(0, this->getTitle(), this->getSelectionAuthor(), this->getSelectionSubject(),
-                                 this->getIsbn(), this->getPageCount(), this->getPublishYear(),
-                                 this->getPrice(), this->getStockQuantity());
-    }
+
+    this->dialogMessage("Ajout Livre", Champ(nb, champs, 2));
+    this->addTupleTableBooks(0, this->getTitle(), this->getSelectionAuthor(), this->getSelectionSubject(),
+                             this->getIsbn(), this->getPageCount(), this->getPublishYear(),
+                             this->getPrice(), this->getStockQuantity());
 }
 
 void MainWindowClientBookEncoder::on_pushButtonClear_clicked() {
@@ -391,132 +419,92 @@ void MainWindowClientBookEncoder::on_actionLogin_triggered() {
     string login = this->dialogInputText("Entrée en session","Login ?");
     string password = this->dialogInputText("Entrée en session","Password ?");
 
-
-    string data2 = login;
-    string texte = password;
-
-    cout << "Login : " << data2 << endl;
-    cout << "Password : " << texte << endl;
-
-    MESSAGE message;
-    message.type = client.getSocketServeur();
-    message.expediteur = idClient;
-    message.requete = LOGIN;
-    message.data1 = NULL;
-    message.data2 = data2.empty() ? NULL : (char*)data2.c_str();
-    message.texte = texte.empty() ? NULL : (char*)texte.c_str();
-
-
-    // Traitement du message LOGIN côté client
-    printf("(CLIENT) Requete envoyee : %d\n", message.requete);
-    int result = Send(message.type, &message);
-    if (result < 0) {
-        this->dialogError("Erreur","Erreur lors de l'envoi du message LOGIN au serveur !");
+    if (!SansSeparateur(login) || !SansSeparateur(password)) {
+        this->dialogError("Erreur", "Le caractère '#' est interdit !");
         return;
     }
 
-    // Attente de la réponse du serveur
-    int receiveResult = Receive(client.getSocketServeur(), &message);
-    if (receiveResult < 0|| message.data1 == NULL) {
-        this->dialogError("Erreur","Erreur lors de la réception de la réponse du serveur pour le message LOGIN !");
+    cout << "Login : " << login << endl;
+    cout << "Password : " << password << endl;
+
+    char reponse[TAILLE_MAX_TRAME + 1];
+    char *champs[MAX_CHAMPS];
+    int nb;
+
+    // ***** Construction de la requete *****
+    string requete = string(LOGIN) + SEPARATEUR_CHAMP + login + SEPARATEUR_CHAMP + password;
+
+    // ***** Envoi requete + réception réponse *****
+    printf("(CLIENT) Requete envoyee : %s\n", LOGIN);
+    nb = Dialogue(client.getSocketServeur(), requete, reponse, champs);
+
+    // ***** Parsing de la réponse *****   LOGIN#ok  ou  LOGIN#ko#raison
+    if (nb < 2 || strcmp(champs[0], LOGIN) != 0) {
+        this->dialogError("Erreur","Erreur lors de l'échange du message LOGIN avec le serveur !");
         return;
     }
 
-    if (string(message.data1) != "OK") {
-        this->dialogError("Erreur","Erreur de connexion : " + string(message.texte));
+    if (!ReponseOk(nb, champs, LOGIN)) {
+        this->dialogError("Erreur","Erreur de connexion : " + Champ(nb, champs, 2));
         return;
     }
+
     ui->comboBoxAuthors->clear();
     ui->comboBoxSubjects->clear();
-    MESSAGE msg;
-    msg.type = client.getSocketServeur();
-    msg.expediteur = idClient;
-    msg.requete = GET_AUTHORS;
-    msg.data1 = NULL;
-    msg.data2 = NULL;
-    msg.texte = NULL;
 
-    if (Send(msg.type, &msg) == -1)
+    // ***** GET_AUTHORS ***** réponse : GET_AUTHORS#ok#ids#noms#prenoms
+    nb = Dialogue(client.getSocketServeur(), GET_AUTHORS, reponse, champs);
+
+    if (nb < 2 || strcmp(champs[0], GET_AUTHORS) != 0)
     {
-        dialogError("Erreur", "Erreur lors de l'envoi de la requête GET_AUTHORS");
-        return;
-    }
-
-    printf("(CLIENT) Requête GET_AUTHORS envoyée\n");
-
-    if (Receive(client.getSocketServeur(), &msg) == -1)
-    {
-        dialogError("Erreur", "Erreur lors de la réception de la réponse GET_AUTHORS");
+        dialogError("Erreur", "Erreur lors de l'échange de la requête GET_AUTHORS");
         return;
     }
 
     printf("(CLIENT) Réponse GET_AUTHORS reçue\n");
 
-    if (msg.data1 != NULL && msg.data2 != NULL && msg.texte != NULL)
+    if (ReponseOk(nb, champs, GET_AUTHORS) && nb == 5)
     {
-        std::stringstream ids(msg.data1);
-        std::stringstream lastnames(msg.data2);
-        std::stringstream firstnames(msg.texte);
+        std::stringstream ids(champs[2]);
+        std::stringstream lastnames(champs[3]);
+        std::stringstream firstnames(champs[4]);
 
         std::string id, lastname, firstname;
 
-        while (std::getline(ids, id, ';') &&
-            std::getline(lastnames, lastname, ';') &&
-            std::getline(firstnames, firstname, ';'))
+        while (std::getline(ids, id, SEPARATEUR_LISTE) &&
+            std::getline(lastnames, lastname, SEPARATEUR_LISTE) &&
+            std::getline(firstnames, firstname, SEPARATEUR_LISTE))
         {
-            std::string author = lastname + " " + firstname;
-
-            this->addComboBoxAuthors(author);
+            this->addComboBoxAuthors(lastname + " " + firstname);
         }
     }
 
-    free(msg.data1);
-    free(msg.data2);
-    free(msg.texte);
+    // ***** GET_SUBJECTS ***** réponse : GET_SUBJECTS#ok#ids#noms
+    nb = Dialogue(client.getSocketServeur(), GET_SUBJECTS, reponse, champs);
 
-    msg.type = client.getSocketServeur();;
-    msg.expediteur = idClient;
-    msg.requete = GET_SUBJECTS;
-    msg.data1 = NULL;
-    msg.data2 = NULL;
-    msg.texte = NULL;
-
-    if (Send(msg.type, &msg) == -1)
+    if (nb < 2 || strcmp(champs[0], GET_SUBJECTS) != 0)
     {
-        dialogError("Erreur", "Erreur lors de l'envoi de la requête GET_SUBJECTS");
-        return;
-    }
-
-    printf("(CLIENT) Requête GET_SUBJECTS envoyée\n");
-
-    if (Receive(client.getSocketServeur(), &msg) == -1)
-    {
-        dialogError("Erreur", "Erreur lors de la réception de la réponse GET_SUBJECTS");
+        dialogError("Erreur", "Erreur lors de l'échange de la requête GET_SUBJECTS");
         return;
     }
 
     printf("(CLIENT) Réponse GET_SUBJECTS reçue\n");
 
-    if (msg.data1 != NULL && msg.texte != NULL)
+    if (ReponseOk(nb, champs, GET_SUBJECTS) && nb == 4)
     {
-        std::stringstream ids(msg.data1);
-        std::stringstream names(msg.texte);
+        std::stringstream ids(champs[2]);
+        std::stringstream names(champs[3]);
 
         std::string id, name;
 
-        while (std::getline(ids, id, ';') &&
-            std::getline(names, name, ';'))
+        while (std::getline(ids, id, SEPARATEUR_LISTE) &&
+            std::getline(names, name, SEPARATEUR_LISTE))
         {
             this->addComboBoxSubjects(name);
         }
     }
 
     printf("(CLIENT) Sujets ajoutés à la combobox\n");
-
-    free(msg.data1);
-    free(msg.texte);
-
-
 
     // Faciliter l'accès aux informations pour le client
     client.setLogin(login);
@@ -528,17 +516,11 @@ void MainWindowClientBookEncoder::on_actionLogin_triggered() {
 }
 
 void MainWindowClientBookEncoder::on_actionLogout_triggered() {
-    MESSAGE message;
-    message.type = client.getSocketServeur();
-    message.expediteur = idClient;
-    message.requete = LOGOUT;
-    message.data1 = NULL;
-    message.data2 = (char*)client.getLogin().c_str();
-    message.texte = NULL;
+    // LOGOUT#login (le serveur ne répond pas)
+    string requete = string(LOGOUT) + SEPARATEUR_CHAMP + client.getLogin();
 
-    printf("(CLIENT) Requete envoyee : %d\n", message.requete);
-    int result = Send(message.type, &message);
-    if (result < 0) {
+    printf("(CLIENT) Requete envoyee : %s\n", LOGOUT);
+    if (SendTrame(client.getSocketServeur(), requete.c_str()) < 0) {
         this->dialogError("Erreur","Erreur lors de l'envoi du message LOGOUT au serveur !");
         return;
     }
@@ -556,17 +538,10 @@ void MainWindowClientBookEncoder::on_actionLogout_triggered() {
 void MainWindowClientBookEncoder::on_actionQuitter_triggered(){
     if(client.isConnected())
     {
-        MESSAGE message;
-        message.type = client.getSocketServeur();
-        message.expediteur = idClient;
-        message.requete = LOGOUT;
-        message.data1 = NULL;
-        message.data2 = (char*)client.getLogin().c_str();
-        message.texte = NULL;
+        string requete = string(LOGOUT) + SEPARATEUR_CHAMP + client.getLogin();
 
-        printf("(CLIENT) Requete envoyee : %d\n", message.requete);
-        int result = Send(message.type, &message);
-        if (result < 0) {
+        printf("(CLIENT) Requete envoyee : %s\n", LOGOUT);
+        if (SendTrame(client.getSocketServeur(), requete.c_str()) < 0) {
             this->dialogError("Erreur","Erreur lors de l'envoi du message LOGOUT au serveur !");
             return;
         }

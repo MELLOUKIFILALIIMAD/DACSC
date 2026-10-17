@@ -6,11 +6,14 @@
 #include <string>
 #include <algorithm>
 #include <locale>
+#include <cstring>
+#include <unistd.h>
 #include "socket.h"
+#include "config.h"
 #include "protocole.h"
 #include "database.h"
 #include "Client.h"
-
+#include "config.h"
 using namespace std;
 #define TAILLE_FILE 20
 
@@ -36,7 +39,7 @@ void *Worker(void *arg);
 int main()
 {
     // Connexion SQL:
-    printf("(SERVEUR) Version actuelle: 0.9.9");
+    printf("(SERVEUR) Version actuelle: 1.0.0");
     printf("(SERVEUR) Connexion à la base de donnée");
     LireConfiguration();
     ConnexionBD();
@@ -129,26 +132,35 @@ int main()
 }
 
 
+// Envoie "REQUETE#ok[#texte]" ou "REQUETE#ko#texte". Retourne 0 si OK, -1 si erreur d'envoi.
+static int Repondre(int client, const char *requete, bool ok, const string &texte = "")
+{
+    string reponse = string(requete) + SEPARATEUR_CHAMP + (ok ? STATUT_OK : STATUT_KO);
+
+    if (!texte.empty())
+    {
+        reponse += SEPARATEUR_CHAMP + texte;
+    }
+
+    return SendTrame(client, reponse.c_str());
+}
+
 void *GestionClient(void *arg)
 {
     int client = *((int *)arg);
-    int result;
-    int loggedIn = 0;
     int logged = 0;
     string loginConnecte = "";
     Liberer(arg);
 
-    MESSAGE m;
-
+    char trame[TAILLE_MAX_TRAME + 1];
+    char *champs[MAX_CHAMPS];
 
     printf("(SERVEUR) Thread cree pour le client\n");
-
 
     while (1)
     {
         // Réception d'une requête
-        int resultat = Receive(client, &m);
-
+        int resultat = ReceiveTrame(client, trame, sizeof(trame));
 
         if (resultat <= 0)
         {
@@ -157,97 +169,68 @@ void *GestionClient(void *arg)
             else
                 printf("(SERVEUR) Echec de reception\n");
 
-            if (logged == 1)
-            {
-                pthread_mutex_lock(&mutexDB);
-                LoggedOut(loginConnecte.c_str());
-                pthread_mutex_unlock(&mutexDB);
-
-                logged = 0;
-            }
-
-            Close(client);
-            return NULL;
+            break;
         }
 
+        // Parsing : champs[0] = nom de la requête, champs[1..] = paramètres
+        int nb = Decouper(trame, champs, MAX_CHAMPS);
+        const char *requete = champs[0];
+        int envoi = 0; // passe à -1 si l'envoi de la réponse échoue
 
-        printf("(SERVEUR) Requete recue : %d\n",m.requete);
+        printf("(SERVEUR) Requete recue : %s\n", requete);
 
-
-        switch (m.requete)
+        if (strcmp(requete, LOGIN) == 0)
         {
-            case LOGIN:
+            // LOGIN#login#password
+            if (nb != 3)
             {
-                MESSAGE msg;
+                envoi = Repondre(client, LOGIN, false, "Requête invalide");
+            }
+            else
+            {
+                const char *login = champs[1];
+                const char *password = champs[2];
+                string raison = "";
+                bool ok = false;
 
-                msg.type = m.expediteur;
-                msg.expediteur = getpid();
-                msg.requete = LOGIN;
-                msg.data1 = (char*)"KO";
-                msg.data2 = NULL;
-                msg.texte = NULL;
-
-                fprintf(stderr, "(SERVEUR %d) Requete LOGIN : %s\n", getpid(), m.data2);
+                fprintf(stderr, "(SERVEUR %d) Requete LOGIN : %s\n", getpid(), login);
 
                 pthread_mutex_lock(&mutexDB);
 
-                int existe = LoginExiste(m.data2);
+                int existe = LoginExiste(login);
 
                 if (existe == 0)
-                {
-                    msg.texte = (char*)"Utilisateur inexistant";
-                }
+                    raison = "Utilisateur inexistant";
                 else if (existe < 0)
+                    raison = "Erreur base de données";
+                else if (VerifierLogin(login, password) != 1)
+                    raison = "Mot de passe incorrect";
+                else if (isLoggedin(login) == 1)
+                    raison = "Utilisateur déjà connecté";
+                else if (LoggedIn(login) == 1)
                 {
-                    msg.texte = (char*)"Erreur base de données";
-                }
-                else if (VerifierLogin(m.data2, m.texte) != 1)
-                {
-                    msg.texte = (char*)"Mot de passe incorrect";
-                }
-                else if (isLoggedin(m.data2) == 1)
-                {
-                    msg.texte = (char*)"Utilisateur déjà connecté";
+                    ok = true;
+                    logged = 1;
+                    loginConnecte = login;
+                    printf("(SERVEUR) Login correct\n");
                 }
                 else
-                {
-                    int result = LoggedIn(m.data2);
-
-                    if (result == 1)
-                    {
-                        msg.data1 = (char*)"OK";
-                        msg.texte = NULL;
-
-                        logged = 1;
-
-                        loginConnecte = m.data2;
-
-                        printf("(SERVEUR) Login correct\n");
-                    }
-                    else
-                    {
-                        msg.texte = (char*)"Erreur de connexion";
-                    }
-                }
+                    raison = "Erreur de connexion";
 
                 pthread_mutex_unlock(&mutexDB);
 
-                if (Send(client, &msg) == -1)
-                {
-                    fprintf(stderr, "(SERVEUR) Erreur d'envoi LOGIN\n");
-
-                    Close(client);
-                    return NULL;
-                }
-
-                break;
+                envoi = Repondre(client, LOGIN, ok, raison);
             }
-
-            case LOGOUT:
+        }
+        else if (strcmp(requete, LOGOUT) == 0)
+        {
+            // LOGOUT#login (pas de réponse)
+            if (nb >= 2)
             {
                 pthread_mutex_lock(&mutexDB);
-                result = LoggedOut(m.data2);
+                int result = LoggedOut(champs[1]);
                 pthread_mutex_unlock(&mutexDB);
+
                 if (result == 0)
                 {
                     fprintf(stderr,"(SERVEUR) Erreur lors de la mise à jour de l'état de connexion de l'utilisateur\n");
@@ -258,298 +241,159 @@ void *GestionClient(void *arg)
                     logged = 0;
                     loginConnecte = "";
                 }
-
-                printf("(SERVEUR) LOGOUT\n");
-
-                break;
             }
 
-            case GET_AUTHORS:
+            printf("(SERVEUR) LOGOUT\n");
+        }
+        else if (strcmp(requete, GET_AUTHORS) == 0)
+        {
+            // GET_AUTHORS -> GET_AUTHORS#ok#ids#noms#prenoms
+            string ids, lastnames, firstnames;
+
+            pthread_mutex_lock(&mutexDB);
+            int res = GetAuthors(ids, lastnames, firstnames);
+            pthread_mutex_unlock(&mutexDB);
+
+            if (res != 1)
             {
-                pthread_mutex_lock(&mutexDB);
-                MESSAGE Amsg = GetAuthors(client);
-                pthread_mutex_unlock(&mutexDB);
-                if (Amsg.texte == NULL)
-                {
-                    printf("(Serveur) Erreur lors de la récupération des auteurs\n");
-                    MESSAGE errorMsg;
-                    errorMsg.type = client;
-                    errorMsg.expediteur = getpid();
-                    errorMsg.requete = GET_AUTHORS;
-                    string data1 = "KO";
-                    errorMsg.data1 = (char*)data1.c_str();
-                    errorMsg.data2 = NULL;
-                    errorMsg.texte = (char*) "Erreur lors de la récupération des auteurs";
-                    if (Send(client, &errorMsg) == -1)
-                    {
-                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE GET_AUTHORS: %d)\n", getpid(), m.expediteur);
-                        Close(client);
-                        return NULL;
-
-                    }
-                    free(Amsg.data1);
-                    free(Amsg.data2);
-                    free(Amsg.texte);
-                    break;
-                }
-                else
-                {
-                    if (Send(client, &Amsg) == -1)
-                    {
-                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE GET_AUTHORS: %d)\n", getpid(), m.expediteur);
-                        Close(client);
-                        return NULL;
-
-                    }
-                    free(Amsg.data1);
-                    free(Amsg.data2);
-                    free(Amsg.texte);
-
-                    printf("(SERVEUR) Récupération des auteurs réussie\n");
-
-                    break;
-                }
+                printf("(Serveur) Erreur lors de la récupération des auteurs\n");
+                envoi = Repondre(client, GET_AUTHORS, false, "Erreur lors de la récupération des auteurs");
             }
-
-            case GET_SUBJECTS:
+            else
             {
-                pthread_mutex_lock(&mutexDB);
-                MESSAGE Smsg = GetSubjects(client);
-                pthread_mutex_unlock(&mutexDB);
-                if (Smsg.texte == NULL)
-                {
-                    printf("(Serveur) Erreur lors de la récupération des sujets\n");
-                    MESSAGE errorMsg;
-                    errorMsg.type = client;
-                    errorMsg.expediteur = getpid();
-                    errorMsg.requete = GET_SUBJECTS;
-                    string data1 = "KO";
-                    errorMsg.data1 = (char*)data1.c_str();
-                    errorMsg.data2 = NULL;
-                    errorMsg.texte = (char*) "Erreur lors de la récupération des sujets";
-                    if (Send(client, &errorMsg) == -1)
-                    {
-                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE GET_SUBJECTS: %d)\n", getpid(), m.expediteur);
-                        Close(client);
-                        return NULL;
+                string reponse = string(GET_AUTHORS) + SEPARATEUR_CHAMP + STATUT_OK
+                               + SEPARATEUR_CHAMP + ids
+                               + SEPARATEUR_CHAMP + lastnames
+                               + SEPARATEUR_CHAMP + firstnames;
 
-                    }
-                    free(Smsg.data1);
-                    free(Smsg.texte);
-                    break;
-                }
-                else
-                {
-                    printf("(SERVEUR) Récupération des sujets réussie\n");
-                    if (Send(client, &Smsg) == -1)
-                    {
-                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE GET_SUBJECTS: %d)\n", getpid(), m.expediteur);
-                        Close(client);
-                        return NULL;
-                    }
-                }
-                free(Smsg.data1);
-                free(Smsg.texte);
-                    
+                envoi = SendTrame(client, reponse.c_str());
 
-                break;
-            }
-
-            case ADD_AUTHOR:
-            {
-                printf("(SERVEUR) ADD_AUTHOR\n");
-                pthread_mutex_lock(&mutexDB);
-                int res = AddAuthors(m.data1, m.data2, m.texte);
-                pthread_mutex_unlock(&mutexDB);
-                if(res == 0)
-                {
-                    MESSAGE err;
-                    err.type = client;
-                    err.expediteur = getpid();
-                    err.requete = ADD_AUTHOR;
-                    string data1 = "KO";
-                    err.data1 = (char*) data1.c_str();
-                    err.data2 = NULL;
-                    err.texte = (char*) "Erreur lors de l'ajout d'un auteur.";
-                    if (Send(client, &err) == -1)
-                    {
-                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE ADD_AUTHOR: %d)\n", getpid(), m.expediteur);
-                        Close(client);
-                        return NULL;
-
-                    }
-
-                }
-                else
-                {
-                    MESSAGE msg;
-                    msg.type = client;
-                    msg.expediteur = getpid();
-                    msg.requete = ADD_AUTHOR;
-                    string data1 = "OK";
-                    msg.data1 = (char*) data1.c_str();
-                    msg.data2 = NULL;
-                    msg.texte = (char*) "Auteur ajouté avec succès.";
-                    if (Send(client, &msg) == -1)
-                    {
-                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE ADD_AUTHOR: %d)\n", getpid(), m.expediteur);
-                        Close(client);
-                        return NULL;
-
-                    }
-                }
-                break;
-            }
-
-            case ADD_SUBJECT:
-            {
-                printf("(SERVEUR) ADD_SUBJECT\n");
-                pthread_mutex_lock(&mutexDB);
-                int res = AddSubjects(m.data1);
-                pthread_mutex_unlock(&mutexDB);
-                if(res == 0)
-                {
-                    MESSAGE err;
-                    err.type = client;
-                    err.expediteur = getpid();
-                    err.requete = ADD_SUBJECT;
-                    string data1 = "KO";
-                    err.data1 = (char*) data1.c_str();
-                    err.data2 = NULL;
-                    err.texte = (char*) "Erreur lors de l'ajout d'un sujet.";
-                    if (Send(client, &err) == -1)
-                    {
-                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE ADD_SUBJECT: %d)\n", getpid(), m.expediteur);
-                        Close(client);
-                        return NULL;
-
-                    }
-
-                }
-                else
-                {
-                    MESSAGE msg;
-                    msg.type = client;
-                    msg.expediteur = getpid();
-                    msg.requete = ADD_SUBJECT;
-                    string data1 = "OK";
-                    msg.data1 = (char*) data1.c_str();
-                    msg.data2 = NULL;
-                    msg.texte = (char*) "Sujet ajouté avec succès.";
-                    if (Send(client, &msg) == -1)
-                    {
-                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE ADD_SUBJECT: %d)\n", getpid(), m.expediteur);
-                        Close(client);
-                        return NULL;
-
-                    }
-                }
-                break;
-            }
-
-            case ADD_BOOK:
-            {
-                printf("(SERVEUR) ADD_BOOK\n");
-                
-                char* title = m.data1;
-                char* isbn = m.data2;
-                std::string authorname;
-                std::string subjecttitle;
-
-                int pageCount, stockQuantity, publishYear;
-                float price;
-
-                std::string texte = m.texte;
-                std::replace(texte.begin(), texte.end(), ',', '.');
-
-                std::stringstream ss(texte);
-                ss.imbue(std::locale::classic());
-
-                std::getline(ss, authorname, ';');
-                std::getline(ss, subjecttitle, ';');
-
-                char separator;
-
-                if (!(ss >> pageCount))
-                    printf("ERREUR : pageCount\n");
-                else
-                    printf("pageCount = %d\n", pageCount);
-
-                if (!(ss >> separator) || separator != ';')
-                    printf("ERREUR : separateur 1 [%c]\n", separator);
-
-                if (!(ss >> publishYear))
-                    printf("ERREUR : publishYear\n");
-                else
-                    printf("publishYear = %d\n", publishYear);
-
-                if (!(ss >> separator) || separator != ';')
-                    printf("ERREUR : separateur 2 [%c]\n", separator);
-
-                if (!(ss >> price))
-                    printf("ERREUR : price\n");
-                else
-                    printf("price = %.2f\n", price);
-
-                if (!(ss >> separator) || separator != ';')
-                    printf("ERREUR : separateur 3 [%c]\n", separator);
-
-                if (!(ss >> stockQuantity))
-                    printf("ERREUR : stockQuantity\n");
-                else
-                    printf("stockQuantity = %d\n", stockQuantity);
-
-                pthread_mutex_lock(&mutexDB);
-                int res = AddBook(authorname.c_str(), subjecttitle.c_str(), title, isbn, pageCount, stockQuantity, price, publishYear);
-                pthread_mutex_unlock(&mutexDB);
-                MESSAGE msg;
-                msg.type = client;
-                msg.expediteur = getpid();
-                msg.requete = ADD_BOOK;
-                if(res == 0)
-                {
-                    string data1 = "KO";
-                    msg.data1 = (char*) data1.c_str();
-                    msg.data2 = NULL;
-                    msg.texte = (char*) "Erreur lors de l'ajout d'un livre.";
-                    if (Send(client, &msg) == -1)
-                    {
-                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE ADD_BOOK: %d)\n", getpid(), msg.expediteur);
-                        Close(client);
-                        return NULL;
-                    }
-                }
-                else
-                {
-                    string data1 = "OK";
-                    msg.data1 = (char*) data1.c_str();
-                    msg.data2 = NULL;
-                    msg.texte = (char*) "Livre ajouté avec succès.";
-                    if (Send(client, &msg) == -1)
-                    {
-                        printf("(SERVEUR %d) Erreur d'envoi (REQUETE ADD_BOOK: %d)\n", getpid(), msg.expediteur);
-                        Close(client);
-                        return NULL;
-                    }
-                }
-                break;
+                printf("(SERVEUR) Récupération des auteurs réussie\n");
             }
         }
+        else if (strcmp(requete, GET_SUBJECTS) == 0)
+        {
+            // GET_SUBJECTS -> GET_SUBJECTS#ok#ids#noms
+            string ids, names;
 
-        if (m.data1 != NULL)
-        {
-            free(m.data1);
+            pthread_mutex_lock(&mutexDB);
+            int res = GetSubjects(ids, names);
+            pthread_mutex_unlock(&mutexDB);
+
+            if (res != 1)
+            {
+                printf("(Serveur) Erreur lors de la récupération des sujets\n");
+                envoi = Repondre(client, GET_SUBJECTS, false, "Erreur lors de la récupération des sujets");
+            }
+            else
+            {
+                string reponse = string(GET_SUBJECTS) + SEPARATEUR_CHAMP + STATUT_OK
+                               + SEPARATEUR_CHAMP + ids
+                               + SEPARATEUR_CHAMP + names;
+
+                envoi = SendTrame(client, reponse.c_str());
+
+                printf("(SERVEUR) Récupération des sujets réussie\n");
+            }
         }
-        if (m.data2 != NULL)
+        else if (strcmp(requete, ADD_AUTHOR) == 0)
         {
-            free(m.data2);
+            // ADD_AUTHOR#nom#prenom#dateNaissance
+            printf("(SERVEUR) ADD_AUTHOR\n");
+
+            if (nb != 4)
+            {
+                envoi = Repondre(client, ADD_AUTHOR, false, "Requête invalide");
+            }
+            else
+            {
+                pthread_mutex_lock(&mutexDB);
+                int res = AddAuthors(champs[1], champs[2], champs[3]);
+                pthread_mutex_unlock(&mutexDB);
+
+                if (res == 0)
+                    envoi = Repondre(client, ADD_AUTHOR, false, "Erreur lors de l'ajout d'un auteur.");
+                else
+                    envoi = Repondre(client, ADD_AUTHOR, true, "Auteur ajouté avec succès.");
+            }
         }
-        if (m.texte != NULL)
+        else if (strcmp(requete, ADD_SUBJECT) == 0)
         {
-            free(m.texte);
+            // ADD_SUBJECT#nom
+            printf("(SERVEUR) ADD_SUBJECT\n");
+
+            if (nb != 2)
+            {
+                envoi = Repondre(client, ADD_SUBJECT, false, "Requête invalide");
+            }
+            else
+            {
+                pthread_mutex_lock(&mutexDB);
+                int res = AddSubjects(champs[1]);
+                pthread_mutex_unlock(&mutexDB);
+
+                if (res == 0)
+                    envoi = Repondre(client, ADD_SUBJECT, false, "Erreur lors de l'ajout d'un sujet.");
+                else
+                    envoi = Repondre(client, ADD_SUBJECT, true, "Sujet ajouté avec succès.");
+            }
+        }
+        else if (strcmp(requete, ADD_BOOK) == 0)
+        {
+            // ADD_BOOK#titre#isbn#auteur#sujet#pages#annee#prix#stock
+            printf("(SERVEUR) ADD_BOOK\n");
+
+            if (nb != 9)
+            {
+                envoi = Repondre(client, ADD_BOOK, false, "Requête invalide");
+            }
+            else
+            {
+                const char *title = champs[1];
+                const char *isbn = champs[2];
+                const char *authorname = champs[3];
+                const char *subjecttitle = champs[4];
+                int pageCount = atoi(champs[5]);
+                int publishYear = atoi(champs[6]);
+
+                string prix = champs[7];
+                std::replace(prix.begin(), prix.end(), ',', '.');
+                float price = (float) atof(prix.c_str());
+
+                int stockQuantity = atoi(champs[8]);
+
+                printf("pageCount = %d\npublishYear = %d\nprice = %.2f\nstockQuantity = %d\n",
+                       pageCount, publishYear, price, stockQuantity);
+
+                pthread_mutex_lock(&mutexDB);
+                int res = AddBook(authorname, subjecttitle, title, isbn, pageCount, stockQuantity, price, publishYear);
+                pthread_mutex_unlock(&mutexDB);
+
+                if (res == 0)
+                    envoi = Repondre(client, ADD_BOOK, false, "Erreur lors de l'ajout d'un livre.");
+                else
+                    envoi = Repondre(client, ADD_BOOK, true, "Livre ajouté avec succès.");
+            }
+        }
+        else
+        {
+            envoi = Repondre(client, requete, false, "Requête inconnue");
+        }
+
+        if (envoi == -1)
+        {
+            printf("(SERVEUR %d) Erreur d'envoi (REQUETE %s)\n", getpid(), requete);
+            break;
         }
     }
 
+    // Fin de la connexion : on libère le compte s'il était connecté
+    if (logged == 1)
+    {
+        pthread_mutex_lock(&mutexDB);
+        LoggedOut(loginConnecte.c_str());
+        pthread_mutex_unlock(&mutexDB);
+    }
 
     Close(client);
     return NULL;
@@ -567,7 +411,7 @@ void HandlerSIGINT(int sig)
 }
 void Liberer(void* arg)
 {
-	free(arg);
+    free(arg);
 }
 
 void *Worker(void *arg)
