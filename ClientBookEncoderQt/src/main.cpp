@@ -1,4 +1,5 @@
 #include "mainwindowclientbookencoder.h"
+#include "config.h"
 #include "socket.h"
 
 #include <QApplication>

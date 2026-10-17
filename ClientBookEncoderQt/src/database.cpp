@@ -233,101 +233,66 @@ int AddBook(const char* authorname, const char* subjecttitle, const char *title,
     return 1;
 }
 
-MESSAGE GetAuthors(int client)
+int GetAuthors(std::string &ids, std::string &lastnames, std::string &firstnames)
 {
-    char requete[256];
-    MESSAGE msg;
+    ids = "";
+    lastnames = "";
+    firstnames = "";
 
-    sprintf(requete,"SELECT id, last_Name, first_Name FROM authors;");
-
-    if (mysql_query(connexion, requete))
+    if (mysql_query(connexion, "SELECT id, last_Name, first_Name FROM authors;"))
     {
         printf("(SERVEUR) Erreur lors de la récupération des auteurs : %s\n", mysql_error(connexion));
-        msg.type = client;
-        msg.expediteur = getpid();
-        msg.requete = GET_AUTHORS;
-        msg.data1 = NULL;
-        msg.data2 = NULL;
-        msg.texte = NULL;
-        return msg;
+        return 0;
     }
 
     MYSQL_RES *resultat = mysql_store_result(connexion);
 
-    if (mysql_num_rows(resultat) > 0)
+    if (resultat == NULL)
     {
+        return 0;
+    }
 
-        std::string data1 = ""; // id
-        std::string data2 = ""; // lastName
-        std::string texte = "";
-
-        msg.type = client;
-        msg.expediteur = getpid();
-        msg.requete = GET_AUTHORS;
-
-        MYSQL_ROW row;
-        while ((row = mysql_fetch_row(resultat)))
-        {
-            data1 += std::string(row[0] ? row[0] : "") + ";";
-            data2 += std::string(row[1] ? row[1] : "") + ";";
-            texte += std::string(row[2] ? row[2] : "") + ";";
-        }
-
-        msg.data1 = strdup(data1.c_str());
-        msg.data2 = strdup(data2.c_str());
-        msg.texte = strdup(texte.c_str());
+    MYSQL_ROW row;
+    while ((row = mysql_fetch_row(resultat)))
+    {
+        ids        += std::string(row[0] ? row[0] : "") + ";";
+        lastnames  += std::string(row[1] ? row[1] : "") + ";";
+        firstnames += std::string(row[2] ? row[2] : "") + ";";
     }
 
     mysql_free_result(resultat);
 
-    return msg;
+    return 1;
 }
 
-MESSAGE GetSubjects(int client)
+int GetSubjects(std::string &ids, std::string &names)
 {
-    char requete[256];
-    MESSAGE msg;
+    ids = "";   // exemple : 1;2;3;
+    names = ""; // exemple : Roman;Science-fiction;Thriller;
 
-    sprintf(requete,"SELECT id, name FROM subjects;");
-
-    if (mysql_query(connexion, requete))
+    if (mysql_query(connexion, "SELECT id, name FROM subjects;"))
     {
         printf("(SERVEUR) Erreur lors de la récupération des sujets : %s\n", mysql_error(connexion));
-        msg.type = client;
-        msg.expediteur = getpid();
-        msg.requete = GET_SUBJECTS;
-        msg.data1 = NULL;
-        msg.data2 = NULL;
-        msg.texte = NULL;
-        return msg;
+        return 0;
     }
 
     MYSQL_RES *resultat = mysql_store_result(connexion);
 
-    if (mysql_num_rows(resultat) > 0)
+    if (resultat == NULL)
     {
-        std::string data1 = ""; // id, exemple : 1;2;3..
-        std::string texte = ""; // name, exemple : Roman;Science-fiction;Thriller.. 
+        return 0;
+    }
 
-        msg.type = client;
-        msg.expediteur = getpid();
-        msg.requete = GET_SUBJECTS;
-
-        MYSQL_ROW row;
-        while ((row = mysql_fetch_row(resultat)))
-        {
-            data1 += std::string(row[0] ? row[0] : "") + ";";
-            texte += std::string(row[1] ? row[1] : "") + ";";
-        }
-
-        msg.data1 = strdup(data1.c_str());
-        msg.data2 = NULL;
-        msg.texte = strdup(texte.c_str());
+    MYSQL_ROW row;
+    while ((row = mysql_fetch_row(resultat)))
+    {
+        ids   += std::string(row[0] ? row[0] : "") + ";";
+        names += std::string(row[1] ? row[1] : "") + ";";
     }
 
     mysql_free_result(resultat);
 
-    return msg;
+    return 1;
 }
 
 // Not used anywhere

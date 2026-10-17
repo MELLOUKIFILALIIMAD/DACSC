@@ -26,11 +26,13 @@ add_executable(Client
     src/mainwindowclientbookencoder.cpp
     src/Client.cpp
     src/socket.cpp
+    src/config.cpp
 
     include/mainwindowclientbookencoder.h
     include/ui_mainwindowclientbookencoder.h
     include/Client.h
     include/socket.h
+    include/config.h
 )
 
 target_include_directories(Client PRIVATE
@@ -62,9 +64,11 @@ add_executable(Serveur
     src/Serveur.cpp
     src/Client.cpp
     src/socket.cpp
+    src/config.cpp
     src/database.cpp
 
     include/socket.h
+    include/config.h
     include/database.h
 )
 
