@@ -28,7 +28,6 @@ public class Style {
             if (component instanceof JButton button) {
 
                 button.setFont(new Font("Arial", Font.BOLD, 14));
-                button.setFocusPainted(false);
 
                 if ("AuteurSection".equals(section) ||
                         "SubjectSection".equals(section)) {
