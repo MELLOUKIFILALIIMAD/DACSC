@@ -5,14 +5,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17455087-04d2-4dc0-a5ff-bddc0bc7873c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.ai/mcp/mcp.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/BaseDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/ServeurException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/UserDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/DACSC.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DACSC.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/controller/ControllerAuteur.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/controller/ControllerAuteur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/controller/ControllerBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/controller/ControllerBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/controller/ControllerSujet.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/controller/ControllerSujet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/AuthorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/AuthorDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/BookDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/ConnectDB.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/ServeurTCP.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/ServeurTCP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/SubjectDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/SubjectDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/entity/Author.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/entity/Author.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/entity/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/entity/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/entity/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/entity/Subject.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/entity/Subject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/AuthorSection.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/AuthorSection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/JDialogAdd.form" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/JDialogAdd.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/JDialogAdd.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/JDialogAdd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/JDialogLogin.form" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/JDialogLogin.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/JDialogLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/JDialogLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/SubjectSection.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/SubjectSection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderQt/version.h" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderQt/version.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -21,10 +52,10 @@
     <commands />
     <urls />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6,
-  "fromUser": false
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6,
+  &quot;fromUser&quot;: false
+}</component>
   <component name="ProjectId" id="3L3Mi2szSmzJCdFNxfY83SecZOr" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -32,13 +63,15 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Unnamed.executor": "Run",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Issam",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
@@ -48,6 +81,9 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "show.migrate.to.gradle.popup": "false",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
@@ -78,6 +114,7 @@
       <option name="presentableId" value="Default" />
       <updated>1792678421447</updated>
       <workItem from="1792678422764" duration="1107000" />
+      <workItem from="1792846122782" duration="3947000" />
     </task>
     <servers />
   </component>

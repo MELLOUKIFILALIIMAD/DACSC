@@ -7,7 +7,8 @@ import model.viewmodel.AuthorSearchVM;
 
 import javax.swing.*;
 import java.awt.*;
-
+import model.entity.Author;
+import java.util.List;
 public class AuthorSection implements AuthorSearchVM {
     private JPanel Auteur;
     private JComboBox auteurCmb;
@@ -42,6 +43,17 @@ public class AuthorSection implements AuthorSearchVM {
     public void setControllerBase(ControllerBase c) {
         AjouterBouton.addActionListener(c);
     }
+    // Remplit la combobox avec les auteurs reçus du serveur
+    public void setAuthors(List<Author> authors) {
+        auteurCmb.removeAllItems();
+        for (Author a : authors) {
+            auteurCmb.addItem(a);
+        }
+    }
+
+    public Author getSelectedAuthor() {
+        return (Author) auteurCmb.getSelectedItem();
+    }
 
     @Override
     public String[] promptForAddAuthor() {
@@ -49,10 +61,11 @@ public class AuthorSection implements AuthorSearchVM {
 
         JDialogAdd dialog = new JDialogAdd(parent, true);
         dialog.setVisible(true);
+
         String Nom = dialog.getNom();
-        String Prenom =  dialog.getPrenom();
+        String Prenom = dialog.getPrenom();
+        String DateNaissance = dialog.getDateNaissance();
 
-        return new String[]{Nom,Prenom};
+        return new String[]{Nom, Prenom, DateNaissance};
     }
-
 }
