@@ -1,5 +1,8 @@
 package model.viewmodel.GUI;
 
+import model.controller.ControllerActions;
+import model.controller.ControllerBase;
+import model.controller.ControllerLivre;
 import model.viewmodel.GUI.common.Style;
 import model.viewmodel.MainApp;
 
@@ -16,18 +19,21 @@ public class MainView extends JFrame implements MainApp {
     private JPanel panel3;
     private JButton buttonEncodage;
     private JPanel Encodage;
+    private JMenuItem menuItemLogin;
+    private JMenuItem menuItemLogout;
 
     public MainView(BaseSection baseSection,
                     AuthorSection authorSection,
                     BookSection bookSection,
                     SubjectSection subjectSection) {
 
+
         Encodage.setName("Encodage");
 
         setContentPane(panel1);
         setTitle("Client Encodage");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(800, 400);
+        setSize(1200, 400);
         setLocationRelativeTo(null);
 
         // Section d'encodage
@@ -46,7 +52,49 @@ public class MainView extends JFrame implements MainApp {
         panel4.setLayout(new BorderLayout());
         panel4.add(bookSection.getMainPanel(), BorderLayout.CENTER);
 
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu menu = new JMenu("Session");
+        menuItemLogin = new JMenuItem(ControllerActions.Login);
+        menu.add(menuItemLogin);
+        menu.addSeparator();
+        menuItemLogout = new JMenuItem(ControllerActions.Logout);
+        menu.add(menuItemLogout);
+        menuBar.add(menu);
+        setJMenuBar(menuBar);
+
+        buttonEncodage.setText(ControllerActions.AjouterLivre);
+
         Style.applyStyle(panel1);
+    }
+
+    public JButton getButtonEncodage() {
+        return buttonEncodage;
+    }
+
+    public JMenuItem getMenuItemLogin() {
+        return menuItemLogin;
+    }
+
+    public JMenuItem getMenuItemLogout() {
+        return menuItemLogout;
+    }
+
+    public void setEnabled(boolean b) {
+        buttonEncodage.setEnabled(b);
+        menuItemLogin.setEnabled(!b);
+        menuItemLogout.setEnabled(b);
+    }
+
+    @Override
+    public void setControllerLivre(ControllerLivre c) {
+        menuItemLogin.addActionListener(c);
+        menuItemLogout.addActionListener(c);
+    }
+
+    public void setControllerBase(ControllerBase c) {
+        menuItemLogin.addActionListener(c);
+        menuItemLogout.addActionListener(c);
     }
 
     @Override
@@ -62,6 +110,18 @@ public class MainView extends JFrame implements MainApp {
                 "Erreur",
                 JOptionPane.ERROR_MESSAGE
         );
+    }
+
+    @Override
+    public String[] promptForLogin() {
+        JDialogLogin dialog = new JDialogLogin(this);
+        dialog.pack();
+        dialog.setVisible(true);
+
+        String Login = dialog.getLogin();
+        String Password = dialog.getPassword();
+
+        return new String[]{Login, Password};
     }
 
     @Override

@@ -1,5 +1,7 @@
 package model.viewmodel.GUI;
 
+import model.viewmodel.BookSearchVM;
+
 import javax.swing.*;
 
 public class BookSection {

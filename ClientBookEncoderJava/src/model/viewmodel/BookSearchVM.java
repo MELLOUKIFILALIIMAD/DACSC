@@ -1,4 +1,8 @@
 package model.viewmodel;
 
-public class BookSearchVM {
+import model.controller.ControllerAuteur;
+import model.controller.ControllerLivre;
+
+public interface BookSearchVM {
+    void setControllerLivre(ControllerLivre controllerLivre);
 }

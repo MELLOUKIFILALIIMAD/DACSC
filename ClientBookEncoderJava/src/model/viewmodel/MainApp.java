@@ -1,16 +1,19 @@
 package model.viewmodel;
 
 
+import model.controller.ControllerBase;
+import model.controller.ControllerLivre;
+
 public interface MainApp {
 
     // void setCardLayout(String layout);
 
-    // void setControllerUser(ControllerUser c);
+    void setControllerLivre(ControllerLivre controllerLivre);
 
     void showMessage(String message);
     void showErrorMessage(String message);
 
-    // String[] promptForLogin() throws UserException, ClientException;
+    String[] promptForLogin();
     // String[] promptForRegister();
 
     // User getCurrentUser();

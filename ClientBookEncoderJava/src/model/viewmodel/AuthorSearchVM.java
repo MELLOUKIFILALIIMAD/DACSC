@@ -1,4 +1,9 @@
 package model.viewmodel;
 
-public class AuthorSearchVM {
+import model.controller.ControllerAuteur;
+
+public interface AuthorSearchVM {
+    void setControllerAuteur(ControllerAuteur controllerAuteur);
+
+    String[] promptForAddAuthor();
 }
