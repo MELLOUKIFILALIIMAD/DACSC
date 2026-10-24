@@ -24,8 +24,6 @@ public class JDialogLogin extends JDialog {
 
         loginLabel.setText("Login");
         passwordLabel.setText("Password");
-
-
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();

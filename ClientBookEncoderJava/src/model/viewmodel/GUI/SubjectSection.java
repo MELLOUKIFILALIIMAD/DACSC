@@ -7,7 +7,8 @@ import model.viewmodel.SubjectSearchVM;
 
 import javax.swing.*;
 import java.awt.*;
-
+import model.entity.Subject;
+import java.util.List;
 public class SubjectSection implements SubjectSearchVM {
     private JPanel Sujet;
     private JComboBox sujetCmb;
@@ -42,7 +43,17 @@ public class SubjectSection implements SubjectSearchVM {
     public void setControllerBase(ControllerBase c) {
         AjouterBouton.addActionListener(c);
     }
+    // Remplit la combobox avec les sujets reçus du serveur
+    public void setSubjects(List<Subject> subjects) {
+        sujetCmb.removeAllItems();
+        for (Subject s : subjects) {
+            sujetCmb.addItem(s);
+        }
+    }
 
+    public Subject getSelectedSubject() {
+        return (Subject) sujetCmb.getSelectedItem();
+    }
     @Override
     public String promptForAddSubject() {
         Window parent = SwingUtilities.getWindowAncestor(Sujet);

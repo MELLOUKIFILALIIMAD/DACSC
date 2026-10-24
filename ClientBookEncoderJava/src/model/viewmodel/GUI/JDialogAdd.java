@@ -15,13 +15,17 @@ public class JDialogAdd extends JDialog {
 
     private String Nom;
     private String Prenom;
+    private JTextField dateNaissanceText;
+    private JLabel dateNaissanceLabel;
+    private JLabel datFormat;
+    private String DateNaissance;
 
     private boolean isAut = false;
 
 
     public JDialogAdd(Window parent, boolean isAuteur) {
         super(parent, isAuteur ? "Ajouter Auteur" : "Ajouter Sujet", ModalityType.APPLICATION_MODAL);
-        setSize(300, 150);
+
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setContentPane(contentPane);
@@ -31,14 +35,21 @@ public class JDialogAdd extends JDialog {
         isAut = isAuteur;
 
         if (!isAuteur) {
+            setSize(300, 150);
             firstLabel.setText("Nom du sujet :");
             secondLabel.setVisible(false);
             secondText.setVisible(false);
+            dateNaissanceLabel.setVisible(false);
+            dateNaissanceText.setVisible(false);
+            datFormat.setVisible(false);
         }
         else
         {
+            setSize(400, 200);
             firstLabel.setText("Nom de l'auteur :");
             secondLabel.setText("Prénom de l'auteur :");
+            datFormat.setText("Exemple de date de naissance: 2026-10-24");
+            dateNaissanceLabel.setText("Date de naissance :");
         }
 
         buttonOK.addActionListener(new ActionListener() {
@@ -71,10 +82,12 @@ public class JDialogAdd extends JDialog {
 
     private void onOK(boolean isAuteur) {
         Nom = firstText.getText();
-        if (isAuteur)
-        {
+
+        if (isAuteur) {
             Prenom = secondText.getText();
+            DateNaissance = dateNaissanceText.getText().trim();
         }
+
         dispose();
     }
 
@@ -101,8 +114,11 @@ public class JDialogAdd extends JDialog {
         else
             return null;
     }
-
+    public String getDateNaissance() {
+        return DateNaissance;
+    }
     public boolean isAuteur() {
         return isAut;
     }
+
 }
