@@ -2,11 +2,9 @@ package model;
 
 import model.controller.ControllerAuteur;
 import model.controller.ControllerBase;
+import model.controller.ControllerLivre;
 import model.controller.ControllerSujet;
-import model.dao.AuthorDAO;
-import model.dao.ServeurTCP;
-import model.dao.SubjectDAO;
-import model.dao.UserDAO;
+import model.dao.*;
 import model.viewmodel.GUI.*;
 import javax.swing.*;
 import com.formdev.flatlaf.FlatIntelliJLaf;
@@ -39,6 +37,7 @@ public class Main {
         final UserDAO userDAO = new UserDAO(serveur);
         final AuthorDAO authorDAO = new AuthorDAO(serveur);
         final SubjectDAO subjectDAO = new SubjectDAO(serveur);
+        final BookDAO bookDAO = new BookDAO(serveur);
 
         // ***** Interface Swing (lancée dans le thread graphique) *****
         SwingUtilities.invokeLater(new Runnable() {
@@ -61,6 +60,7 @@ public class Main {
                 new ControllerSujet(subjectSection, subjectDAO, mainView);
 
                 new ControllerAuteur(authorSection, authorDAO, mainView);
+                new ControllerLivre( mainView,  bookDAO,  bookSection, authorSection, subjectSection, baseSection);
 
                 controllerBase.run();
             }

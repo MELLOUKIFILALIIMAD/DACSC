@@ -1,8 +1,11 @@
 package model.dao;
 
+import model.entity.Author;
 import model.entity.Book;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class BookDAO extends BaseDAO {
@@ -10,7 +13,6 @@ public class BookDAO extends BaseDAO {
     public BookDAO(ServeurTCP serveur) {
         super(serveur);
     }
-
     // ADD_BOOK#titre#isbn#auteur#sujet#pages#annee#prix#stock
     //   ->  ADD_BOOK#ok#message  ou  ADD_BOOK#ko#raison
     // auteur = "Nom Prénom", prix avec '.' comme séparateur décimal
@@ -32,6 +34,10 @@ public class BookDAO extends BaseDAO {
 
         String[] champs = appeler("ADD_BOOK", requete);
 
-        return champs.length > 2 ? champs[2] : "";
+        if (champs.length > 2) {
+            return champs[2];
+        } else {
+            return "";
+        }
     }
 }
