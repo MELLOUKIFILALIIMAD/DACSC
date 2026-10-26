@@ -9,28 +9,6 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-int nbThreads = 0;
-int port = 0;
-
-void LireConfiguration()
-{
-    FILE *fichier = fopen("../configuration.txt", "r");
-    if (fichier == NULL)
-    {
-        perror("Erreur ouverture configuration.txt");
-        exit(1);
-    }
-
-    if (fscanf(fichier, " NB_THREADS = %d", &nbThreads) != 1 ||
-        fscanf(fichier, " PORT_ENCODING = %d", &port) != 1)
-    {
-        fprintf(stderr, "Format de configuration.txt invalide\n");
-        fclose(fichier);
-        exit(1);
-    }
-
-    fclose(fichier);
-}
 int Socket()
 {
     int idSocket = socket(AF_INET, SOCK_STREAM, 0);
@@ -119,7 +97,7 @@ int SendAll(int socket, const char *buffer, int taille)
 
     while (total < taille)
     {
-        int resultat = send(socket,buffer + total,taille - total,0);
+        int resultat = send(socket,buffer + total,taille - total,MSG_NOSIGNAL);
 
         if (resultat <= 0)
         {
@@ -152,93 +130,35 @@ int ReceiveAll(int socket, char *buffer, int taille)
     return total;
 }
 
-int Send(int socket, MESSAGE *message)
+int SendTrame(int socket, const char *contenu)
 {
-    if (SendAll(socket, (char *)&message->type, sizeof(long)) <= 0)
+    int taille = (int) strlen(contenu);
+
+    if (taille <= 0 || taille > TAILLE_MAX_TRAME)
     {
+        fprintf(stderr, "(SOCKET) Trame invalide (taille %d, max %d)\n", taille, TAILLE_MAX_TRAME);
         return -1;
     }
 
-    if (SendAll(socket, (char *)&message->expediteur, sizeof(int)) <= 0)
+    // Entête + contenu dans un seul buffer => un seul send()
+    char buffer[TAILLE_ENTETE + TAILLE_MAX_TRAME + 1];
+
+    snprintf(buffer, sizeof(buffer), "%0*d%s", TAILLE_ENTETE, taille, contenu);
+
+    if (SendAll(socket, buffer, TAILLE_ENTETE + taille) <= 0)
     {
         return -1;
-    }
-
-    if (SendAll(socket, (char *)&message->requete, sizeof(int)) <= 0)
-    {
-        return -1;
-    }
-
-    char taille[5];
-
-    int tailleData1 = 0;
-    int tailleData2 = 0;
-    int tailleTexte = 0;
-
-    if (message->data1 != NULL)
-    {
-        tailleData1 = strlen(message->data1);
-    }
-
-    if (message->data2 != NULL)
-    {
-        tailleData2 = strlen(message->data2);
-    }
-
-    if (message->texte != NULL)
-    {
-        tailleTexte = strlen(message->texte);
-    }
-
-    sprintf(taille, "%04d", tailleData1);
-    if (SendAll(socket, taille, 4) <= 0)
-    {
-        return -1;
-    }
-
-    if (tailleData1 > 0)
-    {
-        if (SendAll(socket, message->data1, tailleData1) <= 0)
-        {
-            return -1;
-        }
-    }
-
-    sprintf(taille, "%04d", tailleData2);
-    if (SendAll(socket, taille, 4) <= 0)
-    {
-        return -1;
-    }
-
-    if (tailleData2 > 0)
-    {
-        if (SendAll(socket, message->data2, tailleData2) <= 0)
-        {
-            return -1;
-        }
-    }
-
-    sprintf(taille, "%04d", tailleTexte);
-    if (SendAll(socket, taille, 4) <= 0)
-    {
-        return -1;
-    }
-
-    if (tailleTexte > 0)
-    {
-        if (SendAll(socket, message->texte, tailleTexte) <= 0)
-        {
-            return -1;
-        }
     }
 
     return 0;
 }
 
-int Receive(int socket, MESSAGE *message)
+int ReceiveTrame(int socket, char *contenu, int tailleMax)
 {
-    int result = ReceiveAll(socket, (char *)&message->type, sizeof(long));
-    
+    char entete[TAILLE_ENTETE + 1];
+
+    int result = ReceiveAll(socket, entete, TAILLE_ENTETE);
+
     if (result == 0)
     {
         return 0; // Deconnexion
@@ -248,125 +168,67 @@ int Receive(int socket, MESSAGE *message)
     {
         return -1; // Erreur
     }
-    if (ReceiveAll(socket, (char *)&message->expediteur, sizeof(int)) <= 0)
+
+    for (int i = 0; i < TAILLE_ENTETE; i++)
     {
-        return -1;
-    }
-
-    if (ReceiveAll(socket, (char *)&message->requete, sizeof(int)) <= 0)
-    {
-        return -1;
-    }
-    char taille[5];
-
-    int tailleData1;
-    int tailleData2;
-    int tailleTexte;
-
-
-    // Réception de data1
-
-    if (ReceiveAll(socket, taille, 4) <= 0)
-    {
-        return -1;
-    }
-
-    taille[4] = '\0';
-
-    tailleData1 = atoi(taille);
-
-    message->data1 = (char *) malloc(tailleData1 + 1);
-
-    if (message->data1 == NULL)
-    {
-        perror("(SOCKET) Erreur malloc data1");
-        return -1;
-    }
-
-    if (tailleData1 > 0)
-    {
-        if (ReceiveAll(socket,message->data1,tailleData1) <= 0)
+        if (entete[i] < '0' || entete[i] > '9')
         {
-            free(message->data1);
+            fprintf(stderr, "(SOCKET) Entete de trame invalide\n");
             return -1;
         }
     }
 
-    message->data1[tailleData1] = '\0';
+    entete[TAILLE_ENTETE] = '\0';
 
+    int taille = atoi(entete);
 
-    // Réception de data2
-
-    if (ReceiveAll(socket, taille, 4) <= 0)
+    if (taille <= 0 || taille >= tailleMax)
     {
-        free(message->data1);
+        fprintf(stderr, "(SOCKET) Taille de trame invalide : %d\n", taille);
         return -1;
     }
 
-    taille[4] = '\0';
-
-    tailleData2 = atoi(taille);
-
-    message->data2 = (char *) malloc(tailleData2 + 1);
-
-    if (message->data2 == NULL)
+    if (ReceiveAll(socket, contenu, taille) <= 0)
     {
-        free(message->data1);
-        perror("(SOCKET) Erreur malloc data2");
         return -1;
     }
 
-    if (tailleData2 > 0)
-    {
-        if (ReceiveAll(socket,message->data2,tailleData2) <= 0)
-        {
-            free(message->data1);
-            free(message->data2);
-            return -1;
-        }
-    }
-
-    message->data2[tailleData2] = '\0';
-
-
-    // Réception de texte
-
-    if (ReceiveAll(socket, taille, 4) <= 0)
-    {
-        free(message->data1);
-        free(message->data2);
-        return -1;
-    }
-
-    taille[4] = '\0';
-
-    tailleTexte = atoi(taille);
-
-    message->texte = (char *) malloc(tailleTexte + 1);
-
-    if (message->texte == NULL)
-    {
-        free(message->data1);
-        free(message->data2);
-        perror("(SOCKET) Erreur malloc texte");
-        return -1;
-    }
-
-    if (tailleTexte > 0)
-    {
-        if (ReceiveAll(socket,message->texte,tailleTexte) <= 0)
-        {
-            free(message->data1);
-            free(message->data2);
-            free(message->texte);
-            return -1;
-        }
-    }
-
-    message->texte[tailleTexte] = '\0';
-
+    contenu[taille] = '\0';
 
     return 1;
+}
+
+int Echange(int socket, const char *requete, char *reponse, int tailleReponse)
+{
+    if (SendTrame(socket, requete) == -1)
+    {
+        return -1;
+    }
+
+    return ReceiveTrame(socket, reponse, tailleReponse);
+}
+
+int Decouper(char *contenu, char *champs[], int max)
+{
+    int nb = 0;
+    char *debut = contenu;
+
+    while (nb < max)
+    {
+        champs[nb++] = debut;
+
+        char *separateur = strchr(debut, SEPARATEUR_CHAMP);
+
+        if (separateur == NULL)
+        {
+            break;
+        }
+
+        *separateur = '\0';
+        debut = separateur + 1;
+    }
+
+    return nb;
 }
 
 

@@ -73,27 +73,3 @@ string Client::PrepareMessageQuery(const string &query) {
 
     return tailleMessage + query;
 }
-
-MESSAGE Client::DecryptMessageQuery(const string &encryptedQuery) {
-    MESSAGE msg;
-
-    if (encryptedQuery.length() < 4) {
-        return msg;
-    }
-
-    string tailleMessageStr = encryptedQuery.substr(0, 4);
-    int tailleMessage = std::stoi(tailleMessageStr);
-
-    if (tailleMessage <= 0 || tailleMessage > static_cast<int>(encryptedQuery.length() - 4)) {
-        return msg;
-    }
-
-    msg.type = socketServeur;
-    msg.expediteur = -1;
-    msg.requete = -1;
-    msg.data1 = (char*)tailleMessageStr.c_str();
-    msg.data2 = NULL;
-    msg.texte = (char*)encryptedQuery.substr(4, tailleMessage).c_str();
-
-    return msg;
-}

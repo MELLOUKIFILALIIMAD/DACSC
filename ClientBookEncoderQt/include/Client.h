@@ -25,7 +25,6 @@ public:
     bool isConnected() const;
 
     std::string PrepareMessageQuery(const std::string &query);
-    MESSAGE DecryptMessageQuery(const std::string &encryptedQuery);
     
     void setSocketServeur(int socket);
     int getSocketServeur();
