@@ -14,11 +14,22 @@ import java.io.IOException;
 public class Main {
 
     // IP de la machine du serveur Encodage et PORT_ENCODING (voir configuration.txt côté serveur)
-    private static final String IP_SERVEUR = "192.168.239.131";
+
     private static final int PORT_ENCODING = 5000;
 
     public static void main(String[] args) {
         FlatIntelliJLaf.setup();
+
+        JDialogServeur serveurDialog = new JDialogServeur(null);
+        serveurDialog.setVisible(true);
+
+
+        final String IP_SERVEUR = serveurDialog.getIp();
+        if (IP_SERVEUR == null) {
+            JOptionPane.showMessageDialog(null, "Erreur serveur !", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
 
         // ***** Connexion unique au serveur (créée UNE seule fois pour toute l'application) *****
         ServeurTCP serveur = new ServeurTCP();
