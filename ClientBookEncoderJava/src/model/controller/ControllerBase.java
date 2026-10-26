@@ -118,6 +118,7 @@ public class ControllerBase implements ActionListener {
             baseSection.setEnabled(false);
             authorSection.setEnabled(false);
             subjectSection.setEnabled(false);
+            bookSection.clearTable();
         }
     }
 }

@@ -88,8 +88,7 @@ public class MainView extends JFrame implements MainApp {
 
     @Override
     public void setControllerLivre(ControllerLivre c) {
-        menuItemLogin.addActionListener(c);
-        menuItemLogout.addActionListener(c);
+        buttonEncodage.addActionListener(c);
     }
 
     public void setControllerBase(ControllerBase c) {
