@@ -1,7 +1,7 @@
 package model.controller;
 
 import model.dao.SubjectDAO;
-import model.entity.Client;
+import model.entity.Subject;
 import model.viewmodel.GUI.MainView;
 import model.viewmodel.GUI.SubjectSection;
 
@@ -34,7 +34,7 @@ public class ControllerSujet implements ActionListener {
 
             // ***** ADD_SUBJECT#nom puis GET_SUBJECTS (mise à jour de la combobox) *****
             try {
-                String message = subjectDAO.insert(new Client(nom.trim()));
+                String message = subjectDAO.insert(new Subject(nom.trim()));
                 mainView.showMessage(message);
             } catch (IOException ex) {
                 mainView.showErrorMessage(ex.getMessage());

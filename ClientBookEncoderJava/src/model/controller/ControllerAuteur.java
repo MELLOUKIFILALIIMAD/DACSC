@@ -1,7 +1,7 @@
 package model.controller;
 
 import model.dao.AuthorDAO;
-import model.entity.CaddyItem;
+import model.entity.Author;
 import model.viewmodel.GUI.AuthorSection;
 import model.viewmodel.GUI.MainView;
 
@@ -50,7 +50,7 @@ public class ControllerAuteur implements ActionListener {
             LocalDate dateNaissance = LocalDate.parse(date);
             // ***** ADD_AUTHOR#nom#prenom puis GET_AUTHORS (mise à jour de la combobox) *****
             try {
-                String message = authorDAO.insert(new CaddyItem(nom.trim(), prenom.trim(), dateNaissance));
+                String message = authorDAO.insert(new Author(nom.trim(), prenom.trim(), dateNaissance));
                 mainView.showMessage(message);
             } catch (IOException ex) {
                 mainView.showErrorMessage(ex.getMessage());

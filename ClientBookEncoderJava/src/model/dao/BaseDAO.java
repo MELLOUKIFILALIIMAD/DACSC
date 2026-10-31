@@ -6,14 +6,14 @@ import java.io.IOException;
 
 public abstract class BaseDAO {
 
-    protected final ClientTCP serveur;
+    protected final ClientTCP client;
 
-    protected BaseDAO(ClientTCP serveur) {
-        this.serveur = serveur;
+    protected BaseDAO(ClientTCP client) {
+        this.client = client;
     }
 
     protected String[] appeler(String nom, String requete) throws IOException {
-        String reponse = serveur.echanger(requete);
+        String reponse = client.echanger(requete);
 
         String[] champs = reponse.split("#", -1);
 
