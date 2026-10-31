@@ -1,7 +1,5 @@
 package model.viewmodel.GUI;
 
-import model.dao.ServeurTCP;
-
 import javax.swing.*;
 import java.awt.event.*;
 

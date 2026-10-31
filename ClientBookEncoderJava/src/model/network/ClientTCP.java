@@ -1,4 +1,4 @@
-package model.dao;
+package model.network;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-public class ServeurTCP {
+public class ClientTCP {
 
     private Socket socket;
     private InputStream entree;
@@ -25,19 +25,19 @@ public class ServeurTCP {
     }
 
     // Envoie "NOM#p1#p2..." et retourne les champs de données de la réponse
-    // (ce qui suit "NOM#ok#"). Lève ServeurException si le serveur répond "ko".
+    // (ce qui suit "NOM#ok#"). Lève ClientException si le serveur répond "ko".
     public synchronized String[] requete(String nom, String... params) throws IOException {
         String reponse = echanger(construire(nom, params));
         String[] champs = reponse.split("#", -1);
 
         if (champs.length < 2 || !champs[0].equals(nom)) {
-            throw new ServeurException("Réponse inattendue du serveur pour " + nom);
+            throw new ClientException("Réponse inattendue du serveur pour " + nom);
         }
         if (champs[1].equals("ko")) {
-            throw new ServeurException(champs.length > 2 ? champs[2] : "Erreur inconnue");
+            throw new ClientException(champs.length > 2 ? champs[2] : "Erreur inconnue");
         }
         if (!champs[1].equals("ok")) {
-            throw new ServeurException("Statut inconnu dans la réponse à " + nom);
+            throw new ClientException("Statut inconnu dans la réponse à " + nom);
         }
 
         return Arrays.copyOfRange(champs, 2, champs.length);
@@ -95,10 +95,10 @@ public class ServeurTCP {
 
         for (String param : params) {
             if (param == null) {
-                throw new ServeurException("Champ manquant dans la requête " + nom);
+                throw new ClientException("Champ manquant dans la requête " + nom);
             }
             if (param.contains("#")) {
-                throw new ServeurException("Le caractère '#' est interdit !");
+                throw new ClientException("Le caractère '#' est interdit !");
             }
             contenu.append('#').append(param);
         }

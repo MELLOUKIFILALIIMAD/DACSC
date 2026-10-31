@@ -1,4 +1,4 @@
-# Created by https://www.toptal.com/developers/gitignore/api/c++,c,java,sublimetext
+    # Created by https://www.toptal.com/developers/gitignore/api/c++,c,java,sublimetext
 # Edit at https://www.toptal.com/developers/gitignore?templates=c++,c,java,sublimetext
 
 ### C ###
@@ -126,3 +126,4 @@ GitHub.sublime-settings
 
 # End of https://www.toptal.com/developers/gitignore/api/c++,c,java,sublimetext
 ClientBookEncoderQt/build/
+out/
