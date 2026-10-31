@@ -1,5 +1,6 @@
 package model.viewmodel.GUI;
 
+import model.controller.ControllerActions;
 import model.controller.ControllerBase;
 import model.viewmodel.BaseApp;
 
@@ -18,12 +19,21 @@ public class BaseSection implements BaseApp {
     private JSpinner minPrixSpinner;
     private JSpinner maxPrixSpinner;
     private JLabel rechercheLabel;
+    private JLabel maxLabel;
+    private JLabel minLabel;
 
     public BaseSection()
     {
         titreLabel.setText("Titre :");
         prixLabel.setText("Prix :");
-        Base.setName("BaseSection");
+        sujetLabel.setText("Sujet :");
+        auteurLabel.setText("Auteur :");
+        buttonRecherche.setText(ControllerActions.Rechercher);
+        minLabel.setText("Min :");
+        maxLabel.setText("Max :");
+        rechercheLabel.setText("Recherche");
+        minPrixSpinner.setModel(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1));
+        maxPrixSpinner.setModel(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1));
     }
     public JPanel getMainPanel() {
         return Base;
@@ -36,6 +46,11 @@ public class BaseSection implements BaseApp {
     public void setEnabled(boolean b)
     {
         auteurText.setEnabled(b);
+        minPrixSpinner.setEnabled(b);
+        maxPrixSpinner.setEnabled(b);
+        titreText.setEnabled(b);
+        sujetText.setEnabled(b);
+        buttonRecherche.setEnabled(b);
     }
 
     @Override
