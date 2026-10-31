@@ -1,15 +1,12 @@
 package model.viewmodel.GUI;
 
-import model.controller.ControllerActions;
 import model.controller.ControllerAuteur;
 import model.controller.ControllerBase;
 import model.viewmodel.AuthorSearchVM;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import model.entity.Author;
-import java.util.List;
+
 public class PanierSection implements AuthorSearchVM {
     private JPanel Auteur;
     private JLabel totalLabel;

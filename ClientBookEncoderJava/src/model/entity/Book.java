@@ -2,8 +2,8 @@ package model.entity;
 
 public class Book implements Entity {
     private int id;
-    private Author author;
-    private Subject subject;
+    private CaddyItem author;
+    private Client subject;
     private String title;
     private String isbn;
     private int pageCount;
@@ -11,7 +11,7 @@ public class Book implements Entity {
     private double price;
     private int publishYear;
 
-    public Book(Author author, Subject subject, String title, String isbn,
+    public Book(CaddyItem author, Client subject, String title, String isbn,
                 int pageCount, int stockQuantity, double price, int publishYear) {
         this.author = author;
         this.subject = subject;
@@ -28,8 +28,8 @@ public class Book implements Entity {
     @Override
     public void setId(int id) { this.id = id; }
 
-    public Author getAuthor() { return author; }
-    public Subject getSubject() { return subject; }
+    public CaddyItem getAuthor() { return author; }
+    public Client getSubject() { return subject; }
     public String getTitle() { return title; }
     public String getIsbn() { return isbn; }
     public int getPageCount() { return pageCount; }

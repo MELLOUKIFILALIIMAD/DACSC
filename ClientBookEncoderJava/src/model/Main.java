@@ -5,6 +5,7 @@ import model.controller.ControllerBase;
 import model.controller.ControllerLivre;
 import model.controller.ControllerSujet;
 import model.dao.*;
+import model.network.ClientTCP;
 import model.viewmodel.GUI.*;
 import javax.swing.*;
 import com.formdev.flatlaf.FlatIntelliJLaf;
@@ -32,7 +33,7 @@ public class Main {
 
 
         // ***** Connexion unique au serveur (créée UNE seule fois pour toute l'application) *****
-        ServeurTCP serveur = new ServeurTCP();
+        ClientTCP serveur = new ClientTCP();
 
         try {
             serveur.connecter(IP_SERVEUR, PORT_ENCODING);
