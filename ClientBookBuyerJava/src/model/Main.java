@@ -1,9 +1,13 @@
 package model;
 
 import model.controller.ControllerBase;
+import model.controller.ControllerPanier;
+import model.controller.ControllerResultat;
 import model.viewmodel.GUI.*;
 import javax.swing.*;
 import com.formdev.flatlaf.FlatIntelliJLaf;
+
+import java.security.cert.CertPath;
 
 public class Main {
 
@@ -19,15 +23,21 @@ public class Main {
             @Override
             public void run() {
                 PanierSection panierSection = new PanierSection();
-                ResultatSection bookSection = new ResultatSection();
+                ResultatSection resultatSection = new ResultatSection();
                 BaseSection baseSection = new BaseSection();
-                MainView mainView = new MainView(baseSection, panierSection, bookSection);
+                MainView mainView = new MainView(baseSection, panierSection, resultatSection);
 
                 mainView.setEnabled(false);
                 baseSection.setEnabled(false);
                 panierSection.setEnabled(false);
+                resultatSection.setEnabled(false);
 
-                mainView.run();
+                ControllerBase controllerBase = new ControllerBase(mainView, panierSection, resultatSection, baseSection);
+                new ControllerPanier(panierSection);
+                new ControllerResultat(resultatSection);
+
+
+                controllerBase.run();
             }
         });
     }

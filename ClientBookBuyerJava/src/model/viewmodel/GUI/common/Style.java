@@ -14,10 +14,9 @@ public class Style {
         // Identifier la section actuelle
         if (container.getName() != null) {
             switch (container.getName()) {
-                case "AuteurSection":
-                case "SubjectSection":
+                case "PanierSection":
+                case "ResultatSection":
                 case "BaseSection":
-                case "Encodage":
                     section = container.getName();
                     break;
             }
@@ -29,22 +28,20 @@ public class Style {
 
                 button.setFont(new Font("Arial", Font.BOLD, 14));
 
-                if ("AuteurSection".equals(section) ||
-                        "SubjectSection".equals(section)) {
-
+                if ("Rechercher".equals(button.getText()) || "Ajouter au panier".equals(button.getText())) {
                     button.setBackground(Color.CYAN);
                     button.setForeground(Color.BLACK);
                 }
-
-                else if ("BaseSection".equals(section)) {
-
-                    button.setBackground(Color.ORANGE);
+                else if ("Valider le panier".equals(button.getText())) {
+                    button.setBackground(Color.GREEN);
                     button.setForeground(Color.BLACK);
                 }
-
-                else if ("Encodage".equals(section)) {
-
-                    button.setBackground(Color.GREEN);
+                else if ("Annuler la session".equals(button.getText())) {
+                    button.setBackground(Color.RED);
+                    button.setForeground(Color.BLACK);
+                }
+                else if ("Vider le panier".equals(button.getText())) {
+                    button.setBackground(Color.GRAY);
                     button.setForeground(Color.BLACK);
                 }
             }

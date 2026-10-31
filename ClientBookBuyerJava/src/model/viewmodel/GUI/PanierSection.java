@@ -1,32 +1,44 @@
 package model.viewmodel.GUI;
 
-import model.controller.ControllerAuteur;
+import model.controller.ControllerActions;
+import model.controller.ControllerPanier;
 import model.controller.ControllerBase;
-import model.viewmodel.AuthorSearchVM;
+import model.viewmodel.PanierVM;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
-public class PanierSection implements AuthorSearchVM {
-    private JPanel Auteur;
+public class PanierSection implements PanierVM {
+    private JPanel Panier;
     private JLabel totalLabel;
     private JTextField prixTotal;
     private JButton buttonPayer;
     private JLabel panierLabel;
     private JTable tablePanier;
+    private JLabel euroLabel;
     private DefaultTableModel tableModel;
     public PanierSection()
     {
         panierLabel.setText("Panier :");
-        Auteur.setName("AuteurSection");
+        totalLabel.setText("Total :");
+        euroLabel.setText("€");
+        prixTotal.setText("0");
+        prixTotal.setEnabled(false);
+        prixTotal.setBorder(null);
+        buttonPayer.setText(ControllerActions.ValiderPanier);
+        tableModel = (DefaultTableModel) tablePanier.getModel();
+        Panier.setName("Panier");
         initTable();
     }
     public JPanel getMainPanel() {
-        return Auteur;
+        return Panier;
     }
 
     public void setEnabled(boolean b)
     {
+        buttonPayer.setEnabled(b);
+        tablePanier.setEnabled(b);
     }
 
     private void initTable() {
@@ -40,9 +52,19 @@ public class PanierSection implements AuthorSearchVM {
         tablePanier.setModel(tableModel);
     }
 
-    @Override
-    public void setControllerAuteur(ControllerAuteur c) {
+    public JTable getTable()
+    {
+        return tablePanier;
+    }
 
+    public JTextField getPrixTotal()
+    {
+        return prixTotal;
+    }
+
+    @Override
+    public void setControllerPanier(ControllerPanier c) {
+        buttonPayer.addActionListener(c);
     }
 
     public void setControllerBase(ControllerBase c) {

@@ -2,12 +2,12 @@ package model.viewmodel.GUI;
 
 import model.controller.ControllerActions;
 import model.controller.ControllerBase;
-import model.controller.ControllerLivre;
 import model.viewmodel.GUI.common.Style;
 import model.viewmodel.MainApp;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class MainView extends JFrame implements MainApp {
 
@@ -24,7 +24,7 @@ public class MainView extends JFrame implements MainApp {
                     ResultatSection bookSection) {
 
         setContentPane(panel1);
-        setTitle("Client Achat: ");
+        setTitle("Client Achat");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1200, 600);
         setLocationRelativeTo(null);
@@ -69,39 +69,21 @@ public class MainView extends JFrame implements MainApp {
     }
 
     @Override
-    public void setControllerLivre(ControllerLivre c) {
-    }
-
     public void setControllerBase(ControllerBase c) {
-        menuItemLogin.addActionListener(c);
-        menuItemLogout.addActionListener(c);
+        menuItemLogin.addActionListener((ActionListener) c);
+        menuItemLogout.addActionListener((ActionListener) c);
     }
 
     @Override
-    public void showMessage(String message) {
-        JOptionPane.showMessageDialog(this, message);
-    }
-
-    @Override
-    public void showErrorMessage(String message) {
-        JOptionPane.showMessageDialog(
-                this,
-                message,
-                "Erreur",
-                JOptionPane.ERROR_MESSAGE
-        );
-    }
-
-    @Override
-    public String[] promptForLogin() {
+    public String[] promptForConnect() {
         JDialogLogin dialog = new JDialogLogin(this);
         dialog.pack();
         dialog.setVisible(true);
 
-        String Login = dialog.getLogin();
-        String Password = dialog.getPassword();
+        String Nom = dialog.getNom();
+        String Prenom = dialog.getPrenom();
 
-        return new String[]{Login, Password};
+        return new String[]{Nom, Prenom};
     }
 
     @Override

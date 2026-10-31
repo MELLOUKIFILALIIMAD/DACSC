@@ -12,18 +12,18 @@ public class JDialogLogin extends JDialog {
     private JLabel nomLabel;
     private JLabel prenomLabel;
 
-    private String Login;
-    private String Password;
+    private String prenom;
+    private String nom;
 
     public JDialogLogin(JFrame parent) {
-        super(parent, "Login", true);
+        super(parent, "Session client", true);
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
         setLocationRelativeTo(parent);
 
-        nomLabel.setText("Login");
-        prenomLabel.setText("Password");
+        nomLabel.setText("Nom");
+        prenomLabel.setText("Prenom");
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
@@ -53,14 +53,14 @@ public class JDialogLogin extends JDialog {
     }
 
     private void onOK() {
-        Login = nomText.getText();
-        Password = prenomText.getText();
+        nom = nomText.getText();
+        prenom = prenomText.getText();
         dispose();
     }
 
     private void onCancel() {
-        Login = null;
-        Password = null;
+        prenom = null;
+        nom = null;
         dispose();
     }
 
@@ -71,11 +71,11 @@ public class JDialogLogin extends JDialog {
         System.exit(0);
     }
 
-    public String getLogin() {
-        return Login;
+    public String getNom() {
+        return nom;
     }
 
-    public String getPassword() {
-        return Password;
+    public String getPrenom() {
+        return prenom;
     }
 }
