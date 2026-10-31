@@ -3,14 +3,10 @@ package model.controller;
 import model.dao.AuthorDAO;
 import model.dao.SubjectDAO;
 import model.dao.UserDAO;
-import model.entity.Author;
-import model.entity.Subject;
 import model.viewmodel.GUI.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class ControllerBase implements ActionListener {
     private BaseSection baseSection;

@@ -17,7 +17,7 @@ public class ResultatSection {
         initTable();
     }
     private void initTable() {
-        String[] columns = {"Title", "Author", "Subject", "Year", "Price", "Stock"};
+        String[] columns = {"Title", "CaddyItem", "Client", "Year", "Price", "Stock"};
         tableModel = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {

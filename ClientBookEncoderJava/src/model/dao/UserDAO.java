@@ -1,10 +1,12 @@
 package model.dao;
 
+import model.network.ClientTCP;
+
 import java.io.IOException;
 
 public class UserDAO extends BaseDAO {
 
-    public UserDAO(ServeurTCP serveur) {
+    public UserDAO(ClientTCP serveur) {
         super(serveur);
     }
 

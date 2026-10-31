@@ -3,8 +3,8 @@ package model.controller;
 import model.dao.AuthorDAO;
 import model.dao.SubjectDAO;
 import model.dao.UserDAO;
-import model.entity.Author;
-import model.entity.Subject;
+import model.entity.CaddyItem;
+import model.entity.Client;
 import model.viewmodel.GUI.*;
 
 import java.awt.event.ActionEvent;
@@ -111,8 +111,8 @@ public class ControllerBase implements ActionListener {
                 loginCourant = null;
             }
 
-            authorSection.setAuthors(new ArrayList<Author>());
-            subjectSection.setSubjects(new ArrayList<Subject>());
+            authorSection.setAuthors(new ArrayList<CaddyItem>());
+            subjectSection.setSubjects(new ArrayList<Client>());
 
             mainView.setEnabled(false);
             baseSection.setEnabled(false);

@@ -1,12 +1,14 @@
 package model.dao;
 
+import model.network.ClientTCP;
+
 import java.io.IOException;
 
 public abstract class BaseDAO {
 
-    protected final ServeurTCP serveur;
+    protected final ClientTCP serveur;
 
-    protected BaseDAO(ServeurTCP serveur) {
+    protected BaseDAO(ClientTCP serveur) {
         this.serveur = serveur;
     }
 

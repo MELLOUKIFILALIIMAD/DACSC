@@ -1,6 +1,7 @@
 package model.dao;
 
-import model.entity.Subject;
+import model.entity.Client;
+import model.network.ClientTCP;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,15 +9,15 @@ import java.util.List;
 
 public class SubjectDAO extends BaseDAO {
 
-    public SubjectDAO(ServeurTCP serveur) {
+    public SubjectDAO(ClientTCP serveur) {
         super(serveur);
     }
 
     // GET_SUBJECTS  ->  GET_SUBJECTS#ok#ids#noms   (listes du type "1;2;3;")
-    public List<Subject> findAll() throws IOException {
+    public List<Client> findAll() throws IOException {
         String[] champs = appeler("GET_SUBJECTS", "GET_SUBJECTS");
 
-        List<Subject> subjects = new ArrayList<>();
+        List<Client> subjects = new ArrayList<>();
 
         if (champs.length != 4) {
             throw new IOException("Réponse GET_SUBJECTS invalide");
@@ -27,7 +28,7 @@ public class SubjectDAO extends BaseDAO {
             String[] noms = champs[3].split(";");
 
             for (int i = 0; i < ids.length; i++) {
-                subjects.add(new Subject(Integer.parseInt(ids[i]), noms[i]));
+                subjects.add(new Client(Integer.parseInt(ids[i]), noms[i]));
             }
         }
 
@@ -35,7 +36,7 @@ public class SubjectDAO extends BaseDAO {
     }
 
     // ADD_SUBJECT#nom  ->  ADD_SUBJECT#ok#message  ou  ADD_SUBJECT#ko#raison
-    public String insert(Subject subject) throws IOException {
+    public String insert(Client subject) throws IOException {
         verifier(subject.getName());
 
         // ***** Construction de la requete *****

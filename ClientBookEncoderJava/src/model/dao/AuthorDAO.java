@@ -1,6 +1,7 @@
 package model.dao;
 
-import model.entity.Author;
+import model.entity.CaddyItem;
+import model.network.ClientTCP;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,15 +9,15 @@ import java.util.List;
 
 public class AuthorDAO extends BaseDAO {
 
-    public AuthorDAO(ServeurTCP serveur) {
+    public AuthorDAO(ClientTCP serveur) {
         super(serveur);
     }
 
     // GET_AUTHORS  ->  GET_AUTHORS#ok#ids#noms#prenoms   (listes du type "1;2;3;")
-    public List<Author> findAll() throws IOException {
+    public List<CaddyItem> findAll() throws IOException {
         String[] champs = appeler("GET_AUTHORS", "GET_AUTHORS");
 
-        List<Author> authors = new ArrayList<>();
+        List<CaddyItem> authors = new ArrayList<>();
 
         if (champs.length != 5) {
             throw new IOException("Réponse GET_AUTHORS invalide");
@@ -28,7 +29,7 @@ public class AuthorDAO extends BaseDAO {
             String[] prenoms = champs[4].split(";");
 
             for (int i = 0; i < ids.length; i++) {
-                authors.add(new Author(Integer.parseInt(ids[i]), noms[i], prenoms[i], null));
+                authors.add(new CaddyItem(Integer.parseInt(ids[i]), noms[i], prenoms[i], null));
             }
         }
 
@@ -36,7 +37,7 @@ public class AuthorDAO extends BaseDAO {
     }
 
     // ADD_AUTHOR#nom#prenom#yyyy-mm-dd  ->  ADD_AUTHOR#ok#message  ou  ADD_AUTHOR#ko#raison
-    public String insert(Author author) throws IOException {
+    public String insert(CaddyItem author) throws IOException {
         verifier(author.getLastName(), author.getFirstName());
 
         // ***** Construction de la requete *****

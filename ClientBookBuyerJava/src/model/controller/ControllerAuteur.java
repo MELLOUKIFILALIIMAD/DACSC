@@ -1,14 +1,11 @@
 package model.controller;
 
 import model.dao.AuthorDAO;
-import model.entity.Author;
 import model.viewmodel.GUI.PanierSection;
 import model.viewmodel.GUI.MainView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.time.LocalDate;
 
 public class ControllerAuteur implements ActionListener {
     private PanierSection author;
