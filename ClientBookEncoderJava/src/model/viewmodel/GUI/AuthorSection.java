@@ -3,11 +3,11 @@ package model.viewmodel.GUI;
 import model.controller.ControllerActions;
 import model.controller.ControllerAuteur;
 import model.controller.ControllerBase;
-import model.entity.CaddyItem;
 import model.viewmodel.AuthorSearchVM;
 
 import javax.swing.*;
 import java.awt.*;
+import model.entity.Author;
 import java.util.List;
 public class AuthorSection implements AuthorSearchVM {
     private JPanel Auteur;
@@ -44,15 +44,15 @@ public class AuthorSection implements AuthorSearchVM {
         AjouterBouton.addActionListener(c);
     }
     // Remplit la combobox avec les auteurs reçus du serveur
-    public void setAuthors(List<CaddyItem> authors) {
+    public void setAuthors(List<Author> authors) {
         auteurCmb.removeAllItems();
-        for (CaddyItem a : authors) {
+        for (Author a : authors) {
             auteurCmb.addItem(a);
         }
     }
 
-    public CaddyItem getSelectedAuthor() {
-        return (CaddyItem) auteurCmb.getSelectedItem();
+    public Author getSelectedAuthor() {
+        return (Author) auteurCmb.getSelectedItem();
     }
 
     @Override

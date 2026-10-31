@@ -17,7 +17,7 @@ public class BookSection {
         initTable();
     }
     private void initTable() {
-        String[] columns = {"ID", "Title", "ISBN", "CaddyItem", "Client", "Year", "Price", "Stock"};
+        String[] columns = {"ID", "Title", "ISBN", "Author", "Subject", "Year", "Price", "Stock"};
         tableModel = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {

@@ -1,6 +1,5 @@
 package model.controller;
 
-import model.dao.SubjectDAO;
 import model.viewmodel.GUI.MainView;
 
 import java.awt.event.ActionEvent;

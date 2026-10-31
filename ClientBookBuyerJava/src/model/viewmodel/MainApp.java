@@ -2,7 +2,6 @@ package model.viewmodel;
 
 
 import model.controller.ControllerBase;
-import model.controller.ControllerLivre;
 
 public interface MainApp {
 

@@ -1,7 +1,7 @@
 package model.controller;
 
 import model.dao.BookDAO;
-import model.entity.Caddy;
+import model.entity.Book;
 import model.viewmodel.GUI.*;
 
 import javax.swing.table.DefaultTableModel;
@@ -26,7 +26,7 @@ public class ControllerLivre implements ActionListener {
 
         this.mainView.setControllerLivre(this);
     }
-    public void addBookToTable(Caddy book) {
+    public void addBookToTable(Book book) {
         DefaultTableModel model = bookSection.getTableModel();
         String authorName = book.getAuthor().getLastName() + " " + book.getAuthor().getFirstName();
 
@@ -45,7 +45,7 @@ public class ControllerLivre implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(ControllerActions.AjouterLivre)) {
             try {
-                Caddy book = new Caddy(
+                Book book = new Book(
                         authorSection.getSelectedAuthor(),
                         subjectSection.getSelectedSubject(),
                         baseSection.getTitreText().getText(),

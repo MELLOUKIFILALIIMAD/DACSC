@@ -1,15 +1,9 @@
 package model;
 
-import model.controller.ControllerAuteur;
 import model.controller.ControllerBase;
-import model.controller.ControllerLivre;
-import model.controller.ControllerSujet;
-import model.dao.*;
 import model.viewmodel.GUI.*;
 import javax.swing.*;
 import com.formdev.flatlaf.FlatIntelliJLaf;
-
-import java.io.IOException;
 
 public class Main {
 

@@ -1,6 +1,6 @@
 package model.dao;
 
-import model.entity.Caddy;
+import model.entity.Book;
 import model.network.ClientTCP;
 
 import java.io.IOException;
@@ -8,13 +8,13 @@ import java.util.Locale;
 
 public class BookDAO extends BaseDAO {
 
-    public BookDAO(ClientTCP serveur) {
-        super(serveur);
+    public BookDAO(ClientTCP client) {
+        super(client);
     }
     // ADD_BOOK#titre#isbn#auteur#sujet#pages#annee#prix#stock
     //   ->  ADD_BOOK#ok#message  ou  ADD_BOOK#ko#raison
     // auteur = "Nom Prénom", prix avec '.' comme séparateur décimal
-    public String insert(Caddy book) throws IOException {
+    public String insert(Book book) throws IOException {
         String auteur = book.getAuthor().getLastName() + " " + book.getAuthor().getFirstName();
         String prix = String.format(Locale.ROOT, "%.2f", book.getPrice());
 

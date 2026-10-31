@@ -6,8 +6,8 @@ import java.io.IOException;
 
 public class UserDAO extends BaseDAO {
 
-    public UserDAO(ClientTCP serveur) {
-        super(serveur);
+    public UserDAO(ClientTCP client) {
+        super(client);
     }
 
     // LOGIN#login#password  ->  LOGIN#ok  ou  LOGIN#ko#raison
@@ -24,6 +24,6 @@ public class UserDAO extends BaseDAO {
     public void logout(String login) throws IOException {
         verifier(login);
 
-        serveur.envoyer("LOGOUT#" + login);
+        client.envoyer("LOGOUT#" + login);
     }
 }

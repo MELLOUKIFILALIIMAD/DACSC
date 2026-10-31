@@ -33,10 +33,10 @@ public class Main {
 
 
         // ***** Connexion unique au serveur (créée UNE seule fois pour toute l'application) *****
-        ClientTCP serveur = new ClientTCP();
+        ClientTCP client = new ClientTCP();
 
         try {
-            serveur.connecter(IP_SERVEUR, PORT_ENCODING);
+            client.connecter(IP_SERVEUR, PORT_ENCODING);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null,
                     "Impossible de joindre le serveur " + IP_SERVEUR + ":" + PORT_ENCODING
@@ -46,10 +46,10 @@ public class Main {
         }
 
         // ***** DAO : tous partagent la même connexion *****
-        final UserDAO userDAO = new UserDAO(serveur);
-        final AuthorDAO authorDAO = new AuthorDAO(serveur);
-        final SubjectDAO subjectDAO = new SubjectDAO(serveur);
-        final BookDAO bookDAO = new BookDAO(serveur);
+        final UserDAO userDAO = new UserDAO(client);
+        final AuthorDAO authorDAO = new AuthorDAO(client);
+        final SubjectDAO subjectDAO = new SubjectDAO(client);
+        final BookDAO bookDAO = new BookDAO(client);
 
         // ***** Interface Swing (lancée dans le thread graphique) *****
         SwingUtilities.invokeLater(new Runnable() {
