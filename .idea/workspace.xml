@@ -5,55 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17455087-04d2-4dc0-a5ff-bddc0bc7873c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/dao/CaddyDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/dao/CaddyItemDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/dao/ClientDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/dao/ConnectDB.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/entity/Caddy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/entity/CaddyItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/entity/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ServeurAchatJava/src/serveur/FileAttente.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ServeurAchatJava/src/serveur/ServeurAchat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ServeurAchatJava/src/serveur/ThreadWorker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/DACSC.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DACSC.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/controller/ControllerAuteur.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/controller/ControllerAuteur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/controller/ControllerBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/controller/ControllerBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/controller/ControllerLivre.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/controller/ControllerLivre.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/controller/ControllerSujet.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/controller/ControllerSujet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/dao/AuthorDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/dao/BaseDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/dao/BookDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/dao/ServeurException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/dao/ServeurTCP.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/network/ClientTCP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/dao/SubjectDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/dao/UserDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/entity/Author.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/entity/Book.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/entity/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/entity/Subject.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/viewmodel/GUI/PanierSection.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/viewmodel/GUI/PanierSection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/viewmodel/GUI/ResultatSection.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/viewmodel/GUI/ResultatSection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/MainAchat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/entity/Caddy.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/entity/Caddy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/entity/CaddyItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/entity/CaddyItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/entity/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/entity/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/entity/EntityAchat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/viewmodel/BaseApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/viewmodel/BaseVM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/viewmodel/GUI/BaseSection.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/viewmodel/GUI/BaseSection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/viewmodel/GUI/JDialogServeur.form" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/viewmodel/GUI/JDialogClient.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/viewmodel/GUI/JDialogServeur.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/viewmodel/GUI/JDialogServeur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/viewmodel/GUI/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/viewmodel/GUI/MainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/viewmodel/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/model/viewmodel/MainVM.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/controller/ControllerAuteur.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/controller/ControllerAuteur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/controller/ControllerBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/controller/ControllerBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/controller/ControllerLivre.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/controller/ControllerLivre.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/controller/ControllerSujet.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/controller/ControllerSujet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/AuthorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/AuthorDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/BaseDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/BaseDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/BookDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/ServeurException.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/network/ClientException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/ServeurTCP.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/SubjectDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/SubjectDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/dao/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/entity/Author.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/entity/Author.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/entity/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/entity/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/AuthorSection.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/AuthorSection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/BookSection.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/BookSection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/JDialogServeur.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/JDialogServeur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/SubjectSection.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/SubjectSection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientBookEncoderQt/version.h" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderQt/version.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/entity/Subject.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/entity/Subject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/BaseSection.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/BaseSection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/JDialogServeur.form" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/JDialogClient.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/JDialogServeur.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/JDialogClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookEncoderJava/src/model/viewmodel/GUI/MainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ServeurAchatJava/src/serveur/FileAttente.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/serveur/FileAttente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ServeurAchatJava/src/serveur/ServeurAchat.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/serveur/ServeurAchat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ServeurAchatJava/src/serveur/ThreadWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClientBookBuyerJava/src/serveur/ThreadWorker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +49,65 @@
     <commands />
     <urls />
   </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000000626547878" />
+      <entry key="S2" value="1.0158718127218358" />
+      <entry key="S5" value="1.219020732866956" />
+      <entry key="S10" value="1.7061589096186802" />
+      <entry key="S30" value="3.5703509346202416" />
+      <entry key="S60" value="5.265451700241289" />
+      <entry key="M2" value="6.745556199396162" />
+      <entry key="M5" value="7.979318343332364" />
+      <entry key="M10" value="8.467121336685672" />
+      <entry key="M15" value="8.639513450311053" />
+      <entry key="M30" value="8.817080669213407" />
+      <entry key="H1" value="8.907860005912696" />
+      <entry key="H2" value="8.95375848395014" />
+      <entry key="H4" value="8.976836181193484" />
+      <entry key="D1" value="8.996133367436165" />
+      <entry key="W1" value="8.9994474768746" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.9460576467255959" />
+      <entry key="MS500" value="0.9889709785167329" />
+      <entry key="S2" value="1.0130700461295747" />
+      <entry key="S5" value="1.2177200361935312" />
+      <entry key="S10" value="1.7052612584896452" />
+      <entry key="S30" value="3.569353371383396" />
+      <entry key="S60" value="5.264304059526217" />
+      <entry key="M2" value="6.7446034099191134" />
+      <entry key="M5" value="7.978790412734103" />
+      <entry key="M10" value="8.466826210678295" />
+      <entry key="M15" value="8.639309182970806" />
+      <entry key="M30" value="8.816974618476996" />
+      <entry key="H1" value="8.907805970451006" />
+      <entry key="H2" value="8.953731209746639" />
+      <entry key="H4" value="8.976822479473794" />
+      <entry key="D1" value="8.996131074798795" />
+      <entry key="W1" value="8.999447149133585" />
+    </decayedShown>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6,
   &quot;fromUser&quot;: false
@@ -86,41 +120,44 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Issam&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Issam/Desktop/hepl/B3/DACSC/DACSC&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.ServeurAchat.executor": "Run",
+    "Application.Unnamed.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "Imad",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Issam/Desktop/hepl/B3/DACSC/DACSC",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "show.migrate.to.gradle.popup": "false",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Issam\Desktop\hepl\B3\DACSC\DACSC\ServeurAchatJava\src" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="model.Main" />
       <module name="DACSC" />
       <method v="2">
@@ -131,8 +168,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.32098.37" />
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.32098.37" />
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.27258.48" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.27258.48" />
       </set>
     </attachedChunks>
   </component>
@@ -150,6 +187,8 @@
       <workItem from="1793195115707" duration="3000" />
       <workItem from="1793450241939" duration="959000" />
       <workItem from="1793453121359" duration="21000" />
+      <workItem from="1793487419375" duration="90000" />
+      <workItem from="1793538856417" duration="510000" />
     </task>
     <servers />
   </component>

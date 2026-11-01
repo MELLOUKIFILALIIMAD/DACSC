@@ -2,11 +2,11 @@ package model.viewmodel.GUI;
 
 import model.controller.ControllerActions;
 import model.controller.ControllerBase;
-import model.viewmodel.BaseApp;
+import model.viewmodel.BaseVM;
 
 import javax.swing.*;
 
-public class BaseSection implements BaseApp {
+public class BaseSection implements BaseVM {
     private JPanel Base;
     private JLabel titreLabel;
     private JLabel ISBNLabel;

@@ -3,14 +3,14 @@ package model.viewmodel.GUI;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class JDialogServeur extends JDialog {
+public class JDialogClient extends JDialog {
     private JPanel contentPane;
     private JLabel ipLabel;
     private JButton buttonImad;
     private JButton buttonIssam;
     private String ip;
 
-    public JDialogServeur(JFrame parent) {
+    public JDialogClient(JFrame parent) {
         super(parent, "Serveur", true);
         setContentPane(contentPane);
         getRootPane().setDefaultButton(null);
@@ -68,7 +68,7 @@ public class JDialogServeur extends JDialog {
     }
 
     public static void main(String[] args) {
-        JDialogServeur dialog = new JDialogServeur(null);
+        JDialogClient dialog = new JDialogClient(null);
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

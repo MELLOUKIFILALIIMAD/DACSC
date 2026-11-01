@@ -71,14 +71,19 @@ public class ConnectDB {
     }
 
     private static Connection open() throws SQLException {
-        String url = "jdbc:mysql://" + config.getProperty("db.host", "localhost")
-                + ":" + config.getProperty("db.port", "3306")
-                + "/" + config.getProperty("db.name")
+
+        String host = config.getProperty("DB_HOST", "localhost");
+        String port = config.getProperty("DB_PORT", "3306");
+        String database = config.getProperty("DB_NAME");
+        String user = config.getProperty("DB_USER");
+        String password = config.getProperty("DB_PASSWORD");
+
+        String url = "jdbc:mysql://" + host + ":" + port + "/" + database
                 + "?useSSL=false&allowPublicKeyRetrieval=true";
 
-        return DriverManager.getConnection(url,
-                config.getProperty("db.user"),
-                config.getProperty("db.password"));
+        System.out.println("(MYSQL) Connexion à : " + url);
+
+        return DriverManager.getConnection(url, user, password);
     }
 
     // "abc" -> "%abc%" pour un LIKE ; les caractères % _ \ saisis par l'utilisateur sont neutralisés

@@ -1,12 +1,11 @@
 package serveur;
 
-import model.dao.BookDAO;
-import model.dao.CaddyDAO;
-import model.dao.CaddyItemDAO;
-import model.dao.ClientDAO;
 import model.dao.ConnectDB;
+import model.viewmodel.GUI.JDialogServeur;
 
+import javax.swing.*;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -18,14 +17,50 @@ public class ServeurAchat {
     public static void main(String[] args) {
         System.out.println("(SERVEUR ACHAT) Démarrage");
 
-        //  Lecture du fichier de configuration (comme LireConfiguration en C) 
-        Properties config = new Properties();
-        try (FileInputStream fichier = new FileInputStream("config.properties")) {
-            config.load(fichier);
-        } catch (IOException e) {
-            System.err.println("(SERVEUR ACHAT) Impossible de lire config.properties : " + e.getMessage());
+        // 1. Afficher le JDialog
+        final String[] ip = {null};
+
+        try {
+            SwingUtilities.invokeAndWait(() -> {
+                JDialogServeur dialog = new JDialogServeur(null);
+                dialog.setVisible(true);
+                ip[0] = dialog.getIp();
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
             return;
         }
+
+        // 2. Vérifier si un serveur a été choisi
+        if (ip[0] == null) {
+            System.out.println("(SERVEUR ACHAT) Aucun serveur sélectionné");
+            return;
+        }
+
+        // 3. Lire config.properties
+        Properties config = new Properties();
+
+        try (FileInputStream fichier =
+                     new FileInputStream("config.properties")) {
+            config.load(fichier);
+        } catch (IOException e) {
+            System.err.println("(SERVEUR ACHAT) Erreur : " + e.getMessage());
+            return;
+        }
+
+        // 4. Modifier DB_HOST selon le bouton sélectionné
+        config.setProperty("DB_HOST", ip[0]);
+
+        // 5. Sauvegarder la nouvelle configuration
+        try (FileOutputStream fichier =
+                     new FileOutputStream("config.properties")) {
+            config.store(fichier, "Configuration Serveur Achat");
+        } catch (IOException e) {
+            System.err.println("(SERVEUR ACHAT) Erreur sauvegarde : " + e.getMessage());
+            return;
+        }
+
+        System.out.println("(SERVEUR ACHAT) IP MySQL : " + ip[0]);
 
         int port;
         int nbThreads;
