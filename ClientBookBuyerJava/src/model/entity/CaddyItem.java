@@ -1,6 +1,6 @@
 package model.entity;
 
-public class CaddyItem implements Entity {
+public class CaddyItem implements EntityAchat {
     private static final long serialVersionUID = 1L;
 
     private int id;

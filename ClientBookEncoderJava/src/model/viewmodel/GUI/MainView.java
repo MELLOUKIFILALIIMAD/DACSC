@@ -4,12 +4,12 @@ import model.controller.ControllerActions;
 import model.controller.ControllerBase;
 import model.controller.ControllerLivre;
 import model.viewmodel.GUI.common.Style;
-import model.viewmodel.MainApp;
+import model.viewmodel.MainVM;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class MainView extends JFrame implements MainApp {
+public class MainView extends JFrame implements MainVM {
 
     private JPanel panel1;
     private JPanel Titre;

@@ -3,7 +3,7 @@ package model.viewmodel;
 
 import model.controller.ControllerBase;
 
-public interface MainApp {
+public interface MainVM {
     String[] promptForConnect();
 
     void setControllerBase(ControllerBase c);

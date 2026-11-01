@@ -1,6 +1,6 @@
 package model.entity;
 
-public class Client implements Entity {
+public class Client implements EntityAchat {
     private static final long serialVersionUID = 1L;
 
     private int id;          // = le numéro de client

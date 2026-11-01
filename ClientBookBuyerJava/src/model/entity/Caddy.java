@@ -2,7 +2,7 @@ package model.entity;
 
 import java.time.LocalDateTime;
 
-public class Caddy implements Entity {
+public class Caddy implements EntityAchat {
     private static final long serialVersionUID = 1L;
 
     private int id;

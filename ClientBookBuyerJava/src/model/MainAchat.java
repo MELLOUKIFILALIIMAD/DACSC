@@ -7,9 +7,7 @@ import model.viewmodel.GUI.*;
 import javax.swing.*;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 
-import java.security.cert.CertPath;
-
-public class Main {
+public class MainAchat {
 
     // IP de la machine du serveur Encodage et PORT_ENCODING (voir configuration.txt côté serveur)
 

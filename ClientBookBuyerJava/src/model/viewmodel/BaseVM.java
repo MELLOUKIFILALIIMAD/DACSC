@@ -2,7 +2,7 @@ package model.viewmodel;
 
 import model.controller.ControllerBase;
 
-public interface BaseApp {
+public interface BaseVM {
     void setControllerBase(ControllerBase controllerBase);
 
     void clearAll();

@@ -21,7 +21,7 @@ public class Main {
     public static void main(String[] args) {
         FlatIntelliJLaf.setup();
 
-        JDialogServeur serveurDialog = new JDialogServeur(null);
+        JDialogClient serveurDialog = new JDialogClient(null);
         serveurDialog.setVisible(true);
 
 
