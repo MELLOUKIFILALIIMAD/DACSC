@@ -2,7 +2,7 @@ package model.entity;
 
 import java.time.LocalDate;
 
-public class Author implements EntityAchat {
+public class Author implements Entity {
     private int id;
     private String lastName;
     private String firstName;

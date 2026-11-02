@@ -1,6 +1,7 @@
 package model.dao;
 
 import model.entity.CaddyItem;
+import model.network.ClientTCP;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,9 +10,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CaddyItemDAO {
+public class CaddyItemDAO extends BaseDAO{
+
 
     private static final String SELECT = "SELECT id, caddy_id, book_id, quantity FROM caddies_items";
+
+    public CaddyItemDAO(ClientTCP client) {
+        super(client);
+    }
 
     // CREATE : retourne l'id généré (et le met dans l'objet)
     public int insert(CaddyItem item) throws SQLException {
