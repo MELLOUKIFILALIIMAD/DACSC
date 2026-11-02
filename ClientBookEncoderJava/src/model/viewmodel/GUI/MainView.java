@@ -1,15 +1,16 @@
 package model.viewmodel.GUI;
 
+import model.Main;
 import model.controller.ControllerActions;
 import model.controller.ControllerBase;
 import model.controller.ControllerLivre;
 import model.viewmodel.GUI.common.Style;
-import model.viewmodel.MainVM;
+import model.viewmodel.MainApp;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class MainView extends JFrame implements MainVM {
+public class MainView extends JFrame implements MainApp {
 
     private JPanel panel1;
     private JPanel Titre;

@@ -1,6 +1,7 @@
 package model.dao;
 
 import model.entity.Caddy;
+import model.network.ClientTCP;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,8 +9,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 
-public class CaddyDAO {
-
+public class CaddyDAO extends BaseDAO{
+    public CaddyDAO(ClientTCP client)
+    {
+        super(client);
+    }
     // CREATE : retourne l'id généré (et le met dans l'objet). Un nouveau panier a un montant de 0.
     public int insert(Caddy caddy) throws SQLException {
         String sql = "INSERT INTO caddies (client_id, date, amount, payed) VALUES (?, ?, 0, FALSE)";

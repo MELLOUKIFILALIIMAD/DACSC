@@ -1,6 +1,7 @@
 package model.dao;
 
 import model.entity.Client;
+import model.network.ClientTCP;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,9 +10,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientDAO {
+public class ClientDAO extends BaseDAO {
 
     private static final String SELECT = "SELECT id, name, first_name, address FROM clients";
+
+    public ClientDAO(ClientTCP client) {
+        super(client);
+    }
 
     // CREATE : retourne l'id généré = le numéro de client (et le met dans l'objet)
     public int insert(Client client) throws SQLException {

@@ -1,6 +1,6 @@
 package model.entity;
 
-public class Subject implements EntityAchat {
+public class Subject implements Entity {
     private int id;
     private String name;
 
