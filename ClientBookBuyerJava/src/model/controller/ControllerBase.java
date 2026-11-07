@@ -111,13 +111,18 @@ public class ControllerBase implements ActionListener {
         }
 
         if (action.equals(ControllerActions.Logout)) {
-
             loggedInClient = null;
 
             mainView.setEnabled(false);
             panierSection.setEnabled(false);
             baseSection.setEnabled(false);
             resultatSection.setEnabled(false);
+
+            baseSection.viderChamps();
+
+            panierSection.afficherPanier(new String[]{"0"});
+
+            resultatSection.clearTable();
         }
 
         if (action.equals(ControllerActions.Rechercher)) {
@@ -126,6 +131,7 @@ public class ControllerBase implements ActionListener {
             String auteur = baseSection.getAuteurText().getText().trim();
             String sujet = baseSection.getSujetText().getText().trim();
             String maxPrix = baseSection.getMaxPrixSpinner().getValue().toString();
+            String minPrix = baseSection.getMinPrixSpinner().getValue().toString();
 
             // Mémoriser les critères de recherche
             dernierTitre = titre;
@@ -140,6 +146,7 @@ public class ControllerBase implements ActionListener {
                         titre,
                         auteur,
                         sujet,
+                        minPrix,
                         maxPrix
                 );
 

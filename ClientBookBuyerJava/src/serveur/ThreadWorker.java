@@ -157,6 +157,8 @@ public class ThreadWorker extends Thread {
 
             System.err.println("[" + getName() + "] Erreur TCP : " + e.getMessage());
             e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -237,76 +239,76 @@ public class ThreadWorker extends Thread {
 
     private String gererSelectBook(String[] champs) {
 
-        if (champs.length < 5) {
+        if (champs.length < 6) {
             return "SELECT_BOOK#ko#Parametres insuffisants";
         }
 
         String titre = champs[1];
         String auteur = champs[2];
         String sujet = champs[3];
-        String maxPrix = champs[4];
 
-        double prixMax = 999999.0;
+        double prixMin = 0;
+        double prixMax = Double.MAX_VALUE;
 
         try {
-            if (maxPrix != null && !maxPrix.trim().isEmpty() && !maxPrix.equals("0")) {
-                prixMax = Double.parseDouble(maxPrix);
+            if (!champs[4].trim().isEmpty()) {
+                prixMin = Double.parseDouble(champs[4]);
             }
+
+            if (!champs[5].trim().isEmpty()) {
+                if (!champs[5].equals("0")) {
+                    prixMax = Double.parseDouble(champs[5]);
+                }
+            }
+
+            if (prixMin < 0 || prixMax < 0 || prixMin > prixMax) {
+                return "SELECT_BOOK#ko#Prix invalides";
+            }
+
         } catch (NumberFormatException e) {
-            return "SELECT_BOOK#ko#Prix maximum invalide";
+            return "SELECT_BOOK#ko#Prix invalides";
         }
 
         StringBuilder sb = new StringBuilder("SELECT_BOOK#ok");
 
         String sql =
-                "SELECT b.id, b.title, a.last_name, b.publish_year, b.price, b.stock_quantity " +
-                        "FROM books b JOIN authors a ON b.author_id = a.id " +
+                "SELECT b.id, b.title, a.last_name, b.publish_year, " +
+                        "b.price, b.stock_quantity " +
+                        "FROM books b " +
+                        "JOIN authors a ON b.author_id = a.id " +
                         "JOIN subjects s ON b.subject_id = s.id " +
-                        "WHERE b.title LIKE ? AND a.last_name LIKE ? " +
-                        "AND s.name LIKE ? AND b.price <= ?";
+                        "WHERE b.title LIKE ? " +
+                        "AND a.last_name LIKE ? " +
+                        "AND s.name LIKE ? " +
+                        "AND b.price >= ? " +
+                        "AND b.price <= ?";
 
         synchronized (ConnectDB.LOCK) {
 
-            try {
+            try (PreparedStatement ps =
+                         ConnectDB.getConnection().prepareStatement(sql)) {
 
-                System.out.println("2 - Obtention connexion MySQL");
+                ps.setString(1, "%" + titre + "%");
+                ps.setString(2, "%" + auteur + "%");
+                ps.setString(3, "%" + sujet + "%");
+                ps.setDouble(4, prixMin);
+                ps.setDouble(5, prixMax);
 
-                try (PreparedStatement ps =
-                             ConnectDB.getConnection().prepareStatement(sql)) {
+                try (ResultSet rs = ps.executeQuery()) {
 
-                    System.out.println("3 - PreparedStatement créé");
+                    while (rs.next()) {
 
-                    ps.setString(1, "%" + titre + "%");
-                    ps.setString(2, "%" + auteur + "%");
-                    ps.setString(3, "%" + sujet + "%");
-                    ps.setDouble(4, prixMax);
-
-                    System.out.println("4 - Paramètres définis");
-                    System.out.println("5 - Exécution SQL");
-
-                    try (ResultSet rs = ps.executeQuery()) {
-
-                        System.out.println("6 - SQL exécuté");
-
-                        while (rs.next()) {
-
-                            System.out.println("Livre trouvé : " + rs.getString("title"));
-
-                            sb.append("#").append(rs.getInt("id"))
-                                    .append("#").append(rs.getString("title"))
-                                    .append("#").append(rs.getString("last_name"))
-                                    .append("#").append(rs.getInt("publish_year"))
-                                    .append("#").append(rs.getDouble("price"))
-                                    .append("#").append(rs.getInt("stock_quantity"));
-                        }
+                        sb.append("#").append(rs.getInt("id"))
+                                .append("#").append(rs.getString("title"))
+                                .append("#").append(rs.getString("last_name"))
+                                .append("#").append(rs.getInt("publish_year"))
+                                .append("#").append(rs.getDouble("price"))
+                                .append("#").append(rs.getInt("stock_quantity"));
                     }
                 }
 
             } catch (Exception e) {
-
-                System.err.println("Erreur SQL SELECT_BOOK : " + e.getMessage());
                 e.printStackTrace();
-
                 return "SELECT_BOOK#ko#Erreur SQL : " + e.getMessage();
             }
         }
@@ -315,11 +317,13 @@ public class ThreadWorker extends Thread {
     }
 
 
-    private String gererAddCaddyItem(String[] champs) {
+    private String gererAddCaddyItem(String[] champs) throws SQLException {
 
         if (champs.length < 4) {
             return "ADD_CADDY_ITEM#ko#Parametres insuffisants";
         }
+
+        java.sql.Connection connexion = ConnectDB.getConnection();
 
         try {
             int clientId = Integer.parseInt(champs[1]);
@@ -332,120 +336,163 @@ public class ThreadWorker extends Thread {
 
             synchronized (ConnectDB.LOCK) {
 
-                int caddyId = -1;
+                connexion.setAutoCommit(false);
 
-                String selectCaddy =
-                        "SELECT id FROM caddies " +
-                                "WHERE client_id = ? AND payed = FALSE " +
-                                "ORDER BY id DESC LIMIT 1";
+                try {
+                    // Vérifier et verrouiller le stock du livre.
+                    String sqlStock =
+                            "SELECT stock_quantity FROM books WHERE id = ? FOR UPDATE";
 
-                try (PreparedStatement ps =
-                             ConnectDB.getConnection().prepareStatement(selectCaddy)) {
+                    int stock;
 
-                    ps.setInt(1, clientId);
+                    try (PreparedStatement ps = connexion.prepareStatement(sqlStock)) {
+                        ps.setInt(1, bookId);
 
-                    try (ResultSet rs = ps.executeQuery()) {
-                        if (rs.next()) {
-                            caddyId = rs.getInt("id");
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (!rs.next()) {
+                                connexion.rollback();
+                                return "ADD_CADDY_ITEM#ko#Livre introuvable";
+                            }
+
+                            stock = rs.getInt("stock_quantity");
                         }
                     }
-                }
 
-                // Création d'un panier s'il n'existe pas
-                if (caddyId == -1) {
+                    if (stock < quantity) {
+                        connexion.rollback();
+                        return "ADD_CADDY_ITEM#ko#Stock insuffisant";
+                    }
 
-                    String insertCaddy =
-                            "INSERT INTO caddies (client_id, date, amount, payed) " +
-                                    "VALUES (?, NOW(), 0, FALSE)";
+                    // Trouver le panier ouvert du client.
+                    int caddyId = -1;
 
-                    try (PreparedStatement ps =
-                                 ConnectDB.getConnection().prepareStatement(
-                                         insertCaddy,
-                                         PreparedStatement.RETURN_GENERATED_KEYS)) {
+                    String sqlCaddy =
+                            "SELECT id FROM caddies " +
+                                    "WHERE client_id = ? AND payed = FALSE " +
+                                    "ORDER BY id DESC LIMIT 1";
 
+                    try (PreparedStatement ps = connexion.prepareStatement(sqlCaddy)) {
                         ps.setInt(1, clientId);
-                        ps.executeUpdate();
 
-                        try (ResultSet rs = ps.getGeneratedKeys()) {
+                        try (ResultSet rs = ps.executeQuery()) {
                             if (rs.next()) {
-                                caddyId = rs.getInt(1);
+                                caddyId = rs.getInt("id");
                             }
                         }
                     }
-                }
 
-                if (caddyId == -1) {
-                    return "ADD_CADDY_ITEM#ko#Impossible de creer le panier";
-                }
+                    // Créer un panier s'il n'existe pas.
+                    if (caddyId == -1) {
 
-                // Vérifier si le livre existe déjà dans le panier
-                int itemId = -1;
+                        String insertCaddy =
+                                "INSERT INTO caddies (client_id, date, amount, payed) " +
+                                        "VALUES (?, NOW(), 0, FALSE)";
 
-                String selectItem =
-                        "SELECT id FROM caddies_items " +
-                                "WHERE caddy_id = ? AND book_id = ?";
+                        try (PreparedStatement ps = connexion.prepareStatement(
+                                insertCaddy, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
-                try (PreparedStatement ps =
-                             ConnectDB.getConnection().prepareStatement(selectItem)) {
+                            ps.setInt(1, clientId);
+                            ps.executeUpdate();
 
-                    ps.setInt(1, caddyId);
-                    ps.setInt(2, bookId);
-
-                    try (ResultSet rs = ps.executeQuery()) {
-                        if (rs.next()) {
-                            itemId = rs.getInt("id");
+                            try (ResultSet rs = ps.getGeneratedKeys()) {
+                                if (rs.next()) {
+                                    caddyId = rs.getInt(1);
+                                }
+                            }
                         }
                     }
-                }
 
-                if (itemId != -1) {
-
-                    String updateItem =
-                            "UPDATE caddies_items " +
-                                    "SET quantity = quantity + ? WHERE id = ?";
-
-                    try (PreparedStatement ps =
-                                 ConnectDB.getConnection().prepareStatement(updateItem)) {
-
-                        ps.setInt(1, quantity);
-                        ps.setInt(2, itemId);
-                        ps.executeUpdate();
+                    if (caddyId == -1) {
+                        connexion.rollback();
+                        return "ADD_CADDY_ITEM#ko#Impossible de creer le panier";
                     }
 
-                } else {
+                    // Diminuer le stock immédiatement.
+                    String updateStock =
+                            "UPDATE books SET stock_quantity = stock_quantity - ? " +
+                                    "WHERE id = ? AND stock_quantity >= ?";
 
-                    String insertItem =
-                            "INSERT INTO caddies_items (caddy_id, book_id, quantity) " +
-                                    "VALUES (?, ?, ?)";
-
-                    try (PreparedStatement ps =
-                                 ConnectDB.getConnection().prepareStatement(insertItem)) {
-
-                        ps.setInt(1, caddyId);
+                    try (PreparedStatement ps = connexion.prepareStatement(updateStock)) {
+                        ps.setInt(1, quantity);
                         ps.setInt(2, bookId);
                         ps.setInt(3, quantity);
+
+                        if (ps.executeUpdate() != 1) {
+                            connexion.rollback();
+                            return "ADD_CADDY_ITEM#ko#Stock insuffisant";
+                        }
+                    }
+
+                    // Vérifier si le livre est déjà dans le panier.
+                    String selectItem =
+                            "SELECT id FROM caddies_items " +
+                                    "WHERE caddy_id = ? AND book_id = ?";
+
+                    int itemId = -1;
+
+                    try (PreparedStatement ps = connexion.prepareStatement(selectItem)) {
+                        ps.setInt(1, caddyId);
+                        ps.setInt(2, bookId);
+
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (rs.next()) {
+                                itemId = rs.getInt("id");
+                            }
+                        }
+                    }
+
+                    // Augmenter la quantité ou créer une ligne.
+                    if (itemId != -1) {
+
+                        String updateItem =
+                                "UPDATE caddies_items SET quantity = quantity + ? " +
+                                        "WHERE id = ?";
+
+                        try (PreparedStatement ps = connexion.prepareStatement(updateItem)) {
+                            ps.setInt(1, quantity);
+                            ps.setInt(2, itemId);
+                            ps.executeUpdate();
+                        }
+
+                    } else {
+
+                        String insertItem =
+                                "INSERT INTO caddies_items (caddy_id, book_id, quantity) " +
+                                        "VALUES (?, ?, ?)";
+
+                        try (PreparedStatement ps = connexion.prepareStatement(insertItem)) {
+                            ps.setInt(1, caddyId);
+                            ps.setInt(2, bookId);
+                            ps.setInt(3, quantity);
+                            ps.executeUpdate();
+                        }
+                    }
+
+                    // Recalculer le montant.
+                    String updateAmount =
+                            "UPDATE caddies SET amount = (" +
+                                    "SELECT COALESCE(SUM(ci.quantity * b.price), 0) " +
+                                    "FROM caddies_items ci " +
+                                    "JOIN books b ON b.id = ci.book_id " +
+                                    "WHERE ci.caddy_id = ?) WHERE id = ?";
+
+                    try (PreparedStatement ps = connexion.prepareStatement(updateAmount)) {
+                        ps.setInt(1, caddyId);
+                        ps.setInt(2, caddyId);
                         ps.executeUpdate();
                     }
-                }
 
-                // Recalcul du montant du panier
-                String updateAmount =
-                        "UPDATE caddies SET amount = (" +
-                                "SELECT COALESCE(SUM(ci.quantity * b.price), 0) " +
-                                "FROM caddies_items ci " +
-                                "JOIN books b ON b.id = ci.book_id " +
-                                "WHERE ci.caddy_id = ?) WHERE id = ?";
+                    connexion.commit();
+                    return "ADD_CADDY_ITEM#ok";
 
-                try (PreparedStatement ps =
-                             ConnectDB.getConnection().prepareStatement(updateAmount)) {
+                } catch (Exception e) {
+                    connexion.rollback();
+                    throw e;
 
-                    ps.setInt(1, caddyId);
-                    ps.setInt(2, caddyId);
-                    ps.executeUpdate();
+                } finally {
+                    connexion.setAutoCommit(true);
                 }
             }
-
-            return "ADD_CADDY_ITEM#ok";
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -633,68 +680,117 @@ public class ThreadWorker extends Thread {
             return "CANCEL_CADDY#ko#Parametres insuffisants";
         }
 
+        java.sql.Connection connexion = null;
+
         try {
             int clientId = Integer.parseInt(champs[1]);
 
-            System.out.println("CANCEL_CADDY : clientId = " + clientId);
             synchronized (ConnectDB.LOCK) {
 
-                int caddyId = -1;
+                connexion = ConnectDB.getConnection();
+                connexion.setAutoCommit(false);
 
-                String selectSql =
-                        "SELECT id FROM caddies " +
-                                "WHERE client_id = ? AND payed = FALSE " +
-                                "ORDER BY id DESC LIMIT 1";
+                try {
+                    int caddyId = -1;
 
-                try (PreparedStatement ps =
-                             ConnectDB.getConnection().prepareStatement(selectSql)) {
+                    String selectCaddy =
+                            "SELECT id FROM caddies " +
+                                    "WHERE client_id = ? AND payed = FALSE " +
+                                    "ORDER BY id DESC LIMIT 1";
 
-                    ps.setInt(1, clientId);
+                    try (PreparedStatement ps = connexion.prepareStatement(selectCaddy)) {
 
-                    try (ResultSet rs = ps.executeQuery()) {
-                        if (rs.next()) {
-                            caddyId = rs.getInt("id");
-                            System.out.println("CANCEL_CADDY : caddyId = " + caddyId);
+                        ps.setInt(1, clientId);
+
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (rs.next()) {
+                                caddyId = rs.getInt("id");
+                            }
                         }
                     }
-                }
 
-                if (caddyId == -1) {
+                    if (caddyId == -1) {
+                        connexion.commit();
+                        return "CANCEL_CADDY#ok";
+                    }
+
+                    // Récupérer les livres et leurs quantités
+                    java.util.ArrayList<int[]> articles = new java.util.ArrayList<>();
+
+                    String selectItems =
+                            "SELECT book_id, quantity FROM caddies_items " +
+                                    "WHERE caddy_id = ?";
+
+                    try (PreparedStatement ps = connexion.prepareStatement(selectItems)) {
+
+                        ps.setInt(1, caddyId);
+
+                        try (ResultSet rs = ps.executeQuery()) {
+
+                            while (rs.next()) {
+                                int bookId = rs.getInt("book_id");
+                                int quantity = rs.getInt("quantity");
+
+                                articles.add(new int[]{bookId, quantity});
+                            }
+                        }
+                    }
+
+                    // Restituer les quantités au stock
+                    String updateStock =
+                            "UPDATE books SET stock_quantity = stock_quantity + ? " +
+                                    "WHERE id = ?";
+
+                    try (PreparedStatement ps = connexion.prepareStatement(updateStock)) {
+
+                        for (int[] article : articles) {
+
+                            ps.setInt(1, article[1]);
+                            ps.setInt(2, article[0]);
+
+                            ps.executeUpdate();
+                        }
+                    }
+
+                    // Supprimer les articles du panier
+                    String deleteItems =
+                            "DELETE FROM caddies_items WHERE caddy_id = ?";
+
+                    try (PreparedStatement ps = connexion.prepareStatement(deleteItems)) {
+                        ps.setInt(1, caddyId);
+                        ps.executeUpdate();
+                    }
+
+                    // Remettre le montant à zéro
+                    String updateAmount =
+                            "UPDATE caddies SET amount = 0 WHERE id = ?";
+
+                    try (PreparedStatement ps = connexion.prepareStatement(updateAmount)) {
+                        ps.setInt(1, caddyId);
+                        ps.executeUpdate();
+                    }
+
+                    connexion.commit();
+
+                    System.out.println("CANCEL_CADDY : stock restauré pour "
+                            + articles.size() + " livres.");
+
                     return "CANCEL_CADDY#ok";
-                }
 
-                // Supprimer les articles du panier
-                String deleteSql =
-                        "DELETE FROM caddies_items WHERE caddy_id = ?";
+                } catch (Exception e) {
+                    connexion.rollback();
+                    throw e;
 
-                try (PreparedStatement ps =
-                             ConnectDB.getConnection().prepareStatement(deleteSql)) {
-
-                    ps.setInt(1, caddyId);
-
-                    int lignesSupprimees = ps.executeUpdate();
-
-                    System.out.println("CANCEL_CADDY : lignes supprimées = " + lignesSupprimees);
-                }
-
-                // Remettre le montant à zéro
-                String updateSql =
-                        "UPDATE caddies SET amount = 0 WHERE id = ?";
-
-                try (PreparedStatement ps =
-                             ConnectDB.getConnection().prepareStatement(updateSql)) {
-
-                    ps.setInt(1, caddyId);
-                    ps.executeUpdate();
+                } finally {
+                    connexion.setAutoCommit(true);
                 }
             }
-
-            return "CANCEL_CADDY#ok";
 
         } catch (Exception e) {
             e.printStackTrace();
             return "CANCEL_CADDY#ko#" + e.getMessage();
         }
     }
+
 
 }
