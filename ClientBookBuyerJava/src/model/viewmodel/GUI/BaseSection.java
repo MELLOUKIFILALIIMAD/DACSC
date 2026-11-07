@@ -5,6 +5,7 @@ import model.controller.ControllerBase;
 import model.viewmodel.BaseVM;
 
 import javax.swing.*;
+import java.util.Map;
 
 public class BaseSection implements BaseVM {
     private JPanel Base;
@@ -32,8 +33,8 @@ public class BaseSection implements BaseVM {
         minLabel.setText("Min :");
         maxLabel.setText("Max :");
         rechercheLabel.setText("Recherche");
-        minPrixSpinner.setModel(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1));
-        maxPrixSpinner.setModel(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1));
+        minPrixSpinner.setModel(new SpinnerNumberModel(0.0, 0.0, Integer.MAX_VALUE, 0.5));
+        maxPrixSpinner.setModel(new SpinnerNumberModel(0.0, 0.0, Integer.MAX_VALUE, 0.5));
     }
     public JPanel getMainPanel() {
         return Base;
@@ -74,5 +75,9 @@ public class BaseSection implements BaseVM {
         auteurText.setText("");
         sujetText.setText("");
         maxPrixSpinner.setValue(0);
+    }
+
+    public JSpinner getMinPrixSpinner() {
+        return minPrixSpinner;
     }
 }

@@ -103,93 +103,17 @@ public class CaddyDAO extends BaseDAO{
 
     public boolean validerPanier(int caddyId) throws SQLException {
 
-        java.sql.Connection connexion = ConnectDB.getConnection();
+        synchronized (ConnectDB.LOCK) {
 
-        try {
-            connexion.setAutoCommit(false);
+            String sql = "UPDATE caddies SET payed = TRUE " +
+                    "WHERE id = ? AND payed = FALSE";
 
-            String sqlItems =
-                    "SELECT ci.book_id, ci.quantity, b.stock_quantity " +
-                            "FROM caddies_items ci " +
-                            "JOIN books b ON b.id = ci.book_id " +
-                            "WHERE ci.caddy_id = ? FOR UPDATE";
-
-            boolean contientArticles = false;
-
-            try (PreparedStatement ps = connexion.prepareStatement(sqlItems)) {
+            try (PreparedStatement ps = ConnectDB.getConnection().prepareStatement(sql)) {
 
                 ps.setInt(1, caddyId);
 
-                try (ResultSet rs = ps.executeQuery()) {
-
-                    while (rs.next()) {
-
-                        contientArticles = true;
-
-                        int bookId = rs.getInt("book_id");
-                        int quantity = rs.getInt("quantity");
-                        int stock = rs.getInt("stock_quantity");
-
-                        if (quantity <= 0 || stock < quantity) {
-                            connexion.rollback();
-                            connexion.setAutoCommit(true);
-                            return false;
-                        }
-
-                        String updateStock =
-                                "UPDATE books " +
-                                        "SET stock_quantity = stock_quantity - ? " +
-                                        "WHERE id = ? AND stock_quantity >= ?";
-
-                        try (PreparedStatement psUpdate =
-                                     connexion.prepareStatement(updateStock)) {
-
-                            psUpdate.setInt(1, quantity);
-                            psUpdate.setInt(2, bookId);
-                            psUpdate.setInt(3, quantity);
-
-                            if (psUpdate.executeUpdate() != 1) {
-                                connexion.rollback();
-                                connexion.setAutoCommit(true);
-                                return false;
-                            }
-                        }
-                    }
-                }
+                return ps.executeUpdate() > 0;
             }
-
-            if (!contientArticles) {
-                connexion.rollback();
-                connexion.setAutoCommit(true);
-                return false;
-            }
-
-            String updateCaddy =
-                    "UPDATE caddies SET payed = TRUE " +
-                            "WHERE id = ? AND payed = FALSE";
-
-            try (PreparedStatement ps = connexion.prepareStatement(updateCaddy)) {
-
-                ps.setInt(1, caddyId);
-
-                if (ps.executeUpdate() != 1) {
-                    connexion.rollback();
-                    connexion.setAutoCommit(true);
-                    return false;
-                }
-            }
-
-            connexion.commit();
-            connexion.setAutoCommit(true);
-
-            return true;
-
-        } catch (SQLException e) {
-
-            connexion.rollback();
-            connexion.setAutoCommit(true);
-
-            throw e;
         }
     }
 
