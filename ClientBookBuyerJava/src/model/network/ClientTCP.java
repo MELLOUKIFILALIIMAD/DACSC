@@ -12,15 +12,29 @@ public class ClientTCP {
     private Socket socket;
     private InputStream entree;
     private OutputStream sortie;
+    private String ipServeur;
+    private int portServeur;
 
     public void connecter(String ip, int port) throws IOException {
-        socket = new Socket(ip, port);
+        ipServeur = ip;
+        portServeur = port;
+
+        socket = new Socket(ipServeur, portServeur);
         socket.setSoTimeout(15000);
         entree = socket.getInputStream();
         sortie = socket.getOutputStream();
     }
-    // Envoie "NOM#p1#p2..." et retourne les champs de données de la réponse
-    // (ce qui suit "NOM#ok#"). Lève ClientException si le serveur répond "ko".
+    public synchronized void reconnecter() throws IOException {
+
+        if (ipServeur == null || portServeur == 0) {
+            throw new IOException("Adresse du serveur inconnue");
+        }
+
+        fermer();
+
+        connecter(ipServeur, portServeur);
+    }
+
     public synchronized String[] requete(String nom, String... params) throws IOException {
         String reponse = echanger(construire(nom, params));
         String[] champs = reponse.split("#", -1);
@@ -38,7 +52,6 @@ public class ClientTCP {
         return Arrays.copyOfRange(champs, 2, champs.length);
     }
 
-    // Envoie une requête sans attendre de réponse (LOGOUT)
     public synchronized void envoyer(String nom, String... params) throws IOException {
         try {
             ecrireTrame(construire(nom, params));
@@ -48,7 +61,6 @@ public class ClientTCP {
         }
     }
 
-    // Envoie une trame brute et retourne le contenu de la trame reçue en réponse
     public synchronized String echanger(String requete) throws IOException {
         try {
             ecrireTrame(requete);
@@ -75,11 +87,11 @@ public class ClientTCP {
 
             return new String(reponse, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            fermerSilencieusement();
+            // Ne fermez pas systématiquement ici si vous voulez garder la session ouverte,
+            // ou gérez la reconnexion automatique dans le contrôleur.
             throw e;
         }
     }
-
 
     private String construire(String nom, String... params) throws IOException {
         StringBuilder contenu = new StringBuilder(nom);
@@ -97,7 +109,6 @@ public class ClientTCP {
         return contenu.toString();
     }
 
-    // Trame = "XXXX" (longueur en octets, 4 chiffres) + contenu, en un seul envoi
     private void ecrireTrame(String contenu) throws IOException {
         byte[] donnees = contenu.getBytes(StandardCharsets.UTF_8);
 
@@ -121,7 +132,8 @@ public class ClientTCP {
 
         while (total < donnees.length) {
             int resultat = entree.read(
-                    donnees, total, donnees.length - total);
+                    donnees, total, donnees.length - total
+            );
 
             if (resultat == -1) {
                 throw new IOException("Connexion fermée par le serveur");
@@ -138,9 +150,14 @@ public class ClientTCP {
         }
     }
 
-    public void fermer() throws IOException {
+    public synchronized void fermer() throws IOException {
+
         if (socket != null) {
             socket.close();
         }
+
+        socket = null;
+        entree = null;
+        sortie = null;
     }
 }

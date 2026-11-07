@@ -40,8 +40,11 @@ public class BaseSection implements BaseVM {
     }
 
     public JTextField getTitreText() {
-        return auteurText;
+        return titreText;
     }
+    public JTextField getAuteurText() { return auteurText;}
+    public JTextField getSujetText() {return sujetText;}
+    public JSpinner getMaxPrixSpinner() {return maxPrixSpinner;}
 
     public void setEnabled(boolean b)
     {
@@ -55,11 +58,21 @@ public class BaseSection implements BaseVM {
 
     @Override
     public void setControllerBase(ControllerBase c) {
+        buttonRecherche.addActionListener(c);
     }
 
     @Override
     public void clearAll() {
+        titreText.setText("");
         auteurText.setText("");
+        sujetText.setText("");
+        maxPrixSpinner.setValue(1000);
+        minPrixSpinner.setValue(0);
     }
-
+    public void viderChamps() {
+        titreText.setText("");
+        auteurText.setText("");
+        sujetText.setText("");
+        maxPrixSpinner.setValue(0);
+    }
 }
