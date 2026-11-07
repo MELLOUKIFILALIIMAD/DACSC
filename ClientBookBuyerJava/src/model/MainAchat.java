@@ -6,12 +6,16 @@ import model.controller.ControllerResultat;
 import model.dao.CaddyDAO;
 import model.dao.CaddyItemDAO;
 import model.dao.ClientDAO;
+import model.dao.ConnectDB;
+import model.entity.Client;
 import model.network.ClientTCP;
 import model.viewmodel.GUI.*;
 import javax.swing.*;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Properties;
 
 public class MainAchat {
 
@@ -32,6 +36,16 @@ public class MainAchat {
                     "Erreur", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        Properties props = new Properties();
+
+        try (FileInputStream input = new FileInputStream("config.properties")) {
+            props.load(input);
+        } catch (IOException e) {
+            System.err.println("Impossible de charger le fichier de configuration : " + e.getMessage());
+            return;
+        }
+
+        ConnectDB.init(props);
         final CaddyDAO caddyDAO = new CaddyDAO(client);
         final CaddyItemDAO caddyItemDAO = new CaddyItemDAO(client);
         final ClientDAO clientDAO = new ClientDAO(client);
@@ -48,9 +62,10 @@ public class MainAchat {
                 panierSection.setEnabled(false);
                 resultatSection.setEnabled(false);
 
-                ControllerBase controllerBase = new ControllerBase(mainView, panierSection, resultatSection, baseSection);
-                new ControllerPanier(panierSection);
-                new ControllerResultat(resultatSection);
+                ControllerBase controllerBase = new ControllerBase(mainView, panierSection,
+                                                        resultatSection, baseSection, clientDAO, client);
+                new ControllerPanier(panierSection, controllerBase, caddyDAO);
+                new ControllerResultat(resultatSection, controllerBase, client);
 
 
                 controllerBase.run();
