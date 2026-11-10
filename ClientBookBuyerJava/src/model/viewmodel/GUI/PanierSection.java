@@ -66,12 +66,14 @@ public class PanierSection implements PanierVM {
     }
 
     private void initMenuContextuel() {
+
         final JPopupMenu menu = new JPopupMenu();
 
         JMenuItem supprimerItem = new JMenuItem("Supprimer ce livre");
         menu.add(supprimerItem);
 
         supprimerItem.addActionListener(e -> {
+
             int ligneSelectionnee = tablePanier.getSelectedRow();
 
             if (ligneSelectionnee == -1) {
@@ -81,22 +83,52 @@ public class PanierSection implements PanierVM {
             int ligneModele = tablePanier.convertRowIndexToModel(ligneSelectionnee);
 
             String bookId = tableModel.getValueAt(ligneModele, 0).toString();
+            String titre = tableModel.getValueAt(ligneModele, 1).toString();
+            int quantiteMax = Integer.parseInt(
+                    tableModel.getValueAt(ligneModele, 2).toString()
+            );
+
+            // Création du spinner entre 1 et la quantité présente dans le panier.
+            SpinnerNumberModel spinnerModel = new SpinnerNumberModel(
+                    1,
+                    1,
+                    quantiteMax,
+                    1
+            );
+
+            JSpinner spinner = new JSpinner(spinnerModel);
+
+            JPanel panel = new JPanel(new BorderLayout(5, 5));
+
+            panel.add(new JLabel(
+                    "Combien de livres voulez-vous supprimer de \"" + titre + "\" ?"
+            ), BorderLayout.NORTH);
+
+            panel.add(spinner, BorderLayout.CENTER);
 
             int choix = JOptionPane.showConfirmDialog(
                     Panier,
-                    "Voulez-vous vraiment supprimer ce livre du panier ?",
-                    "Supprimer le livre",
-                    JOptionPane.YES_NO_OPTION
+                    panel,
+                    "Supprimer un livre",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE
             );
 
-            if (choix == JOptionPane.YES_OPTION) {
+            if (choix == JOptionPane.OK_OPTION) {
+
+                int quantite = (Integer) spinner.getValue();
+
                 if (controllerBase != null) {
-                    controllerBase.supprimerLivreDuPanier(bookId);
+                    controllerBase.supprimerLivreDuPanier(
+                            bookId,
+                            String.valueOf(quantite)
+                    );
                 }
             }
         });
 
         tablePanier.addMouseListener(new MouseAdapter() {
+
             @Override
             public void mousePressed(MouseEvent e) {
                 afficherMenu(e);
@@ -108,7 +140,9 @@ public class PanierSection implements PanierVM {
             }
 
             private void afficherMenu(MouseEvent e) {
+
                 if (e.isPopupTrigger()) {
+
                     int ligne = tablePanier.rowAtPoint(e.getPoint());
 
                     if (ligne >= 0) {

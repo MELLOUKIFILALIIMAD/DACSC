@@ -119,26 +119,7 @@ public class ControllerResultat implements ActionListener {
         }
 
         if (action.equals(ControllerActions.AnnulerSession)) {
-
-            try {
-                // Déconnecter le client côté serveur
-                clientTCP.envoyer("LOGOUT");
-
-                // Fermer la connexion TCP
-                clientTCP.fermer();
-
-                // Réinitialiser l'interface sans supprimer le panier en base
-                controllerBase.annulerSession();
-
-            } catch (Exception ex) {
-
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Erreur lors de la déconnexion : " + ex.getMessage(),
-                        "Erreur",
-                        JOptionPane.ERROR_MESSAGE
-                );
-            }
+            controllerBase.annulerSession();
         }
     }
 }
