@@ -1,14 +1,14 @@
-
 package serveur;
 
 import model.dao.ConnectDB;
+import model.protocol.Reponse;
+import model.protocol.Requete;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.ObjectInputFilter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
-import java.nio.charset.StandardCharsets;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,144 +41,69 @@ public class ThreadWorker extends Thread {
 
         try (Socket s = socket) {
 
-            s.setSoTimeout(0);
+            ObjectOutputStream sortie = new ObjectOutputStream(s.getOutputStream());
+            sortie.flush();
 
-            InputStream entree = s.getInputStream();
-            OutputStream sortie = s.getOutputStream();
+            ObjectInputStream entree = new ObjectInputStream(s.getInputStream());
+            entree.setObjectInputFilter(ObjectInputFilter.Config.createFilter("model.protocol.*;java.lang.*;!*"));
 
-            System.out.println("[" + getName() + "] Client connecté.");
+            Object recu = entree.readObject();
 
-            while (!s.isClosed()) {
-
-                byte[] entete = new byte[4];
-                int lu = lireCompletement(entree, entete);
-
-                if (lu == -1) {
-                    System.out.println("Client déconnecté.");
-                    break;
-                }
-
-                String tailleTexte = new String(entete, StandardCharsets.US_ASCII);
-                int taille;
-
-                try {
-                    taille = Integer.parseInt(tailleTexte);
-                } catch (NumberFormatException e) {
-                    System.err.println("En-tête invalide : " + tailleTexte);
-                    break;
-                }
-
-                if (taille <= 0 || taille > 9999) {
-                    System.err.println("Taille invalide : " + taille);
-                    break;
-                }
-
-                byte[] donnees = new byte[taille];
-
-                if (lireCompletement(entree, donnees) == -1) {
-                    break;
-                }
-
-                String requete = new String(donnees, StandardCharsets.UTF_8);
-
-                System.out.println("REQUETE RECUE : " + requete);
-
-                String[] champs = requete.split("#", -1);
-
-                if (champs.length == 0) {
-                    break;
-                }
-
-                String commande = champs[0];
-                String reponse = "";
-
-                if (commande.equals("CLIENT")) {
-                    reponse = gererClient(champs);
-
-                } else if (commande.equals("SELECT_BOOK")) {
-
-                    System.out.println("1 - Début SELECT_BOOK");
-
-                    reponse = gererSelectBook(champs);
-
-                    System.out.println("6 - Fin SELECT_BOOK : " + reponse);
-
-                } else if (commande.equals("ADD_CADDY_ITEM")) {
-                    reponse = gererAddCaddyItem(champs);
-
-                } else if (commande.equals("GET_CADDY")) {
-                    reponse = gererGetCaddy(champs);
-                } else if (commande.equals("UPDATE_CADDY_ITEM")) {
-                    reponse = gererUpdateCaddyItem(champs);
-                } else if (commande.equals("CANCEL_CADDY")) {
-                    reponse = gererCancelCaddy(champs);
-
-                } else if (commande.equals("LOGOUT")) {
-                    break;
-
-                } else {
-                    reponse = commande + "#ko#Commande inconnue";
-                }
-
-                byte[] reponseBytes = reponse.getBytes(StandardCharsets.UTF_8);
-
-                if (reponseBytes.length > 9999) {
-                    System.err.println("Réponse trop longue.");
-                    break;
-                }
-
-                byte[] enteteReponse = String.format(
-                                "%04d", reponseBytes.length)
-                        .getBytes(StandardCharsets.US_ASCII);
-
-                byte[] trameReponse = new byte[
-                        enteteReponse.length + reponseBytes.length];
-
-                System.arraycopy(enteteReponse, 0,
-                        trameReponse, 0, enteteReponse.length);
-
-                System.arraycopy(reponseBytes, 0,
-                        trameReponse, enteteReponse.length,
-                        reponseBytes.length);
-
-                System.out.println("7 - Envoi de la réponse");
-
-                sortie.write(trameReponse);
-                sortie.flush();
-
-                System.out.println("8 - Réponse envoyée !");
+            if (!(recu instanceof Requete)) {
+                return;
             }
 
-        } catch (SocketTimeoutException e) {
+            String[] champs = ((Requete) recu).getChamps();
 
-            System.out.println("[" + getName() + "] Timeout : client inactif ou lecture incomplète.");
+            if (champs == null || champs.length == 0 || champs[0] == null) {
+                return;
+            }
 
-        } catch (IOException e) {
+            System.out.println("[" + getName() + "] REQUETE RECUE : " + champs[0]);
 
-            System.err.println("[" + getName() + "] Erreur TCP : " + e.getMessage());
-            e.printStackTrace();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            String reponse = dispatcher(champs);
+
+            sortie.writeObject(new Reponse(reponse.split("#", -1)));
+            sortie.flush();
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("[" + getName() + "] Erreur : " + e.getMessage());
         }
     }
 
-    private int lireCompletement(InputStream entree, byte[] donnees) throws IOException {
+    private String dispatcher(String[] champs) {
 
-        int total = 0;
+        String commande = champs[0];
 
-        while (total < donnees.length) {
+        try {
+            if (commande.equals("CLIENT")) {
+                return gererClient(champs);
 
-            int resultat = entree.read(
-                    donnees, total, donnees.length - total);
+            } else if (commande.equals("SELECT_BOOK")) {
+                return gererSelectBook(champs);
 
-            if (resultat == -1) {
-                return -1;
+            } else if (commande.equals("ADD_CADDY_ITEM")) {
+                return gererAddCaddyItem(champs);
+
+            } else if (commande.equals("GET_CADDY")) {
+                return gererGetCaddy(champs);
+
+            } else if (commande.equals("DEL_CADDY_ITEM")) {
+                return gererDelCaddyItem(champs);
+
+            } else if (commande.equals("CANCEL_CADDY")) {
+                return gererCancelCaddy(champs);
+
+            } else if (commande.equals("PAY_CADDY")) {
+                return gererPayCaddy(champs);
             }
 
-            total += resultat;
-        }
+            return commande + "#ko#Commande inconnue";
 
-        return total;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return commande + "#ko#" + e.getMessage();
+        }
     }
 
     private String gererClient(String[] champs) {
@@ -572,108 +497,6 @@ public class ThreadWorker extends Thread {
         }
     }
 
-    private String gererUpdateCaddyItem(String[] champs) {
-
-        if (champs.length < 4) {
-            return "UPDATE_CADDY_ITEM#ko#Parametres insuffisants";
-        }
-
-        try {
-            int clientId = Integer.parseInt(champs[1]);
-            int bookId = Integer.parseInt(champs[2]);
-            int quantity = Integer.parseInt(champs[3]);
-
-            if (quantity < 0) {
-                return "UPDATE_CADDY_ITEM#ko#Quantite invalide";
-            }
-
-            synchronized (ConnectDB.LOCK) {
-
-                int caddyId = -1;
-
-                String sqlCaddy =
-                        "SELECT id FROM caddies " +
-                                "WHERE client_id = ? AND payed = FALSE " +
-                                "ORDER BY id DESC LIMIT 1";
-
-                try (PreparedStatement ps =
-                             ConnectDB.getConnection().prepareStatement(sqlCaddy)) {
-
-                    ps.setInt(1, clientId);
-
-                    try (ResultSet rs = ps.executeQuery()) {
-                        if (rs.next()) {
-                            caddyId = rs.getInt("id");
-                        }
-                    }
-                }
-
-                if (caddyId == -1) {
-                    return "UPDATE_CADDY_ITEM#ko#Panier introuvable";
-                }
-
-                if (quantity == 0) {
-
-                    String deleteSql =
-                            "DELETE FROM caddies_items " +
-                                    "WHERE caddy_id = ? AND book_id = ?";
-
-                    try (PreparedStatement ps =
-                                 ConnectDB.getConnection().prepareStatement(deleteSql)) {
-
-                        ps.setInt(1, caddyId);
-                        ps.setInt(2, bookId);
-
-                        if (ps.executeUpdate() == 0) {
-                            return "UPDATE_CADDY_ITEM#ko#Livre introuvable";
-                        }
-                    }
-
-                } else {
-
-                    String updateSql =
-                            "UPDATE caddies_items SET quantity = ? " +
-                                    "WHERE caddy_id = ? AND book_id = ?";
-
-                    try (PreparedStatement ps =
-                                 ConnectDB.getConnection().prepareStatement(updateSql)) {
-
-                        ps.setInt(1, quantity);
-                        ps.setInt(2, caddyId);
-                        ps.setInt(3, bookId);
-
-                        if (ps.executeUpdate() == 0) {
-                            return "UPDATE_CADDY_ITEM#ko#Livre introuvable";
-                        }
-                    }
-                }
-
-                String amountSql =
-                        "UPDATE caddies SET amount = (" +
-                                "SELECT COALESCE(SUM(ci.quantity * b.price), 0) " +
-                                "FROM caddies_items ci " +
-                                "JOIN books b ON b.id = ci.book_id " +
-                                "WHERE ci.caddy_id = ?) WHERE id = ?";
-
-                try (PreparedStatement ps =
-                             ConnectDB.getConnection().prepareStatement(amountSql)) {
-
-                    ps.setInt(1, caddyId);
-                    ps.setInt(2, caddyId);
-                    ps.executeUpdate();
-                }
-            }
-
-            return "UPDATE_CADDY_ITEM#ok";
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "UPDATE_CADDY_ITEM#ko#" + e.getMessage();
-        }
-    }
-
-
-
     private String gererCancelCaddy(String[] champs) {
 
         if (champs.length < 2) {
@@ -792,5 +615,209 @@ public class ThreadWorker extends Thread {
         }
     }
 
+    private String gererDelCaddyItem(String[] champs) {
 
+        if (champs.length < 4) {
+            return "DEL_CADDY_ITEM#ko#Parametres insuffisants";
+        }
+
+        java.sql.Connection connexion = null;
+
+        try {
+            int clientId = Integer.parseInt(champs[1]);
+            int bookId = Integer.parseInt(champs[2]);
+            int quantity = Integer.parseInt(champs[3]);
+
+            if (quantity <= 0) {
+                return "DEL_CADDY_ITEM#ko#Quantite invalide";
+            }
+
+            synchronized (ConnectDB.LOCK) {
+
+                connexion = ConnectDB.getConnection();
+                connexion.setAutoCommit(false);
+
+                try {
+                    int caddyId = -1;
+
+                    String selectCaddy =
+                            "SELECT id FROM caddies " +
+                                    "WHERE client_id = ? AND payed = FALSE " +
+                                    "ORDER BY id DESC LIMIT 1";
+
+                    try (PreparedStatement ps = connexion.prepareStatement(selectCaddy)) {
+                        ps.setInt(1, clientId);
+
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (rs.next()) {
+                                caddyId = rs.getInt("id");
+                            }
+                        }
+                    }
+
+                    if (caddyId == -1) {
+                        connexion.rollback();
+                        return "DEL_CADDY_ITEM#ko#Panier introuvable";
+                    }
+
+                    int presente = 0;
+
+                    String selectItem =
+                            "SELECT quantity FROM caddies_items " +
+                                    "WHERE caddy_id = ? AND book_id = ?";
+
+                    try (PreparedStatement ps = connexion.prepareStatement(selectItem)) {
+                        ps.setInt(1, caddyId);
+                        ps.setInt(2, bookId);
+
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (rs.next()) {
+                                presente = rs.getInt("quantity");
+                            }
+                        }
+                    }
+
+                    if (presente <= 0) {
+                        connexion.rollback();
+                        return "DEL_CADDY_ITEM#ko#Livre absent du panier";
+                    }
+
+                    int retiree = Math.min(quantity, presente);
+
+                    if (retiree == presente) {
+
+                        String deleteSql =
+                                "DELETE FROM caddies_items " +
+                                        "WHERE caddy_id = ? AND book_id = ?";
+
+                        try (PreparedStatement ps = connexion.prepareStatement(deleteSql)) {
+                            ps.setInt(1, caddyId);
+                            ps.setInt(2, bookId);
+                            ps.executeUpdate();
+                        }
+
+                    } else {
+
+                        String updateSql =
+                                "UPDATE caddies_items SET quantity = ? " +
+                                        "WHERE caddy_id = ? AND book_id = ?";
+
+                        try (PreparedStatement ps = connexion.prepareStatement(updateSql)) {
+                            ps.setInt(1, presente - retiree);
+                            ps.setInt(2, caddyId);
+                            ps.setInt(3, bookId);
+                            ps.executeUpdate();
+                        }
+                    }
+
+                    String updateStock =
+                            "UPDATE books SET stock_quantity = stock_quantity + ? WHERE id = ?";
+
+                    try (PreparedStatement ps = connexion.prepareStatement(updateStock)) {
+                        ps.setInt(1, retiree);
+                        ps.setInt(2, bookId);
+                        ps.executeUpdate();
+                    }
+
+                    String updateAmount =
+                            "UPDATE caddies SET amount = (" +
+                                    "SELECT COALESCE(SUM(ci.quantity * b.price), 0) " +
+                                    "FROM caddies_items ci " +
+                                    "JOIN books b ON b.id = ci.book_id " +
+                                    "WHERE ci.caddy_id = ?) WHERE id = ?";
+
+                    try (PreparedStatement ps = connexion.prepareStatement(updateAmount)) {
+                        ps.setInt(1, caddyId);
+                        ps.setInt(2, caddyId);
+                        ps.executeUpdate();
+                    }
+
+                    connexion.commit();
+                    return "DEL_CADDY_ITEM#ok";
+
+                } catch (Exception e) {
+                    connexion.rollback();
+                    throw e;
+
+                } finally {
+                    connexion.setAutoCommit(true);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "DEL_CADDY_ITEM#ko#" + e.getMessage();
+        }
+    }
+
+    private String gererPayCaddy(String[] champs) {
+
+        if (champs.length < 2) {
+            return "PAY_CADDY#ko#Parametres insuffisants";
+        }
+
+        try {
+            int clientId = Integer.parseInt(champs[1]);
+
+            synchronized (ConnectDB.LOCK) {
+
+                int caddyId = -1;
+
+                String selectCaddy =
+                        "SELECT id FROM caddies " +
+                                "WHERE client_id = ? AND payed = FALSE " +
+                                "ORDER BY id DESC LIMIT 1";
+
+                try (PreparedStatement ps =
+                             ConnectDB.getConnection().prepareStatement(selectCaddy)) {
+
+                    ps.setInt(1, clientId);
+
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            caddyId = rs.getInt("id");
+                        }
+                    }
+                }
+
+                if (caddyId == -1) {
+                    return "PAY_CADDY#ko#Panier introuvable";
+                }
+
+                int nbItems = 0;
+
+                try (PreparedStatement ps = ConnectDB.getConnection().prepareStatement(
+                        "SELECT COUNT(*) FROM caddies_items WHERE caddy_id = ?")) {
+
+                    ps.setInt(1, caddyId);
+
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            nbItems = rs.getInt(1);
+                        }
+                    }
+                }
+
+                if (nbItems == 0) {
+                    return "PAY_CADDY#ko#Panier vide";
+                }
+
+                try (PreparedStatement ps = ConnectDB.getConnection().prepareStatement(
+                        "UPDATE caddies SET payed = TRUE WHERE id = ? AND payed = FALSE")) {
+
+                    ps.setInt(1, caddyId);
+
+                    if (ps.executeUpdate() != 1) {
+                        return "PAY_CADDY#ko#Paiement impossible";
+                    }
+                }
+            }
+
+            return "PAY_CADDY#ok";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "PAY_CADDY#ko#" + e.getMessage();
+        }
+    }
 }

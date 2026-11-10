@@ -1,7 +1,5 @@
-
 package model.controller;
 
-import model.dao.ClientDAO;
 import model.entity.Client;
 import model.network.ClientTCP;
 import model.viewmodel.GUI.BaseSection;
@@ -12,7 +10,6 @@ import model.viewmodel.GUI.ResultatSection;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 public class ControllerBase implements ActionListener {
 
@@ -20,7 +17,6 @@ public class ControllerBase implements ActionListener {
     private PanierSection panierSection;
     private ResultatSection resultatSection;
     private BaseSection baseSection;
-    private ClientDAO clientDAO;
     private ClientTCP clientTCP;
     private Client loggedInClient;
 
@@ -29,16 +25,17 @@ public class ControllerBase implements ActionListener {
     private String dernierAuteur = "";
     private String dernierSujet = "";
     private String dernierMaxPrix = "0";
+    private String dernierMinPrix = "0";
+    private String[] dernierPanier = new String[0];
 
     public ControllerBase(MainView mainView, PanierSection panierSection,
                           ResultatSection resultatSection, BaseSection baseSection,
-                          ClientDAO clientDAO, ClientTCP clientTCP) {
+                          ClientTCP clientTCP) {
 
         this.mainView = mainView;
         this.panierSection = panierSection;
         this.resultatSection = resultatSection;
         this.baseSection = baseSection;
-        this.clientDAO = clientDAO;
         this.clientTCP = clientTCP;
 
         this.mainView.setControllerBase(this);
@@ -70,20 +67,13 @@ public class ControllerBase implements ActionListener {
 
             try {
 
-                loggedInClient = clientDAO.findByName(nom, prenom);
+                String[] reponse = clientTCP.requete("CLIENT", nom, prenom);
 
-                if (loggedInClient == null) {
-
-                    loggedInClient = new Client();
-                    loggedInClient.setName(nom);
-                    loggedInClient.setFirstName(prenom);
-                    loggedInClient.setAddress("");
-
-                    clientDAO.insert(loggedInClient);
-                }
-
-                // Réactiver la connexion TCP si elle a été fermée
-                clientTCP.reconnecter();
+                loggedInClient = new Client();
+                loggedInClient.setId(Integer.parseInt(reponse[0]));
+                loggedInClient.setName(nom);
+                loggedInClient.setFirstName(prenom);
+                loggedInClient.setAddress("");
 
                 mainView.setEnabled(true);
                 panierSection.setEnabled(true);
@@ -138,6 +128,7 @@ public class ControllerBase implements ActionListener {
             dernierAuteur = auteur;
             dernierSujet = sujet;
             dernierMaxPrix = maxPrix;
+            dernierMinPrix = minPrix;
 
             try {
 
@@ -190,6 +181,8 @@ public class ControllerBase implements ActionListener {
                     String.valueOf(loggedInClient.getId())
             );
 
+            dernierPanier = resultats;
+
             panierSection.afficherPanier(resultats);
 
         } catch (Exception e) {
@@ -215,6 +208,7 @@ public class ControllerBase implements ActionListener {
                     dernierTitre,
                     dernierAuteur,
                     dernierSujet,
+                    dernierMinPrix,
                     dernierMaxPrix
             );
 
@@ -255,7 +249,8 @@ public class ControllerBase implements ActionListener {
                 JOptionPane.INFORMATION_MESSAGE
         );
     }
-    public void supprimerLivreDuPanier(String bookId) {
+    public void supprimerLivreDuPanier(String bookId, String quantite) {
+
         if (loggedInClient == null) {
             JOptionPane.showMessageDialog(
                     null,
@@ -265,16 +260,19 @@ public class ControllerBase implements ActionListener {
         }
 
         try {
+
             clientTCP.requete(
-                    "UPDATE_CADDY_ITEM",
+                    "DEL_CADDY_ITEM",
                     getClientNumber(),
                     bookId,
-                    "0"
+                    quantite
             );
 
             actualiserPanier();
+            actualiserResultats();
 
         } catch (Exception e) {
+
             JOptionPane.showMessageDialog(
                     null,
                     "Erreur lors de la suppression du livre : " + e.getMessage()
