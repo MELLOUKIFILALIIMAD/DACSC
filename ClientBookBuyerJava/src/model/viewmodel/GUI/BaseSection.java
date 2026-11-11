@@ -5,6 +5,7 @@ import model.controller.ControllerBase;
 import model.viewmodel.BaseVM;
 
 import javax.swing.*;
+import java.util.Map;
 
 public class BaseSection implements BaseVM {
     private JPanel Base;
@@ -32,16 +33,19 @@ public class BaseSection implements BaseVM {
         minLabel.setText("Min :");
         maxLabel.setText("Max :");
         rechercheLabel.setText("Recherche");
-        minPrixSpinner.setModel(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1));
-        maxPrixSpinner.setModel(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1));
+        minPrixSpinner.setModel(new SpinnerNumberModel(0.0, 0.0, Integer.MAX_VALUE, 0.5));
+        maxPrixSpinner.setModel(new SpinnerNumberModel(0.0, 0.0, Integer.MAX_VALUE, 0.5));
     }
     public JPanel getMainPanel() {
         return Base;
     }
 
     public JTextField getTitreText() {
-        return auteurText;
+        return titreText;
     }
+    public JTextField getAuteurText() { return auteurText;}
+    public JTextField getSujetText() {return sujetText;}
+    public JSpinner getMaxPrixSpinner() {return maxPrixSpinner;}
 
     public void setEnabled(boolean b)
     {
@@ -55,11 +59,25 @@ public class BaseSection implements BaseVM {
 
     @Override
     public void setControllerBase(ControllerBase c) {
+        buttonRecherche.addActionListener(c);
     }
 
     @Override
     public void clearAll() {
+        titreText.setText("");
         auteurText.setText("");
+        sujetText.setText("");
+        maxPrixSpinner.setValue(1000);
+        minPrixSpinner.setValue(0);
+    }
+    public void viderChamps() {
+        titreText.setText("");
+        auteurText.setText("");
+        sujetText.setText("");
+        maxPrixSpinner.setValue(0);
     }
 
+    public JSpinner getMinPrixSpinner() {
+        return minPrixSpinner;
+    }
 }
