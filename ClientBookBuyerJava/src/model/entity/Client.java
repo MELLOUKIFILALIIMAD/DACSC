@@ -19,6 +19,10 @@ public class Client implements EntityAchat {
         this.address = address;
     }
 
+    public Client() {
+
+    }
+
     @Override public int getId() { return id; }
     @Override public void setId(int id) { this.id = id; }
 
@@ -29,5 +33,17 @@ public class Client implements EntityAchat {
     @Override
     public String toString() {
         return name + " " + firstName + " (n° " + id + ")";
+    }
+
+    public void setName(String nom) {
+        this.name = nom;
+    }
+    public void setFirstName(String pr)
+    {
+        this.firstName = pr;
+    }
+    public void setAddress(String r)
+    {
+        this.address = r;
     }
 }

@@ -19,11 +19,6 @@ public class ClientTCP {
         entree = socket.getInputStream();
         sortie = socket.getOutputStream();
     }
-
-    public boolean estConnecte() {
-        return socket != null && socket.isConnected() && !socket.isClosed();
-    }
-
     // Envoie "NOM#p1#p2..." et retourne les champs de données de la réponse
     // (ce qui suit "NOM#ok#"). Lève ClientException si le serveur répond "ko".
     public synchronized String[] requete(String nom, String... params) throws IOException {
@@ -85,10 +80,6 @@ public class ClientTCP {
         }
     }
 
-    // "1;2;3;" -> ["1","2","3"]   et   "" -> []
-    public static String[] decouperListe(String liste) {
-        return liste.isEmpty() ? new String[0] : liste.split(";");
-    }
 
     private String construire(String nom, String... params) throws IOException {
         StringBuilder contenu = new StringBuilder(nom);
