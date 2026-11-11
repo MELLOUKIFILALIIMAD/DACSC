@@ -26,7 +26,7 @@ public class PanierSection implements PanierVM {
 
     public PanierSection() {
         panierLabel.setText("Panier :");
-        totalLabel.setText("Total :");
+        totalLabel.setText("Total");
         euroLabel.setText("€");
         prixTotal.setText("0");
         prixTotal.setEnabled(false);
@@ -191,6 +191,11 @@ public class PanierSection implements PanierVM {
         }
 
         prixTotal.setText(String.format("%.2f", total));
+    }
+
+    public void annulerPanier() {
+        tableModel.setRowCount(0);
+        prixTotal.setText("0.00");
     }
 
     public void setControllerBase(ControllerBase c) {

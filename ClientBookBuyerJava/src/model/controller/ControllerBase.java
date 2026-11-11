@@ -10,6 +10,7 @@ import model.viewmodel.GUI.ResultatSection;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class ControllerBase implements ActionListener {
 
@@ -24,7 +25,7 @@ public class ControllerBase implements ActionListener {
     private String dernierTitre = "";
     private String dernierAuteur = "";
     private String dernierSujet = "";
-    private String dernierMaxPrix = "0";
+    private String dernierMaxPrix = "999";
     private String dernierMinPrix = "0";
     private String[] dernierPanier = new String[0];
 
@@ -94,6 +95,30 @@ public class ControllerBase implements ActionListener {
                 JOptionPane.showMessageDialog(
                         mainView,
                         "Erreur lors de la connexion : " + ex.getMessage(),
+                        "Erreur",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+            try {
+
+                String[] resultats = clientTCP.requete(
+                        "SELECT_BOOK",
+                        dernierTitre,
+                        dernierAuteur,
+                        dernierSujet,
+                        dernierMinPrix,
+                        dernierMaxPrix
+                );
+
+                resultatSection.displayResults(resultats);
+
+            } catch (Exception ex) {
+
+                ex.printStackTrace();
+
+                JOptionPane.showMessageDialog(
+                        mainView,
+                        "Erreur lors de la recherche : " + ex.getMessage(),
                         "Erreur",
                         JOptionPane.ERROR_MESSAGE
                 );
@@ -227,20 +252,24 @@ public class ControllerBase implements ActionListener {
         }
     }
 
-    public void annulerSession() {
+    public void annulerSession() throws IOException {
+        if (loggedInClient == null) {
+            return;
+        }
+
+        clientTCP.requete("CLEAR_CADDY", String.valueOf(loggedInClient.getId()));
 
         loggedInClient = null;
+        dernierPanier = null;
+
+        panierSection.annulerPanier();
+        baseSection.viderChamps();
+        resultatSection.clearTable();
 
         mainView.setEnabled(false);
         panierSection.setEnabled(false);
         baseSection.setEnabled(false);
         resultatSection.setEnabled(false);
-
-        baseSection.viderChamps();
-
-        panierSection.afficherPanier(new String[]{"0"});
-
-        resultatSection.clearTable();
 
         JOptionPane.showMessageDialog(
                 mainView,

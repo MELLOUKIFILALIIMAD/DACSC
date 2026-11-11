@@ -96,6 +96,9 @@ public class ThreadWorker extends Thread {
 
             } else if (commande.equals("PAY_CADDY")) {
                 return gererPayCaddy(champs);
+
+            } else if (commande.equals("CLEAR_CADDY")) {
+                return gererClearCaddy(champs);
             }
 
             return commande + "#ko#Commande inconnue";
@@ -749,6 +752,97 @@ public class ThreadWorker extends Thread {
             return "DEL_CADDY_ITEM#ko#" + e.getMessage();
         }
     }
+
+
+    private String gererClearCaddy(String[] champs) {
+
+        if (champs.length < 2) {
+            return "CLEAR_CADDY#ko#Parametres insuffisants";
+        }
+
+        try {
+            int clientId = Integer.parseInt(champs[1]);
+
+            synchronized (ConnectDB.LOCK) {
+
+                int caddyId = -1;
+
+                String selectCaddy =
+                        "SELECT id FROM caddies " +
+                                "WHERE client_id = ? AND payed = FALSE " +
+                                "ORDER BY id DESC LIMIT 1";
+
+                try (PreparedStatement ps =
+                             ConnectDB.getConnection().prepareStatement(selectCaddy)) {
+
+                    ps.setInt(1, clientId);
+
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            caddyId = rs.getInt("id");
+                        }
+                    }
+                }
+
+                if (caddyId == -1) {
+                    return "CLEAR_CADDY#ko#Panier introuvable";
+                }
+
+                int nbItems = 0;
+
+                try (PreparedStatement ps = ConnectDB.getConnection().prepareStatement(
+                        "SELECT COUNT(*) FROM caddies_items WHERE caddy_id = ?")) {
+
+                    ps.setInt(1, caddyId);
+
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            nbItems = rs.getInt(1);
+                        }
+                    }
+                }
+
+                if (nbItems == 0) {
+                    return "CLEAR_CADDY#ko#Panier vide";
+                }
+
+                String updateStock =
+                        "UPDATE books b " +
+                                "JOIN caddies_items ci ON b.id = ci.book_id " +
+                                "SET b.stock_quantity = b.stock_quantity + ci.quantity " +
+                                "WHERE ci.caddy_id = ?";
+
+                try (PreparedStatement ps = ConnectDB.getConnection().prepareStatement(updateStock)) {
+                    ps.setInt(1, caddyId);
+                    ps.executeUpdate();
+                }
+
+                try (PreparedStatement ps = ConnectDB.getConnection().prepareStatement(
+                        "DELETE FROM caddies_items WHERE caddy_id = ?")) {
+
+                    ps.setInt(1, caddyId);
+
+                    if (ps.executeUpdate() == 0) {
+                        return "CLEAR_CADDY#ko#Suppression impossible";
+                    }
+                }
+
+                try (PreparedStatement ps = ConnectDB.getConnection().prepareStatement(
+                        "UPDATE caddies SET amount = 0 WHERE id = ?")) {
+
+                    ps.setInt(1, caddyId);
+                    ps.executeUpdate();
+                }
+            }
+
+            return "CLEAR_CADDY#ok";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "CLEAR_CADDY#ko#" + e.getMessage();
+        }
+    }
+
 
     private String gererPayCaddy(String[] champs) {
 

@@ -119,7 +119,11 @@ public class ControllerResultat implements ActionListener {
         }
 
         if (action.equals(ControllerActions.AnnulerSession)) {
-            controllerBase.annulerSession();
+            try {
+                controllerBase.annulerSession();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 }
