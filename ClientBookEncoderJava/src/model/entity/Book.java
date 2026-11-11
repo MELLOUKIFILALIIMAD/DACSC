@@ -1,6 +1,6 @@
 package model.entity;
 
-public class Book implements EntityAchat {
+public class Book implements Entity {
     private int id;
     private Author author;
     private Subject subject;
